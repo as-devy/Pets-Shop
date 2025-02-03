@@ -17,7 +17,7 @@ body {
     font-family: "Poppins", serif;
 }
 
-a{
+a {
     text-decoration: none;
     color: #000;
 }
@@ -51,7 +51,6 @@ header .container .logo {
 
 header .container .logo h3 {
     margin-left: -5px;
-
 }
 
 header .container ul {
@@ -67,45 +66,57 @@ header .container ul a {
     padding: 6px 12px;
 }
 
-header .container ul a.active{
-    
+header .container ul a.active {
     background-color: var(--primary_color);
     color: #fff;
     border-radius: 0.5rem;
 }
-header .container ul a:hover{
-    
-    background-color: var(--primary_color);
-    color: #fff;
-    border-radius: 0.5rem;
-    
-}
-header .container .auth{
-    display:flex;
-    align-items:center;
-    gap:1rem;
-    
-}
-header .container .auth a{
-   transition:0.3s;
- 
-}
-header .container .auth .login:hover{
-    color:var(--primary_color);
-    font-weight:bold;
 
-} 
-header .container .auth .signup{
-    border:2px solid var(--primary_color);
-    padding:4px 8px;
+header .container ul a:hover {
+    background-color: var(--primary_color);
+    color: #fff;
+    border-radius: 0.5rem;
+
+}
+
+header .container .auth {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+header .container .auth a {
+    transition: 0.3s;
+}
+
+header .container .auth .login:hover {
+    color: var(--primary_color);
+}
+
+header .container .auth .signup {
+    border: 2px solid var(--primary_color);
+    padding: 4px 8px;
     border-radius: 0.3rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
 }
-header .container .auth .signup:hover{
-    color:var(--primary_color);
-    font-weight:bold;
-    
-} 
 
+header .container .auth .signup i{
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background-color: var(--primary_color);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border: 1px solid #fff;
+}
 
-
+header .container .auth .signup:hover {
+    background-color: var(--primary_color);
+    color: #fff;
+}
