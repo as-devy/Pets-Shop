@@ -12,7 +12,7 @@
 
 body {
     width: 100%;
-    height: 100vh;
+    height: 200vh;
     /* FOR REMOVE */
     font-family: "Poppins", serif;
     background-color: #f9f9e4;
@@ -124,3 +124,4 @@ header .container .auth .signup:hover {
     background-color: var(--primary_color);
     color: #fff;
 }
+
