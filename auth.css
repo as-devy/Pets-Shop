@@ -1,0 +1,138 @@
+.signup,
+.login{
+    height: 100%;
+}
+
+.signup .auth_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 80%; */
+    /* margin: 0 auto; */
+    /* margin-top: 150px; */
+    margin-left: 170px;
+    height: 100%;
+}
+
+.signup .auth_container form{
+    width: 35%;
+    background-color: #fff;
+    padding: 20px;
+    padding-top: 10px;
+    border-radius: 0.7rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+/* .signup .auth_container form h1{
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+} */
+
+.signup .auth_container form .logo img{
+    width: 70px;
+    height: 70px;
+}
+
+.signup .auth_container form .logo{
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.signup .auth_container form label{
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 15px;
+}
+
+.signup .auth_container form .icon{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 13px;
+    background-color: var(--primary_color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.signup .auth_container form .inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.signup .auth_container form .inputs .input{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.signup .auth_container form .inputs .input input{
+    outline: none;
+    padding: 8px 10px;
+    border-radius: 0.7rem;
+    border: 1px solid #4b4b4b;
+}
+
+.signup .auth_container form button{
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: var(--primary_color);
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.signup .auth_container form button:hover{
+    background-color: #00a59e;
+}
+
+.signup .auth_container .illustrate{
+    width: 40%;
+    background-color: var(--primary_color);
+    height: 100%;
+    display: flex;
+    align-items: end;
+    position: relative;
+}
+
+.signup .auth_container .illustrate .logo {
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 220px;
+    z-index: 9;
+    /* width: 500px; */
+    padding: 0 10px;
+    padding-left: 0;
+    gap: 0.7rem;
+    border-radius: 1rem;
+    /* border: 1px s; */
+    font-size: 15px;
+}
+
+.signup .auth_container .illustrate .logo img{
+    width: 50px;
+    height: 50px;
+}
+
+.signup .auth_container .illustrate .loign_img{
+    width: 100%;
+    position: relative;
+    left: -50px;
+}
