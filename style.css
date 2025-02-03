@@ -17,6 +17,11 @@ body {
     font-family: "Poppins", serif;
 }
 
+a{
+    text-decoration: none;
+    color: #000;
+}
+
 header {
     width: 100%;
     position: fixed;
@@ -44,25 +49,63 @@ header .container .logo {
     font-weight: bold;
 }
 
-header .container .logo span {
+header .container .logo h3 {
     margin-left: -5px;
+
 }
 
 header .container ul {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     list-style: none;
 }
 
 header .container ul a {
-    text-decoration: none;
     color: #000;
+    transition: 0.3s;
+    padding: 6px 12px;
 }
 
 header .container ul a.active{
-    padding: 6px 12px;
+    
     background-color: var(--primary_color);
     color: #fff;
     border-radius: 0.5rem;
 }
+header .container ul a:hover{
+    
+    background-color: var(--primary_color);
+    color: #fff;
+    border-radius: 0.5rem;
+    
+}
+header .container .auth{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    
+}
+header .container .auth a{
+   transition:0.3s;
+ 
+}
+header .container .auth .login:hover{
+    color:var(--primary_color);
+    font-weight:bold;
+
+} 
+header .container .auth .signup{
+    border:2px solid var(--primary_color);
+    padding:4px 8px;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+header .container .auth .signup:hover{
+    color:var(--primary_color);
+    font-weight:bold;
+    
+} 
+
+
+
