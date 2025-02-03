@@ -20,6 +20,8 @@ body {
 header {
     width: 100%;
     position: fixed;
+    padding:5px 20px;
+    
 }
 
 header .container {
@@ -27,6 +29,7 @@ header .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 
 header .container .logo img {
@@ -43,4 +46,15 @@ header .container .logo{
 
 header .container .logo span{
     margin-left: -5px;
+}
+header .container ul{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+    list-style: none;
+}
+
+header .container ul a{
+    text-decoration: none;
+    color:#000;
 }
