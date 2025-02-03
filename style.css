@@ -29,9 +29,18 @@ header .container {
     justify-content: space-between;
 }
 
-header .container .logo img{
-    width:120px;
-    height:120px;
+header .container .logo img {
+    width: 80px;
+    height: 80px;
+}
 
+header .container .logo{
+    display: flex;
+    align-items: center;
+    color: var(--primary_color);
+    font-weight: bold;
+}
 
+header .container .logo span{
+    margin-left: -5px;
 }
