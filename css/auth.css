@@ -32,6 +32,7 @@
     justify-content: center;
 } 
 
+body > main > div > form > h1
 .signup .auth_container form .logo img{
     width: 70px;
     height: 70px;
