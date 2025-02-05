@@ -3,5 +3,24 @@
     height:95%;
     width:100%;
     background-size:cover ;
+
    
+}
+
+.landing .container{
+    color:#fff;
+    padding-top: 150px;
+    height: 100%;
+    text-align: center;
+    
+}
+
+.landing .container h1{
+    font-size:35px;
+}
+
+.landing .container p{
+    font-size:14px;
+    color: #888CA9;
+
 }
