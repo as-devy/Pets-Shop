@@ -1,0 +1,6 @@
+.landing{
+    background-image:url(../imgs/hero-banner.webp);
+    height:100%;
+    width:100%;
+    background-size:cover ;
+}
