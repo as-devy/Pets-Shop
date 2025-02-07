@@ -30,6 +30,16 @@
     right: 0;
 }
 
+.landing .vector_1 {
+    top: 70px;
+    right: 0;
+}
+
+.landing .vector_2 {
+    bottom: 350px;
+    left: 50px;
+}
+
 .landing .container {
     color: #fff;
     padding-top: 200px;
