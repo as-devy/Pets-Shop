@@ -25,9 +25,23 @@
     left: 50px;
 }
 
+.landing .overlay{
+    position: absolute;
+}
+
 .landing .dog {
     bottom: 0;
     right: 0;
+}
+
+.landing .vector_1 {
+    top: 70px;
+    right: 0;
+}
+
+.landing .vector_2 {
+    bottom: 350px;
+    left: 50px;
 }
 
 .landing .container {
