@@ -33,7 +33,7 @@
 
         <div class="auth_container">
             <form action="">
-                <h1 style="color:#02c5bd"> Sign Up</h1> 
+                <h1 style="color:#02c5bd"> Sign Up</h1>
                 <!-- <a href="./" class="logo">
                     <img src="./imgs/logo.png" alt="pawsafe">
                     <h3>Paws Safe</h3>
@@ -43,22 +43,22 @@
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-user"></i></div> Username
                         </label>
-                        <input type="text" placeholder="Username">
+                        <input type="text" placeholder="Username" id="name">
                     </div>
                     <div class="input">
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-envelope"></i></div> Email
                         </label>
-                        <input type="email" placeholder="Email">
+                        <input type="email" placeholder="Email" id="email">
                     </div>
                     <div class="input">
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-lock"></i></div> Password
                         </label>
-                        <input type="password" placeholder="Password">
+                        <input type="password" placeholder="Password" id="password">
                     </div>
                 </div>
-                <button>Sign In</button>
+                <button id="signin">Sign In</button>
             </form>
             <div class="illustrate">
                 <div class="logo">
@@ -69,6 +69,40 @@
             </div>
         </div>
     </main>
+
+    <script>
+        document.querySelector("#signin").addEventListener("click", (event) => {
+            event.preventDefault();
+
+            const name = document.querySelector("#name").value
+            const email = document.querySelector("#email").value
+            const password = document.querySelector("#password").value
+
+            const user = {
+                name: name,
+                email: email,
+                password: password,
+            }
+
+            fetch('http://localhost:400/addUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then(response => response.json())
+                .then(data => console.log('Success:', data))
+                .catch(error => console.error('Error:', error));
+        })
+
+
+        // string "ghghgh"
+        // Nums => integer - Float 6.98
+        // bollean true or false
+        // array ["cat", "dog", "ha"]
+        // objects {key: value}
+    </script>
 </body>
 
 </html>
