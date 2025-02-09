@@ -281,8 +281,8 @@ width:350px;
 
 .our-benefits .benefits .benefit .icon {
     border-radius: 50%;
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     background-color: var(--primary_color);
     align-items: center;
     display: flex;
