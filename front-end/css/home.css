@@ -475,6 +475,7 @@ section .container .title p {
     background-size: cover;
     background-position: center;
     background-image: url('/front-end/imgs/banner-bg-2.jpg');
+    flex-direction: row-reverse;
 }
 
 
@@ -525,7 +526,7 @@ section .container .title p {
     flex-direction: column;
 }
 
-.banner-container .banner .content2 {
+.banner-container .banneryellow .content2 {
 
     width: 60%;
     z-index: 3;
@@ -569,6 +570,9 @@ section .container .title p {
     color: white;
 }
 
+.donation_section{
+
+}
 .donation {
     position: relative;
     width: 100%;
@@ -576,28 +580,31 @@ section .container .title p {
     justify-content: center;
     align-items: center;
     display: flex;
-    flex-direction: column;
-    background-color: #f4f4f4;
+    flex-direction: row-reverse;
+    background-color:#fae8d7;
     gap: 1rem;
 }
 
 .donation img {
 
-    position: absolute;
-    bottom: 0;
-    left: 200px;
-    display: flex;
-    flex-direction: row;
+margin-bottom: -30px;
+
 }
+
+.donation .text{
+    width:40%;
+
+}
+
 
 .donation h2 {
     font-size: 3.375rem;
     font-weight: 600;
+   
 }
 
-.donation span {
-    text-align: center;
-    width: 450px;
+.donation p {
+    color:#505050;
     line-height: 1.5;
 }
 
@@ -608,8 +615,9 @@ section .container .title p {
     color: white;
     text-decoration: none;
     border-radius: 30px;
-    height: 60px;
+    
     font-size: 1.2rem;
-    text-align: center;
+    
     font-weight: bold;
+    margin-top:20px;
 }

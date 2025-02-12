@@ -1,0 +1,39 @@
+.banner{
+    width:100%;
+    height:50%;
+    background-image:url(../imgs/dd.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    text-align: center;
+    position: relative;
+   
+
+}
+.banner h1{
+    font-size: 2.5rem;
+}
+.banner div{
+    position: relative;
+    z-index: 99;
+}
+.banner span{
+    color: rgb(211, 210, 210) ;
+}
+.adoption{
+    height: 100%;
+    padding-top: 90px;
+}
+
+.banner::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.452);
+
+}
