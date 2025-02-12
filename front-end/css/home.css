@@ -413,20 +413,20 @@ section .container .title p {
     justify-content: center;
     align-items: center;
     box-shadow: inset 0 0 0 1000px rgb(0 48 80 / 52%);
-    display: flex ;
+    display: flex;
     flex-direction: row;
     gap: 8rem;
     align-items: center;
 }
 
 .adopt-section .overlay {
-    display: flex ;
+    display: flex;
     flex-direction: row;
     gap: 8rem;
     padding: 40px;
     border-radius: 10px;
     text-align: center;
-    
+
 }
 
 .adopt-section .overlay h2 {
@@ -435,7 +435,7 @@ section .container .title p {
     margin-bottom: 20px;
 }
 
-.adopt-section .overlay  .contact-btn {
+.adopt-section .overlay .contact-btn {
     display: inline-block;
     padding: 15px 30px;
     background-color: #d62828;
@@ -450,5 +450,166 @@ section .container .title p {
 
 .adopt-section .overlay .contact-btn:hover {
     background-color: #5e0404;
-   
+
+}
+
+/* find bff section */
+.banner-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 40px;
+
+
+}
+
+.banner-container .banner {
+    position: relative;
+    width: 565px;
+    height: 244px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
+    background-size: cover;
+    background-position: center;
+    background-image: url('/front-end/imgs/banner-bg-2.jpg');
+}
+
+
+.banner-container .banneryellow {
+    background-image: url('/front-end/imgs/backbanner.jpg');
+    position: relative;
+    width: 565px;
+    height: 244px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
+    background-size: cover;
+    background-position: center;
+
+
+
+}
+
+/* Foreground images */
+.banner-container .banner .imgwomen {
+    position: absolute;
+    left: 30px;
+    bottom: 0;
+    width: 150px;
+    /* Adjust size */
+    height: auto;
+    z-index: 2;
+    margin-bottom: -8px;
+}
+
+.banner-container .banneryellow .imgdog {
+    position: absolute;
+    right: 80px;
+    bottom: 0;
+    width: 150px;
+    /* Adjust size */
+    height: auto;
+    z-index: 2;
+    margin-bottom: -8px;
+}
+
+.banner-container .banner .content1 {
+    width: 60%;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner-container .banner .content2 {
+
+    width: 60%;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.banner-container .banner .content1 .bf h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.banner-container .banneryellow .content2 .bff h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: white;
+
+}
+
+
+.banner-container .button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    width: 190px;
+}
+
+.banner-container .banner .content1 .red-button {
+    background-color: #FF3B30;
+    color: white;
+}
+
+.banner-container .banneryellow .black-button {
+    background-color: black;
+    color: white;
+}
+
+.donation {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    gap: 1rem;
+}
+
+.donation img {
+
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+    display: flex;
+    flex-direction: row;
+}
+
+.donation h2 {
+    font-size: 3.375rem;
+    font-weight: 600;
+}
+
+.donation span {
+    text-align: center;
+    width: 450px;
+    line-height: 1.5;
+}
+
+.donation .contactbotton {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #d62828;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    height: 60px;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bold;
 }
