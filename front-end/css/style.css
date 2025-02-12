@@ -80,7 +80,6 @@ header .container ul a:hover {
     background-color: var(--primary_color);
     color: #fff;
     border-radius: 0.5rem;
-
 }
 
 header .container .auth {
@@ -97,7 +96,8 @@ header .container .auth .login:hover {
     color: var(--primary_color);
 }
 
-header .container .auth .signup {
+header .container .auth .signup,
+header .container .auth .post_pet {
     border: 2px solid var(--primary_color);
     padding: 4px 8px;
     border-radius: 0.3rem;
@@ -107,7 +107,8 @@ header .container .auth .signup {
     gap: 0.3rem;
 }
 
-header .container .auth .signup i{
+header .container .auth .signup i,
+header .container .auth .post_pet i{
     width: 23px;
     height: 23px;
     border-radius: 50%;
@@ -120,8 +121,13 @@ header .container .auth .signup i{
     border: 1px solid #fff;
 }
 
-header .container .auth .signup:hover {
+header .container .auth .signup:hover,
+header .container .auth .post_pet:hover{
     background-color: var(--primary_color);
     color: #fff;
+}
+
+.d_none{
+    display: none;
 }
 
