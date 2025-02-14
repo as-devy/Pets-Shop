@@ -1,3 +1,4 @@
+
 .banner{
     width:100%;
     height:50%;
@@ -36,4 +37,230 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.452);
 
+}
+
+/* CONTACTUS  */
+
+.form {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width:90%;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.form-container {
+    padding: 20px;
+    background: #fff7ee;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+     width:50%;
+    border-top: 5px solid #f77f00;
+    border-bottom: 5px solid #f77f00;
+}
+
+h2 {
+    color: #143d52;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #797979;
+    padding:.375rem .75rem;
+   
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid orange;
+    border-radius: 15px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    background-color: #d62828;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 2rem;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+.form  .image-container img {
+ 
+    height: auto;
+    margin-left: 20px;
+    border-radius: 12px;
+    flex: 0 0 auto;
+    width:650px;
+
+}
+
+
+/* list categories */
+
+.adoption .container{
+    width:95%;
+    margin:0 auto;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+   
+
+}
+.categories{
+    width: 18%;
+}
+.categories ul{
+    list-style: none;
+    display: flex;
+    gap:0.7rem;
+    flex-direction: column;
+
+  
+}
+
+.categories ul li{
+    display: flex;
+    justify-content: space-between;
+    background-color:#ececec;
+    align-items: center;
+    height: 55px;
+    padding: 3px 10px;
+    border-radius:0.5rem;
+    border:1px solid #aaaaaa;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.categories ul li:hover{
+    background-color: #d7d6d6;
+}
+
+.categories ul li img{
+    width:25px;
+    height:25px;
+}
+
+.categories ul li .icon{
+    width:35px;
+    height:35px;
+    border-radius: 50%;
+    background:#000 ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.categories ul li span{
+    font-size: 14px;
+    color:#838282;
+}
+
+.petlist{
+    width:83%;
+    margin-left: 10px;
+}
+.petlist .list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.petlist .list .pet {
+    width: 250px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.7rem;
+    overflow: hidden;
+    padding-bottom: 25px;
+
+
+}
+
+.petlist .list .pet .img {
+    width: 100%;
+    height: 30%;
+    position: relative;
+}
+
+.petlist .list .pet .img img {
+    width: 100%;
+    height: 100%;
+}
+
+.petlist .list .pet .img .category {
+    position: absolute;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: var(--primary_color);
+    top: 0;
+    left: 0;
+    padding: 5px 8px;
+    border-bottom-right-radius: 0.5rem;
+    font-weight: bold;
+}
+
+.petlist .list .pet .text {
+    padding: 20px 15px;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.petlist .list .pet .text h2 {
+    color: #003049;
+    font-size: 2rem;
+
+}
+
+.petlist .list .pet .text .age {
+    font-size: 15.5px;
+    color: #D62828;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: -5px;
+    margin-bottom: 6px;
+}
+
+.petlist .list .pet .text .location {
+    color: #545454;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.petlist .list .pet .text .desc {
+    color: #7a7a7a;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.petlist .list .pet a {
+    background-color: var(--primary_color);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 1.5rem;
+    text-transform: capitalize;
 }
