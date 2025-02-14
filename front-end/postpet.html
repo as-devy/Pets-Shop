@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/icons.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/postpet.css">
+
+    <title>Paws Safe</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="./" class="logo">
+                <img src="./imgs/logo.png" alt="pawsafe">
+                <h3>Paws Safe</h3>
+            </a>
+            <ul>
+                <li><a class="active" href="./index.html">Home</a></li>
+                <li><a href="./adoption.html">Adoption</a></li>
+                <li><a href="#">ReHoming</a></li>
+                <li><a href="./contactus.html">Contact Us</a></li>
+            </ul>
+            <div class="auth">
+                <div class="register">
+                    <a href="./login.html" class="login">Login</a>
+                    <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
+                </div>
+                <a href="#" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+        <div class="form">
+            <div class="form-container">
+
+                <form>
+                    <h2>pet information</h2>
+
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="age">Age</label>
+                    <input type="text" id="Age" name="Age" required>
+
+                    <label for="address" >Address</label>
+                    <input type="text" id="Address" name="Address" required placeholder="Street Address" style="margin-bottom:10px;" >
+                    <input type="text" id="Address" name="Address" required placeholder="Street Address Line 2" style="margin-bottom:10px;">
+                    <div class="address">
+                        <input type="text" id="Address" name="Address" required placeholder="Town/City">
+                        <input type="text" id="Address" name="Address" required placeholder="Post Code">
+                    </div>
+
+                    <label for="medicalHistory">Medical history</label>
+                    <input type="text" id="Age" name="Age" required>
+
+                    <label for="Description">Description:</label>
+                    <textarea id="Description" name="Description" rows="4" required></textarea>
+
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+
+            <div class="image-container">
+                <img src="./imgs/faq.webp" alt="Dog and Cat">
+            </div>
+        </div>
+
+
+    </main>
+
+</body>
+
+</html>
