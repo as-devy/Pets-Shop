@@ -33,45 +33,72 @@
 
         <div class="auth_container">
             <form action="">
-                 <h1 style="color:#02c5bd"> Log In</h1>  
-                 <!-- <a href="./" class="logo">
+                <h1 style="color:#02c5bd"> Log In</h1>
+                <!-- <a href="./" class="logo">
                     <img src="./imgs/logo.png" alt="pawsafe">
                     <h3>Paws Safe</h3>
                 </a>  -->
                 <div class="inputs">
-                    <!-- <div class="input">
-                        <label for="">
-                            <div class="icon"><i class="fa-solid fa-user"></i></div> Username
-                        </label>
-                        <input type="text" placeholder="Username">
-                    </div> -->
                     <div class="input">
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-envelope"></i></div> Email
                         </label>
-                        <input type="email" placeholder="Email">
+                        <input type="email" id="email" placeholder="Email">
                     </div>
                     <div class="input">
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-lock"></i></div> Password
                         </label>
-                        <input type="password" placeholder="Password">
+                        <input type="password" id="password" placeholder="Password">
                     </div>
                 </div>
-                <button>Sign In</button>
+                <button id="login">Sign In</button>
             </form>
             <div class="illustrate">
                 <div class="logo">
                     <img src="./imgs/logo.png" alt="pawsafe">
                     <h3>Paws Safe</h3>
-                </div> 
+                </div>
                 <!-- <h3>Log In</h3> -->
                 <img class="loign_img" src="./imgs/login_img.png" alt="">
             </div>
         </div>
     </main>
 
-    <script src="./main.js"></script>
+    <script>
+        document.querySelector("#login").addEventListener("click", (event) => {
+            event.preventDefault();
+
+            console.log("log in")
+
+            const email = document.querySelector("#email").value
+            const password = document.querySelector("#password").value
+
+            const user = {
+                email: email,
+                password: password,
+            }
+
+            fetch('http://localhost:400/loginUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data)
+                    console.log(data.userId)
+                    document.cookie = `UserId=${data.userId}; path=/; max-age=604800`;
+                    window.location.href = "index.html";
+
+                }
+                )
+                .catch(error => console.error('Error:', error));
+        })
+    </script>
+    <!-- <script src="./main.js"></script> -->
 </body>
 
 </html>

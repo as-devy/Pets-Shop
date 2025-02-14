@@ -41,6 +41,30 @@ app.post("/addUser", (request, response) => {
     });
 })
 
+app.post("/loginUser", (request, response) => {
+    const { email, password } = request.body;
+    const sql = "SELECT * FROM users WHERE email = ?";
+
+    db.query(sql, [email], (err, result) => {
+        if (err) {
+            console.error("Database error:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+
+        if (result.length === 0) {
+            return response.status(401).json({ error: "Invalid email or password" });
+        }
+
+        const dbUser = result[0]; // Get the first matched user
+        if (password === dbUser.password) {
+            return response.status(200).json({ message: "Login successful", userId: dbUser.id });
+        } else {
+            return response.status(401).json({ error: "Invalid email or password" });
+        }
+    });
+});
+
+
 app.listen(400, () => {
     console.log("server is listening")
 })
