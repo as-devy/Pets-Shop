@@ -80,11 +80,17 @@ body > main > div > form > h1
     gap: 0.5rem;
 }
 
+.signup .auth_container form .inputs .input .error,
+.signup .auth_container form .inputs .input b{
+    color: red;
+    font-size: 0.8rem;
+}
+
 .signup .auth_container form .inputs .input input{
     outline: none;
     padding: 8px 10px;
     border-radius: 0.7rem;
-    border: 1px solid #4b4b4b;
+    border: 1px solid #939393;
 }
 
 .signup .auth_container form button{

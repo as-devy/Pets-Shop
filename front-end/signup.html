@@ -41,21 +41,24 @@
                 <div class="inputs">
                     <div class="input">
                         <label for="">
-                            <div class="icon"><i class="fa-solid fa-user"></i></div> Username
+                            <div class="icon"><i class="fa-solid fa-user"></i></div> Username <b>*</b>
                         </label>
                         <input type="text" placeholder="Username" id="name">
+                        <span class="error"></span>
                     </div>
                     <div class="input">
                         <label for="">
-                            <div class="icon"><i class="fa-solid fa-envelope"></i></div> Email
+                            <div class="icon"><i class="fa-solid fa-envelope"></i></div> Email <b>*</b>
                         </label>
                         <input type="email" placeholder="Email" id="email">
+                        <span class="error"></span>
                     </div>
                     <div class="input">
                         <label for="">
-                            <div class="icon"><i class="fa-solid fa-lock"></i></div> Password
+                            <div class="icon"><i class="fa-solid fa-lock"></i></div> Password <b>*</b>
                         </label>
                         <input type="password" placeholder="Password" id="password">
+                        <span class="error"></span>
                     </div>
                 </div>
                 <button id="signin">Sign In</button>
@@ -95,7 +98,7 @@
                 .then(data => {
                         console.log('Success:', data)
                         console.log(data.userId)
-                        document.cookie = `UserId=${data.userId}; path=/;`;
+                        document.cookie = "UserId=12345; path=/; max-age=604800"; // 7 days (604800 seconds)
                         window.location.href = "http://127.0.0.1:5500/front-end/index.html";
                     }
                 )
