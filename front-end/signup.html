@@ -95,7 +95,7 @@
                 .then(data => {
                         console.log('Success:', data)
                         console.log(data.userId)
-                        document.cookie = `UserId=${data.userId}; path=/;`;
+                        document.cookie = "UserId=12345; path=/; max-age=604800"; // 7 days (604800 seconds)
                         window.location.href = "http://127.0.0.1:5500/front-end/index.html";
                     }
                 )
