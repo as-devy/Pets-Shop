@@ -122,9 +122,6 @@
                             <p>We ensure pets find safe, loving homes with responsible adopters through a secure and
                                 verified process.</p>
                         </div>
-
-
-
                     </div>
                     <div class="benefit">
                         <div class="icon">
@@ -242,6 +239,31 @@
 
     </section>
 
+    <section>
+        <div class="form">
+            <div class="form-container">
+
+                <form>
+                    <h2>Send us a message</h2>
+
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email address:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+
+            <div class="image-container">
+                <img src="./imgs/faq.webp" alt="Dog and Cat">
+            </div>
+        </div>
+    </section>
     <script>
         let pets = [];
 
@@ -256,7 +278,7 @@
                 // console.log("Fetched Pets:", data);
                 pets = data;
 
-                pets.map(pet=>{
+                pets.map(pet => {
                     const petElement = document.createElement("div")
                     petElement.innerHTML = `
                         <div class="pet">
