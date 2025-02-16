@@ -19,14 +19,17 @@
                     <h3>Paws Safe</h3>
                 </a>
                 <ul>
-                    <li><a class="active" href="index.html">Home</a></li>
-                    <li><a href="#">Pet List</a></li>
+                    <li><a class="active" href="./index.html">Home</a></li>
+                    <li><a href="./adoption.html">Adoption</a></li>
                     <li><a href="#">ReHoming</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="./contactus.html">Contact Us</a></li>
                 </ul>
                 <div class="auth">
-                    <a href="./login.html" class="login">Login</a>
-                    <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
+                    <div class="register">
+                        <a href="./login.html" class="login">Login</a>
+                        <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
+                    </div>
+                    <a href="#" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
                 </div>
             </div>
         </header>
@@ -44,15 +47,17 @@
                             <div class="icon"><i class="fa-solid fa-envelope"></i></div> Email
                         </label>
                         <input type="email" id="email" placeholder="Email">
+                        <span class="error"></span>
                     </div>
                     <div class="input">
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-lock"></i></div> Password
                         </label>
                         <input type="password" id="password" placeholder="Password">
+                        <span class="error"></span>
                     </div>
                 </div>
-                <button id="login">Sign In</button>
+                <button id="login">Submit</button>
             </form>
             <div class="illustrate">
                 <div class="logo">
@@ -66,39 +71,80 @@
     </main>
 
     <script>
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                const [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null; // Return null if the cookie is not found
+        }
+
+        const user = getCookie('UserId');
+
+        if (user){
+            window.location.href = "index.html";
+        }
+
         document.querySelector("#login").addEventListener("click", (event) => {
             event.preventDefault();
 
-            console.log("log in")
+            // let name = document.getElementById("name");
+            let email = document.getElementById("email");
+            let password = document.getElementById("password");
+            let nameError = name.nextElementSibling;
+            let emailError = email.nextElementSibling;
+            let passwordError = password.nextElementSibling;
 
-            const email = document.querySelector("#email").value
-            const password = document.querySelector("#password").value
+            let isValid = true;
 
-            const user = {
-                email: email,
-                password: password,
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            if (email.value.trim() === "") {
+                emailError.textContent = "Please Fill Out This Field.";
+                isValid = false;
+            } else {
+                let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (!emailPattern.test(email.value.trim())) {
+                    emailError.textContent = "Please Enter Valid Email.";
+                    isValid = false;
+                }
+            }
+            if (password.value.trim() === "") {
+                passwordError.textContent = "Please Fill Out This Field.";
+                isValid = false;
             }
 
-            fetch('http://localhost:400/loginUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data)
-                    console.log(data.userId)
-                    document.cookie = `UserId=${data.userId}; path=/; max-age=604800`;
-                    window.location.href = "index.html";
-
+            if (isValid) {
+                const user = {
+                    email: email.value,
+                    password: password.value,
                 }
-                )
-                .catch(error => console.error('Error:', error));
+
+                fetch('http://localhost:400/loginUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data)
+                        console.log(data.userId)
+                        document.cookie = `UserId=${data.userId}; path=/; max-age=604800`;
+                        window.location.href = "index.html";
+
+                    }
+                    )
+                    .catch(error => console.error('Error:', error));
+            }
         })
     </script>
-    <!-- <script src="./main.js"></script> -->
+    <script src="./main.js"></script>
 </body>
 
 </html>

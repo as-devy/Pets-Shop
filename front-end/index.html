@@ -33,8 +33,8 @@
                 <a href="#" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
             </div>
         </div>
-
     </header>
+
     <main class="landing">
         <div class="container">
             <div class="text">
@@ -197,98 +197,6 @@
                             tempore rem ullam delectus asperiores in est natus voluptatibus</p>
                     </div>
                     <a href="#">more info </a>
-
-
-
-                </div>
-                <div class="pet">
-                    <div class="img">
-                        <img src="https://ingridkuhn.com/themes/petlove/img/adopt/adopt4.jpg" alt="">
-                        <span class="category">Adoption</span>
-                    </div>
-                    <div class="text">
-                        <h2 class="name">Jonas</h2>
-                        <span class="age">Three month</span>
-                        <p class="location"><i class="fa-solid fa-location-dot"></i>
-                            <span> Giza,Egypt </span>
-                        </p>
-                        <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis possimus
-                            nulla
-                            tempore rem ullam delectus asperiores in est natus voluptatibus</p>
-                    </div>
-                    <a href="#">more info </a>
-                </div>
-
-                <div class="pet">
-                    <div class="img">
-                        <img src="https://ingridkuhn.com/themes/petlove/img/adopt/adopt4.jpg" alt="">
-                        <span class="category">Adoption</span>
-                    </div>
-                    <div class="text">
-                        <h2 class="name">Jonas</h2>
-                        <span class="age">Three month</span>
-                        <p class="location"><i class="fa-solid fa-location-dot"></i>
-                            <span> Giza,Egypt </span>
-                        </p>
-                        <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis possimus
-                            nulla
-                            tempore rem ullam delectus asperiores in est natus voluptatibus</p>
-                    </div>
-                    <a href="#">more info </a>
-                </div>
-
-                <div class="pet">
-                    <div class="img">
-                        <img src="https://ingridkuhn.com/themes/petlove/img/adopt/adopt4.jpg" alt="">
-                        <span class="category">Adoption</span>
-                    </div>
-                    <div class="text">
-                        <h2 class="name">Jonas</h2>
-                        <span class="age">Three month</span>
-                        <p class="location"><i class="fa-solid fa-location-dot"></i>
-                            <span> Giza,Egypt </span>
-                        </p>
-                        <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis possimus
-                            nulla
-                            tempore rem ullam delectus asperiores in est natus voluptatibus</p>
-                    </div>
-                    <a href="#">more info </a>
-                </div>
-
-                <div class="pet">
-                    <div class="img">
-                        <img src="https://ingridkuhn.com/themes/petlove/img/adopt/adopt4.jpg" alt="">
-                        <span class="category">Adoption</span>
-                    </div>
-                    <div class="text">
-                        <h2 class="name">Jonas</h2>
-                        <span class="age">Three month</span>
-                        <p class="location"><i class="fa-solid fa-location-dot"></i>
-                            <span> Giza,Egypt </span>
-                        </p>
-                        <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis possimus
-                            nulla
-                            tempore rem ullam delectus asperiores in est natus voluptatibus</p>
-                    </div>
-                    <a href="#">more info </a>
-                </div>
-
-                <div class="pet">
-                    <div class="img">
-                        <img src="https://ingridkuhn.com/themes/petlove/img/adopt/adopt4.jpg" alt="">
-                        <span class="category">Adoption</span>
-                    </div>
-                    <div class="text">
-                        <h2 class="name">Jonas</h2>
-                        <span class="age">Three month</span>
-                        <p class="location"><i class="fa-solid fa-location-dot"></i>
-                            <span> Giza,Egypt </span>
-                        </p>
-                        <p class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis possimus
-                            nulla
-                            tempore rem ullam delectus asperiores in est natus voluptatibus</p>
-                    </div>
-                    <a href="#">more info </a>
                 </div>
             </div>
         </div>
@@ -333,31 +241,49 @@
         </div>
 
     </section>
-<section>
-    <div class="form">
-        <div class="form-container">
-            
-            <form>
-                <h2>Send us a message</h2>
 
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+    <script>
+        let pets = [];
 
-                <label for="email">Email address:</label>
-                <input type="email" id="email" name="email" required>
+        fetch("http://localhost:400/allPets")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // console.log("Fetched Pets:", data);
+                pets = data;
 
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+                pets.map(pet=>{
+                    const petElement = document.createElement("div")
+                    petElement.innerHTML = `
+                        <div class="pet">
+                            <div class="img">
+                                <img src="${pet.img}" alt="">
+                                <span class="category">${pet.adoption ? "Adoption" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
+                            </div>
+                            <div class="text">
+                                <h2 class="name">${pet.name}</h2>
+                                <span class="age">${pet.age}</span>
+                                <p class="location"><i class="fa-solid fa-location-dot"></i>
+                                    <span>${pet.location}</span>
+                                </p>
+                                <p class="desc">${pet.description}</p>
+                            </div>
+                            <a href="#">more info </a>
+                        </div>
+                    `
 
-                <button type="submit">Send</button>
-            </form>
-        </div>
-   
-        <div class="image-container">
-            <img src="./imgs/faq.webp" alt="Dog and Cat">
-        </div>
-    </div>
-</section>
+                    document.querySelector(".petlist .list").append(petElement)
+                    // console.log(pet.name)
+                })
+            })
+            .catch(error => {
+                console.error("Error fetching pets:", error);
+            });
+    </script>
     <script src="./main.js"></script>
 </body>
 

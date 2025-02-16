@@ -316,13 +316,13 @@ section .container .title p {
 .petlist .list {
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     gap: 2rem;
     flex-wrap: wrap;
 }
 
 .petlist .list .pet {
-    width: 400px;
+    width: 350px;
     background-color: #fff;
     text-align: center;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -335,13 +335,14 @@ section .container .title p {
 
 .petlist .list .pet .img {
     width: 100%;
-    height: 30%;
+    height: 300px;
     position: relative;
 }
 
 .petlist .list .pet .img img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 .petlist .list .pet .img .category {

@@ -64,6 +64,18 @@ app.post("/loginUser", (request, response) => {
     });
 });
 
+app.get("/allPets", (request, response)=>{
+    const sql = "SELECT * FROM pets";
+
+    db.query(sql, (err, result)=>{
+        if (err) {
+            console.error("Database error:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+
+        response.json(result)
+    })
+})
 
 app.listen(400, () => {
     console.log("server is listening")
