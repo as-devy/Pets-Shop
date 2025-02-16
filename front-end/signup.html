@@ -19,14 +19,17 @@
                     <h3>Paws Safe</h3>
                 </a>
                 <ul>
-                    <li><a class="active" href="index.html">Home</a></li>
-                    <li><a href="#">Pet List</a></li>
+                    <li><a class="active" href="./index.html">Home</a></li>
+                    <li><a href="./adoption.html">Adoption</a></li>
                     <li><a href="#">ReHoming</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="./contactus.html">Contact Us</a></li>
                 </ul>
                 <div class="auth">
-                    <a href="./login.html" class="login">Login</a>
-                    <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
+                    <div class="register">
+                        <a href="./login.html" class="login">Login</a>
+                        <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Submit </a>
+                    </div>
+                    <a href="#" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
                 </div>
             </div>
         </header>
@@ -74,34 +77,83 @@
     </main>
 
     <script>
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                const [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null; // Return null if the cookie is not found
+        }
+
+        const user = getCookie('UserId');
+
+        if (user) {
+            window.location.href = "index.html";
+        }
         document.querySelector("#signin").addEventListener("click", (event) => {
             event.preventDefault();
 
-            const name = document.querySelector("#name").value
-            const email = document.querySelector("#email").value
-            const password = document.querySelector("#password").value
+            let name = document.getElementById("name");
+            let email = document.getElementById("email");
+            let password = document.getElementById("password");
+            let nameError = name.nextElementSibling;
+            let emailError = email.nextElementSibling;
+            let passwordError = password.nextElementSibling;
 
-            const user = {
-                name: name,
-                email: email,
-                password: password,
+            let isValid = true;
+
+            nameError.textContent = "";
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            if (name.value.trim() === "") {
+                nameError.textContent = "Please Fill Out This Field.";
+                isValid = false;
             }
 
-            fetch('http://localhost:400/addUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-                .then(response => response.json())
-                .then(data => {
+            if (email.value.trim() === "") {
+                emailError.textContent = "Please Fill Out This Field.";
+                isValid = false;
+            } else {
+                let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (!emailPattern.test(email.value.trim())) {
+                    emailError.textContent = "Please Enter Valid Email.";
+                    isValid = false;
+                }
+            }
+            if (password.value.trim() === "") {
+                passwordError.textContent = "Please Fill Out This Field.";
+                isValid = false;
+            }
+
+            if (isValid) {
+                const user = {
+                    name: name.value,
+                    email: email.value,
+                    password: password.value,
+                }
+
+                fetch('http://localhost:400/addUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(response => response.json())
+                    .then(data => {
                         console.log('Success:', data)
                         document.cookie = `UserId=${data.userId}; path=/; max-age=604800`; // 7 days (604800 seconds)
                         window.location.href = "http://127.0.0.1:5500/front-end/index.html";
                     }
-                )
-                .catch(error => console.error('Error:', error));
+                    )
+                    .catch(error => console.error('Error:', error));
+            }
+
+
         })
 
 

@@ -22,6 +22,7 @@ if (signInBtn || logInBtn) {
             nameError.textContent = "Please Fill Out This Field.";
             isValid = false;
         }
+
         if (email.value.trim() === "") {
             emailError.textContent = "Please Fill Out This Field.";
             isValid = false;
