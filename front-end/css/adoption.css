@@ -54,7 +54,7 @@
 
 }
 .categories{
-    width: 18%;
+    width: 20%;
 }
 .categories ul{
     list-style: none;
@@ -103,7 +103,7 @@
 }
 
 .petlist{
-    width:83%;
+    width:80%;
     margin-left: 10px;
 }
 .petlist .list {
@@ -115,7 +115,7 @@
 }
 
 .petlist .list .pet {
-    width: 250px;
+    width: 300px;
     background-color: #fff;
     text-align: center;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
