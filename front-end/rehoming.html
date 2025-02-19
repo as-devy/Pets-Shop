@@ -21,8 +21,8 @@
             </a>
             <ul>
                 <li><a href="./index.html">Home</a></li>
-                <li><a class="active" href="./adoption.html">Adoption</a></li>
-                <li><a href="./rehoming.html">ReHoming</a></li>
+                <li><a href="./adoption.html">Adoption</a></li>
+                <li><a class="active" href="./rehoming.html">ReHoming</a></li>
                 <li><a href="./contactus.html">Contact Us</a></li>
             </ul>
             <div class="auth">
@@ -35,8 +35,8 @@
     <main class="adoption">
         <div class="banner">
             <div>
-                <h1>Adopt A Pet</h1>
-                <span>Home > Adoption</span>
+                <h1>Rehome A Pet</h1>
+                <span>Home > Rehome</span>
             </div>
         </div>
         <section>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="petlist">
                     <div class="list">
-                        
+
                     </div>
                 </div>
             </div>
@@ -104,15 +104,15 @@
                 // console.log("Fetched Pets:", data);
                 pets = data;
 
-                let adoptionPets = [];
+                let rehomingPets = [];
 
                 pets.forEach(pet => {
-                    if (pet.adoption) {
-                        adoptionPets.push(pet)
+                    if (pet.rehoming) {
+                        rehomingPets.push(pet)
                     }
                 })
 
-                adoptionPets.map(pet => {
+                rehomingPets.map(pet => {
                     // ADD LENGTH OF EACH CATEGORY
                     if (pet.category == "dog") {
                         let dogs_length = document.querySelector("#dogs_length")
@@ -162,7 +162,7 @@
                         const categoryFilter = categoryBtn.getAttribute("data-category")
 
                         if (categoryFilter == "other") {
-                            adoptionPets.map(pet => {
+                            rehomingPets.map(pet => {
                                 if (pet.category !== "cat" && pet.category !== "dog" && pet.category !== "bird" && pet.category !== "fish" && pet.category !== "rabbit") {
                                     const petElement = document.createElement("div")
                                     petElement.innerHTML = `
@@ -185,11 +185,11 @@
                                     document.querySelector(".petlist .list").append(petElement)
                                 }
                             })
-                        }else{
-                            adoptionPets.map(pet => {
-                            if (pet.category == categoryFilter) {
-                                const petElement = document.createElement("div")
-                                petElement.innerHTML = `
+                        } else {
+                            rehomingPets.map(pet => {
+                                if (pet.category == categoryFilter) {
+                                    const petElement = document.createElement("div")
+                                    petElement.innerHTML = `
                                 <div class="pet">
                                     <div class="img">
                                         <img src="${pet.img}" alt="">
@@ -206,9 +206,9 @@
                                     <a href="/viewPet.html?petId=${pet.id}">more info </a>
                                 </div>
                     `
-                                document.querySelector(".petlist .list").append(petElement)
-                            }
-                        })
+                                    document.querySelector(".petlist .list").append(petElement)
+                                }
+                            })
                         }
                     })
                 })
