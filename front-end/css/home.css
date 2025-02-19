@@ -329,8 +329,11 @@ section .container .title p {
     border-radius: 0.7rem;
     overflow: hidden;
     padding-bottom: 25px;
+    transition: 0.3s;
+}
 
-
+.petlist .list .pet:hover{
+    transform: scale(1.05);
 }
 
 .petlist .list .pet .img {

@@ -77,6 +77,22 @@ app.get("/allPets", (request, response)=>{
     })
 })
 
+app.get("/pet/:id", (request, response)=>{
+    const petId = request.params.id;
+
+    const sql = "SELECT * FROM pets WHERE id = ?";
+
+    db.query(sql, [petId], (err, result) => {
+        if (err) {
+            console.error("Database error:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+
+        const pet = result[0];
+        response.json(pet)
+    });
+})
+
 app.listen(400, () => {
     console.log("server is listening")
 })

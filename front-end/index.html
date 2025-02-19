@@ -276,8 +276,7 @@
             })
             .then(data => {
                 // console.log("Fetched Pets:", data);
-                pets = data;
-
+                pets = data.slice(0, 9);
                 pets.map(pet => {
                     const petElement = document.createElement("div")
                     petElement.innerHTML = `
@@ -297,9 +296,7 @@
                             <a href="#">more info </a>
                         </div>
                     `
-
                     document.querySelector(".petlist .list").append(petElement)
-                    // console.log(pet.name)
                 })
             })
             .catch(error => {

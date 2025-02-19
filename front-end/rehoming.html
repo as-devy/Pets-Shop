@@ -37,68 +37,56 @@
             <div>
                 <h1>Rehome A Pet</h1>
                 <span>Home > Rehome</span>
-
             </div>
         </div>
         <section>
             <div class="container">
                 <div class="categories">
                     <ul>
-                        <li id="category_item">
+                        <li id="category_item" data-category="dog">
                             <div class="icon" style="background-color: #ff3d41;"> <img src="./imgs/category-dog.svg"
                                     alt="Dog"></div>
                             <h4>Dogs</h4>
-                            <span class="category-length"> (3)</span>
+                            <span class="category-length"> (<span id="dogs_length">0</span>)</span>
                         </li>
-                        <li id="category_item">
+                        <li id="category_item" data-category="cat">
                             <div class="icon" style="background-color: #ffb13d"> <img src="./imgs/category-cats.svg"
                                     alt="Dog"></div>
-                            <h4>cats</h4>
-                            <span class="category-length"> (3)</span>
+                            <h4>Cats</h4>
+                            <span class="category-length"> (<span id="cats_length">0</span>)</span>
                         </li>
-                        <li id="category_item">
+                        <li id="category_item" data-category="rabbit">
                             <div class="icon" style="background-color: #3d68ff"> <img src="./imgs/category-rabbit.svg"
                                     alt="Dog"></div>
                             <h4>Rabbits</h4>
-                            <span class="category-length"> (3)</span>
+                            <span class="category-length"> (<span id="rabbits_length">0</span>)</span>
                         </li>
-                        <li id="category_item">
+                        <li id="category_item" data-category="bird">
                             <div class="icon" style="background-color: #ff27b6"> <img src="./imgs/category-birds.svg"
                                     alt="Dog"></div>
                             <h4>Birds</h4>
-                            <span class="category-length"> (2)</span>
+                            <span class="category-length"> (<span id="birds_length">0</span>)</span>
                         </li>
-                        <li id="category_item">
+                        <li id="category_item" data-category="fish">
                             <div class="icon" style="background-color: #21cd1e"> <img src="./imgs/category-fish.svg"
                                     alt="Dog"></div>
                             <h4>Fish</h4>
-                            <span class="category-length"> (3)</span>
+                            <span class="category-length"> (<span id="fish_length">0</span>)</span>
                         </li>
-                        <li id="category_item">
-                            <div class="icon" style="background-color: #03aaf2"> <img src="./imgs/category-hen.svg"
-                                    alt="Dog"></div>
-                            <h4>Hen</h4>
-                            <span class="category-length"> (3)</span>
-                        </li>
-                        <li id="category_item">
+                        <li id="category_item" data-category="other">
                             <div class="icon" style="background-color: #ac46ec"> <img src="./imgs/category-others.svg"
                                     alt="Dog"></div>
                             <h4>Others</h4>
-                            <span class="category-length"> (1)</span>
+                            <span class="category-length"> (<span id="others_length">0</span>)</span>
                         </li>
-
-
                     </ul>
 
                 </div>
                 <div class="petlist">
                     <div class="list">
 
-
-
                     </div>
                 </div>
-            </div>
             </div>
         </section>
     </main>
@@ -116,7 +104,37 @@
                 // console.log("Fetched Pets:", data);
                 pets = data;
 
-                pets.map(pet => {
+                let rehomingPets = [];
+
+                pets.forEach(pet => {
+                    if (pet.rehoming) {
+                        rehomingPets.push(pet)
+                    }
+                })
+
+                rehomingPets.map(pet => {
+                    // ADD LENGTH OF EACH CATEGORY
+                    if (pet.category == "dog") {
+                        let dogs_length = document.querySelector("#dogs_length")
+                        dogs_length.innerHTML = Number(dogs_length.innerHTML) + 1;
+                    } else if (pet.category == "cat") {
+                        let cats_length = document.querySelector("#cats_length")
+                        cats_length.innerHTML = Number(cats_length.innerHTML) + 1;
+                    } else if (pet.category == "rabbit") {
+                        let rabbits_length = document.querySelector("#rabbits_length")
+                        rabbits_length.innerHTML = Number(rabbits_length.innerHTML) + 1;
+                    } else if (pet.category == "bird") {
+                        let birds_length = document.querySelector("#birds_length")
+                        birds_length.innerHTML = Number(birds_length.innerHTML) + 1;
+                    } else if (pet.category == "fish") {
+                        let fish_length = document.querySelector("#fish_length")
+                        fish_length.innerHTML = Number(fish_length.innerHTML) + 1;
+                    } else {
+                        let others_length = document.querySelector("#others_length")
+                        others_length.innerHTML = Number(others_length.innerHTML) + 1;
+                    }
+
+                    // ADD PETS TO THE PAGE
                     const petElement = document.createElement("div")
                     petElement.innerHTML = `
                         <div class="pet">
@@ -132,12 +150,67 @@
                                 </p>
                                 <p class="desc">${pet.description}</p>
                             </div>
-                            <a href="#">more info </a>
+                            <a href="./viewPet.html?petId=${pet.id}">more info </a>
                         </div>
                     `
-
                     document.querySelector(".petlist .list").append(petElement)
-                    // console.log(pet.name)
+                })
+
+                document.querySelectorAll(".categories #category_item").forEach(categoryBtn => {
+                    categoryBtn.addEventListener("click", () => {
+                        document.querySelector(".petlist .list").innerHTML = ""
+                        const categoryFilter = categoryBtn.getAttribute("data-category")
+
+                        if (categoryFilter == "other") {
+                            rehomingPets.map(pet => {
+                                if (pet.category !== "cat" && pet.category !== "dog" && pet.category !== "bird" && pet.category !== "fish" && pet.category !== "rabbit") {
+                                    const petElement = document.createElement("div")
+                                    petElement.innerHTML = `
+                                <div class="pet">
+                                    <div class="img">
+                                        <img src="${pet.img}" alt="">
+                                        <span class="category">${pet.adoption ? "Adoption" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
+                                    </div>
+                                    <div class="text">
+                                        <h2 class="name">${pet.name}</h2>
+                                        <span class="age">${pet.age} Years Old</span>
+                                        <p class="location"><i class="fa-solid fa-location-dot"></i>
+                                            <span>${pet.location}</span>
+                                        </p>
+                                        <p class="desc">${pet.description}</p>
+                                    </div>
+                                    <a href="/viewPet.html?petId=${pet.id}">more info</a>
+                                </div>
+                    `
+                                    document.querySelector(".petlist .list").append(petElement)
+                                }
+                            })
+                        } else {
+                            rehomingPets.map(pet => {
+                                if (pet.category == categoryFilter) {
+                                    const petElement = document.createElement("div")
+                                    petElement.innerHTML = `
+                                <div class="pet">
+                                    <div class="img">
+                                        <img src="${pet.img}" alt="">
+                                        <span class="category">${pet.adoption ? "Adoption" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
+                                    </div>
+                                    <div class="text">
+                                        <h2 class="name">${pet.name}</h2>
+                                        <span class="age">${pet.age} Years Old</span>
+                                        <p class="location"><i class="fa-solid fa-location-dot"></i>
+                                            <span>${pet.location}</span>
+                                        </p>
+                                        <p class="desc">${pet.description}</p>
+                                    </div>
+                                    <a href="/viewPet.html?petId=${pet.id}">more info </a>
+                                </div>
+                    `
+                                    document.querySelector(".petlist .list").append(petElement)
+                                }
+                            })
+                        }
+                    })
                 })
             })
             .catch(error => {

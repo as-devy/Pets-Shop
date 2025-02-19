@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View - </title>
+</head>
+
+<body>
+
+    
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const petId = urlParams.get("petId");
+
+        console.log(petId);
+
+        fetch(`http://localhost:400/pet/${petId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data)
+                const pet = data;
+                document.title = `View - ${pet.name}`
+                // document.body.innerHTML = `
+                //     <h1>${pet.name}</h1>
+                //     <p>${pet.description}</p>
+                // `
+            })
+            .catch(error => {
+                console.error("Error fetching pets:", error);
+            });
+    </script>
+</body>
+
+</html>
