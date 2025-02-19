@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/icons.css">
-    <link rel="stylesheet" href="./css/home.css">
+    <!-- <link rel="stylesheet" href="./css/home.css"> -->
     <link rel="stylesheet" href="./css/postpet.css">
 
     <title>Paws Safe</title>
@@ -42,17 +42,28 @@
             <div class="form-container">
 
                 <form>
-                    <h2>pet information</h2>
+                    <h2><i class="fa-solid fa-paw"></i> Post Your Pet</h2>
 
-                    <label for="name">Name:</label>
+                    <div class="pet_img">
+                        <input id="pet_img_input" type="file" accept="image/*" hidden>
+                        <div class="input">
+                            <img id="pet_img" style="display: none;"
+                                src="https://images.pexels.com/photos/208773/pexels-photo-208773.jpeg" alt="">
+                            <img class="icon" src="./imgs/image-gallery.png" alt="">
+                        </div>
+                        <p id="fileName">Add Your Pet Photo</p>
+                    </div>
+                    <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>
 
                     <label for="age">Age</label>
                     <input type="text" id="Age" name="Age" required>
 
-                    <label for="address" >Address</label>
-                    <input type="text" id="Address" name="Address" required placeholder="Street Address" style="margin-bottom:10px;" >
-                    <input type="text" id="Address" name="Address" required placeholder="Street Address Line 2" style="margin-bottom:10px;">
+                    <label for="address">Address</label>
+                    <input type="text" id="Address" name="Address" required placeholder="Street Address"
+                        style="margin-bottom:10px;">
+                    <input type="text" id="Address" name="Address" required placeholder="Street Address Line 2"
+                        style="margin-bottom:10px;">
                     <div class="address">
                         <input type="text" id="Address" name="Address" required placeholder="Town/City">
                         <input type="text" id="Address" name="Address" required placeholder="Post Code">
@@ -68,14 +79,55 @@
                 </form>
             </div>
 
-            <div class="image-container">
+            <!-- <div class="image-container">
                 <img src="./imgs/faq.webp" alt="Dog and Cat">
-            </div>
+            </div> -->
         </div>
 
 
     </main>
 
+    <script>
+        const pet_img_ele = document.querySelector(".pet_img .input")
+        const pet_img_input = document.querySelector(".pet_img #pet_img_input")
+        pet_img_ele.addEventListener("click", () => {
+            pet_img_input.click()
+            pet_img_input.addEventListener("change", function (event) {
+                const file = event.target.files[0]; // Get the selected file
+                if (file) {
+                    const fileName = file.name;
+                    function shortenFileName(filename) {
+                        const lastDotIndex = filename.lastIndexOf(".");
+
+                        if (lastDotIndex === -1) {
+                            return filename.length > 20 ? filename.slice(0, 20) + "..." : filename;
+                        }
+
+                        const namePart = filename.slice(0, lastDotIndex); // File name without extension
+                        const extension = filename.slice(lastDotIndex); // File extension
+
+                        return namePart.length > 20 ? namePart.slice(0, 20) + "..." + extension : filename;
+                    }
+                    document.querySelector(".pet_img #fileName").textContent = shortenFileName(fileName);
+                    console.log("File Name:", file.name);
+                    console.log("File Type:", file.type);
+                    console.log("File Size:", file.size, "bytes");
+
+                    // Read the image as a URL (if needed)
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.querySelector(".pet_img #pet_img").src = e.target.result
+                        document.querySelector(".pet_img #pet_img").style = `display: block`
+                        document.querySelector(".pet_img .icon").style = `display: none`
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    document.getElementById("fileName").textContent = "No file selected.";
+                }
+            });
+        })
+    </script>
+    <script src="./main.js"></script>
 </body>
 
 </html>

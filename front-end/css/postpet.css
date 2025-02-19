@@ -1,10 +1,11 @@
 .form {
     display: flex;
     align-items: center;
-    flex-direction: row;
-    width:90%;
-    justify-content: space-between;
+    justify-content: center;
+    /* width:90%; */
     margin: 0 auto;
+    padding: 100px 0;
+    padding-bottom: 50px;
 }
 
 .form-container {
@@ -13,31 +14,92 @@
     padding: 3rem;
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-     width:50%;
     border-top: 5px solid #f77f00;
     border-bottom: 5px solid #f77f00;
+    width: 60%;
 }
 
 h2 {
     color: #143d52;
     font-weight: bold;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+h2 i {
+    font-size: 18px;
+    background-color: var(--primary_color);
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 label {
     display: block;
     margin: 10px 0 5px;
     color: #797979;
-    padding:.375rem .75rem;
-   
+    padding: .375rem 0;
 }
 
-input, textarea {
+input:not(input[type=file]),
+textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid orange;
     border-radius: 15px;
     font-size: 16px;
+}
+
+.pet_img {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pet_img .input {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #cdcdcd;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 2px solid #ffaf1e;
+    overflow: hidden;
+    position: relative;
+}
+
+.pet_img .input:hover {
+    background-color: #979797;
+}
+
+.pet_img #pet_img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet_img .icon {
+    width: 40px;
+    position: absolute;
+}
+
+.pet_img #fileName{
+    font-size: 14px;
 }
 
 textarea {
@@ -59,18 +121,18 @@ button:hover {
     background-color: darkred;
 }
 
-.form  .image-container img {
- 
+.form .image-container img {
+
     height: auto;
     margin-left: 20px;
     border-radius: 12px;
     flex: 0 0 auto;
-    width:650px;
+    width: 650px;
 
 }
 
-.form-container .address{
+.form-container .address {
     display: flex;
-  gap:1rem;
-  
+    gap: 1rem;
+
 }
