@@ -1,6 +1,6 @@
 .landing {
     background-image: url(../imgs/bg1.jpg);
-    height: 95%;
+    height: 95vh;
     width: 100%;
     background-size: cover;
     position: relative;
@@ -772,3 +772,39 @@ button:hover {
     width:650px;
 
 }
+
+
+.grid{
+    
+    background-color:var(--primary_color);
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 50px 20px;
+    margin:0 auto;
+}
+
+.grid .box{
+    background: #043243;
+    color: white;
+    padding: 40px;
+    text-align: center;
+    border-radius: 2rem;
+    width: 270px;
+    height:200px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+
+}
+
+.grid h1{
+    font-size: 3.8em;;
+    margin: 0;
+}
+.grid p{
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 10px 0 0;
+}
+
+
+
