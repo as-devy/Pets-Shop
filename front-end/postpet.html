@@ -109,11 +109,7 @@
                         return namePart.length > 20 ? namePart.slice(0, 20) + "..." + extension : filename;
                     }
                     document.querySelector(".pet_img #fileName").textContent = shortenFileName(fileName);
-                    console.log("File Name:", file.name);
-                    console.log("File Type:", file.type);
-                    console.log("File Size:", file.size, "bytes");
-
-                    // Read the image as a URL (if needed)
+                    
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         document.querySelector(".pet_img #pet_img").src = e.target.result
