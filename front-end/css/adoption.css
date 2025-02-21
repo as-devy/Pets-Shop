@@ -1,36 +1,39 @@
-
-.banner{
-    width:100%;
-    height:40vh;
-    background-image:url(../imgs/dd.jpeg);
+.banner {
+    width: 100%;
+    height: 40vh;
+    background-image: url(../imgs/dd.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center ;
+    background-position: center center;
     display: flex;
     align-items: center;
     justify-content: center;
     color: aliceblue;
     text-align: center;
     position: relative;
-   
+
 
 }
-.banner h1{
+
+.banner h1 {
     font-size: 2.5rem;
 }
-.banner div{
+
+.banner div {
     position: relative;
     z-index: 99;
 }
-.banner span{
-    color: rgb(211, 210, 210) ;
+
+.banner span {
+    color: rgb(211, 210, 210);
 }
-.adoption{
+
+.adoption {
     height: 100%;
     padding-top: 90px;
 }
 
-.banner::after{
+.banner::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -44,66 +47,68 @@
 
 /* list categories */
 
-.adoption .container{
-    width:95%;
-    margin:0 auto;
+.adoption .container {
+    width: 95%;
+    margin: 0 auto;
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
-   
+
 
 }
-.categories{
+
+.categories {
     width: 20%;
 }
-.categories ul{
+
+.categories ul {
     list-style: none;
     display: flex;
-    gap:1rem;
+    gap: 1rem;
     flex-direction: column;
 
-  
+
 }
 
-.categories ul li{
+.categories ul li {
     display: flex;
     justify-content: space-between;
-    background-color:#ececec;
+    background-color: #ececec;
     align-items: center;
     height: 55px;
     padding: 3px 10px;
-    border-radius:0.5rem;
-    border:1px solid #aaaaaa;
+    border-radius: 0.5rem;
+    border: 1px solid #aaaaaa;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.categories ul li:hover{
+.categories ul li:hover {
     background-color: #d7d6d6;
 }
 
-.categories ul li img{
-    width:25px;
-    height:25px;
+.categories ul li img {
+    width: 25px;
+    height: 25px;
 }
 
-.categories ul li .icon{
-    width:35px;
-    height:35px;
+.categories ul li .icon {
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    background:#000 ;
+    background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.categories ul li span{
+.categories ul li span {
     font-size: 14px;
-    color:#838282;
+    color: #838282;
 }
 
-.petlist{
-    width:80%;
+.petlist {
+    width: 80%;
     margin-left: 10px;
     margin-bottom: 30px;
 }
@@ -138,7 +143,8 @@
     object-fit: cover;
 }
 
-.petlist .list .pet .img .category {
+.petlist .list .pet .img .category,
+.petInfo .img .category {
     position: absolute;
     text-transform: uppercase;
     color: #fff;
@@ -148,6 +154,7 @@
     padding: 5px 8px;
     border-bottom-right-radius: 0.5rem;
     font-weight: bold;
+
 }
 
 .petlist .list .pet .text {
@@ -197,41 +204,79 @@
 
 /* viewpet */
 
-.petInfo{
+.petInfo {
     display: flex;
-    width: 90%;
-    align-items: center;
-    gap:2rem;
-    justify-content: center ;
+    width: 85%;
+
+    gap: 2rem;
+
     margin: 0 auto;
     padding-top: 150px;
-    
+
 }
 
-.petInfo img{
-    border-radius: 10%;
-    width: 45%;
+.petInfo .img {
+    border-radius: 10px;
+    height: 600px;
+    width: 400px;
     border: 2px #ffffff solid;
-    
+
+}
+
+.petInfo .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
 }
 
 .petInfo .info {
     display: flex;
-    gap:1.5rem;
+    gap: 1.5rem;
     flex-direction: column;
+    list-style: none;
+    width: 50%;
+
 }
 
-.petInfo .info h1{
+
+.petInfo .info li:not(:last-child) {
+    border-bottom: 2px solid #21d3c482;
+    padding-bottom: 9px;
+
+
+}
+
+.petInfo .info h1 {
     font-size: 3.375rem;
-    color:#003049;
+    color: #003049;
 }
 
-.petInfo .info h4{
+.petInfo .info h4 {
     font-size: 1.020rem;
-    color:#d62828;
+    color: #d62828;
+    text-transform: capitalize;
+    margin-top: -10px;
 }
 
-.petInfo .info p{
+.petInfo .info p {
     color: #7a7a7a;
     line-height: 1.5;
+}
+
+.petInfo .info .loc {
+    color: #545454;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.petInfo .info button{
+    background-color: var(--primary_color);
+    border: none;
+    padding: 15px 30px;
+    color: #fff;
+    border-radius: 1.5rem;
+    font-size: 19px;
+    cursor: pointer;
 }

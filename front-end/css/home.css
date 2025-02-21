@@ -776,12 +776,15 @@ button:hover {
 
 .grid{
     
-    background-color:var(--primary_color);
+    background-image: url(../imgs/counter.jpg);
     display: flex;
     justify-content: center;
     gap: 3rem;
     padding: 50px 20px;
     margin:0 auto;
+    background-size: cover;
+    align-items: center;
+    height: 50vh;
 }
 
 .grid .box{
@@ -793,7 +796,7 @@ button:hover {
     width: 270px;
     height:200px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-
+ 
 }
 
 .grid h1{

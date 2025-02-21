@@ -34,16 +34,51 @@
     </header>
     <main>
         <div class="petInfo">
-         
-            <img src="./imgs/adoptsingle1.jpg" alt="">
-     
-        <div class="info">
-            <h1>Bella</h1>
-            <h4>2 years old</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident eius reprehenderit architecto
-                perferendis optio culpa ipsam esse iure temporibus, commodi aliquam eos saepe omnis. Unde, beatae
-                molestias! Laudantium, aliquid modi.</p>
-            </div>
+            <div class="img" style="position: relative; overflow: hidden;">
+            <img id="img" src="./imgs/adoptsingle1.jpg" alt="">
+            <span class="category" id="ra">adoption</span>
+        </div>
+            <ul class="info">
+                <li>
+                    <h1 id="name"></h1>
+                </li>
+                <li>
+                    <h4 id="age"></h4>
+                </li>
+                <li>
+                    <div class="loc">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="location"></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="cat">
+                        <span style="color: grey;">Category:</span>
+                        <span id="cat" style="text-transform: capitalize;"></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="ms">
+                        <span style="color: grey;">Microchip:</span>
+                        <span id="mc" style="text-transform: capitalize;"></span>
+                    </div>
+                </li>
+                <li>
+                    <p id="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident eius reprehenderit
+                        architecto
+                        perferendis optio culpa ipsam esse iure temporibus, commodi aliquam eos saepe omnis. Unde,
+                        beatae
+                        molestias! Laudantium, aliquid modi.</p>
+                </li>
+
+                <li>
+                    <button id="petButton">Adopt Pet</button>
+                </li>
+
+            </ul>
+           
+          
+
         </div>
     </main>
     <script>
@@ -64,10 +99,15 @@
                 console.log(data)
                 const pet = data;
                 document.title = `View - ${pet.name}`
-                // document.body.innerHTML = `
-                //     <h1>${pet.name}</h1>
-                //     <p>${pet.description}</p>
-                // `
+                document.querySelector("#name").textContent = pet.name
+                document.querySelector("#age").textContent = `${pet.age} years old `
+                document.querySelector("#desc").textContent = pet.description
+                document.querySelector("#img").src = pet.img
+                document.querySelector("#location").textContent = pet.location
+                document.querySelector("#cat").textContent = pet.category
+                document.querySelector("#mc").textContent = pet.microchip
+                document.querySelector("#ra").textContent = pet.adoption ? "adoption" : "rehoming"
+                document.querySelector("#petButton").textContent =pet.adoption ? "Adopt Pet" : "Rehome Pet" 
             })
             .catch(error => {
                 console.error("Error fetching pets:", error);
