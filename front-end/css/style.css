@@ -136,3 +136,11 @@ header .container .auth .register {
 .d_none {
     display: none !important;
 }
+
+.msg_defined{
+    color: #494949;
+    font-size: 1.1rem;
+    background: #ff82828a;
+    padding: 10px 50px;
+    border-radius: 0.5rem;
+}
