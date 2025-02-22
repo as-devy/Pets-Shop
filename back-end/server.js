@@ -4,6 +4,17 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
 
+const createOdometer =(el, value)=>{
+    const odometer = new Odometer({
+        el : el,
+        value : 0,
+    })
+    odometer.update(value)
+};
+
+const adoptedOdometer = document.querySelector(".adopted-odometer ");
+createOdometer(adoptedOdometer, 800);
+
 app.use(bodyParser.json()); // Parse JSON request bodies
 app.use(cors()); // Parse JSON request bodies
 

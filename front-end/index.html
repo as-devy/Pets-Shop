@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/icons.css">
     <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-default.css"
+        integrity="sha512-kMPqFnKueEwgQFzXLEEl671aHhQqrZLS5IP3HzqdfozaST/EgU+/wkM07JCmXFAt9GO810I//8DBonsJUzGQsQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Paws Safe</title>
 </head>
@@ -266,18 +270,19 @@
     </section>
     <section>
 
-        <div class="grid">
-            <div class="box">
-                <h1>800+ </h1>
-                <p class="title">Pets Adopted</p>
+        <div class="stats-container">
+            <div class="stat">
+                <div class="adopted-odometer odometer plus">0</div>
+                <div class="type">Pets Adopted</div>
             </div>
-            <div class="box">
-                <h1>40 </h1>
-                <p class="title">Volunteers</p>
+            <div class="stat">
+                <div class="Vol-odometer odometer">0</div>
+                <div class="type">Volunteers</div>
             </div>
-            <div class="box">
-                <h1>22</h1>
-                <p>22 years of experience</p>
+            <div class="stat">
+                <div class="exp-odometer odometer">0</div>
+                <div class="type">22 years of experience</div>
+
             </div>
         </div>
 
@@ -328,7 +333,11 @@
                 document.querySelector(".petlist .list").innerHTML = "<p class='msg_defined'>Internal Server Error!</p>"
             });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"
+        integrity="sha512-v3fZyWIk7kh9yGNQZf1SnSjIxjAKsYbg6UQ+B+QxAZqJQLrN3jMjrdNwcxV6tis6S0s1xyVDZrDz9UoRLfRpWw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./main.js"></script>
+
 </body>
 
 </html>

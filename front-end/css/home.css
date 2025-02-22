@@ -772,11 +772,12 @@ button:hover {
     width:650px;
 
 }
+/* odometer */
 
-
-.grid{
+.stats-container{
     
-    background-image: url(../imgs/counter.jpg);
+    
+      background-image: url(../imgs/counter.jpg);
     display: flex;
     justify-content: center;
     gap: 3rem;
@@ -785,29 +786,51 @@ button:hover {
     background-size: cover;
     align-items: center;
     height: 50vh;
+
+    /* display:grid;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr;
+    margin:0px auto;
+    align-items: center;
+    padding-inline:16px;
+   gap:2px;
+    background-image: url(../imgs/counter.jpg);
+    height: 50vh;
+    background-size: cover; */
 }
 
-.grid .box{
+.stats-container .stat{
     background: #043243;
     color: white;
     padding: 40px;
     text-align: center;
     border-radius: 2rem;
-    width: 270px;
-    height:200px;
+     width: 270px;
+    height:200px; 
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
  
 }
 
-.grid h1{
-    font-size: 3.8em;;
-    margin: 0;
+.stats-container .stat .odometer{
+    font-size:50px;
+    font-weight:bold;
+    display: inline-block;
+
 }
-.grid p{
-    font-size: 16px;
-    text-transform: uppercase;
-    margin: 10px 0 0;
+.stats-container .stat .type{
+    font-size:16px;
 }
 
+ .odometer.plus{
+    position: relative;
+}
+ .odometer.plus::after {
+    content: "+" ;
+    position: absolute;
+    top:0;
+    right:-16px;
+    font-size:20px;
+}
 
+/* @media (max-width: 700px){
 
+} */
