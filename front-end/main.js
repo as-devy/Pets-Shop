@@ -57,3 +57,21 @@ if (user) {
     document.querySelector("header .register").classList.add("d_none")
     document.querySelector("header .post_pet").classList.remove("d_none")
 }
+
+
+const createOdometer =(el, value)=>{
+    const odometer = new Odometer({
+        el : el,
+        value : 0,
+    })
+    odometer.update(value);
+};
+
+const adoptedOdometer = document.querySelector(".adopted-odometer ");
+createOdometer(adoptedOdometer, 800);
+
+const VolOdometer = document.querySelector(".Vol-odometer");
+createOdometer(VolOdometer, 40);
+
+const expOdometer = document.querySelector(".exp-odometer");
+createOdometer(expOdometer, 22);

@@ -778,6 +778,7 @@ button:hover {
     
     
       background-image: url(../imgs/counter.jpg);
+      background-position: 50% 50%;
     display: flex;
     justify-content: center;
     gap: 3rem;
@@ -804,7 +805,7 @@ button:hover {
     padding: 40px;
     text-align: center;
     border-radius: 2rem;
-     width: 270px;
+     width: 280px;
     height:200px; 
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
  
@@ -818,6 +819,9 @@ button:hover {
 }
 .stats-container .stat .type{
     font-size:16px;
+    font-weight: bold;
+    margin-top: 15px;
+    text-transform:uppercase;
 }
 
  .odometer.plus{
