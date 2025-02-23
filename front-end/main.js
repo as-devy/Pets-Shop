@@ -59,19 +59,19 @@ if (user) {
 }
 
 
-const createOdometer =(el, value)=>{
-    const odometer = new Odometer({
-        el : el,
-        value : 0,
-    })
-    odometer.update(value);
-};
+// const createOdometer =(el, value)=>{
+//     const odometer = new Odometer({
+//         el : el,
+//         value : 0,
+//     })
+//     odometer.update(value);
+// };
 
-const adoptedOdometer = document.querySelector(".adopted-odometer ");
-createOdometer(adoptedOdometer, 800);
+// const adoptedOdometer = document.querySelector(".adopted-odometer ");
+// createOdometer(adoptedOdometer, 800);
 
-const VolOdometer = document.querySelector(".Vol-odometer");
-createOdometer(VolOdometer, 40);
+// const VolOdometer = document.querySelector(".Vol-odometer");
+// createOdometer(VolOdometer, 40);
 
-const expOdometer = document.querySelector(".exp-odometer");
-createOdometer(expOdometer, 22);
+// const expOdometer = document.querySelector(".exp-odometer");
+// createOdometer(expOdometer, 22);

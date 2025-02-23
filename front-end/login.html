@@ -84,7 +84,7 @@
 
         const user = getCookie('UserId');
 
-        if (user){
+        if (user) {
             window.location.href = "index.html";
         }
 
@@ -135,9 +135,13 @@
                     .then(data => {
                         console.log('Success:', data)
                         console.log(data.userId)
-                        document.cookie = `UserId=${data.userId}; path=/; max-age=604800`;
-                        window.location.href = "index.html";
-
+                        if (data.userId) {
+                            document.cookie = `UserId=${data.userId}; path=/; max-age=604800`;
+                            window.location.href = "index.html";
+                        } else {
+                            emailError.textContent = "Wrong name or password";
+                            passwordError.textContent = "Wrong name or password";
+                        }
                     }
                     )
                     .catch(error => console.error('Error:', error));
