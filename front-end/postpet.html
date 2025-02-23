@@ -53,15 +53,45 @@
                         </div>
                         <p id="fileName">Add Your Pet Photo</p>
                     </div>
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
 
-                    <label for="age">Age</label>
-                    <input type="text" id="Age" name="Age" required>
+                    <label for="">Rehome or Foster This Pet:</label>
+                    <div class="custom-select">
+                        <select>
+                            <option value="">Rehome or Foster This Pet</option>
+                            <option value="">rehome</option>
+                            <option value="">foster</option>
+
+                        </select>
+                    </div>
+                    <div class="name_age">
+                        <div><label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div><label for="age">Age</label>
+                            <input type="text" id="Age" name="Age" required>
+                        </div>
+
+                    </div>
+
+                    <label for="">Category</label>
+                    <div class="custom-select">
+                        <select>
+                            <option value="">Choose pet category </option>
+                            <option value="">dog</option>
+                            <option value="">cat</option>
+                            <option value="">rabbit</option>
+                            <option value="">bird</option>
+                            <option value="">fish</option>
+                            <option value="">other</option>
+                        </select>
+                    </div>
 
                     <label for="address">Address</label>
                     <input type="text" id="Address" name="Address" required placeholder="Street Address"
                         style="margin-bottom:10px;">
+
+
                     <input type="text" id="Address" name="Address" required placeholder="Street Address Line 2"
                         style="margin-bottom:10px;">
                     <div class="address">
@@ -69,8 +99,20 @@
                         <input type="text" id="Address" name="Address" required placeholder="Post Code">
                     </div>
 
+
+
                     <label for="medicalHistory">Medical history</label>
-                    <input type="text" id="Age" name="Age" required>
+                    <div class="medical_history">
+                        <textarea name="vaccinations" id="vaccinations"
+                            placeholder="Is your pet up to date on vaccinations and treatments like flea, tick, or heartworm prevention?"></textarea>
+                        <textarea name="medicalHistory" id="medicalHistory"
+                            placeholder="Does your pet have any medical conditions, surgeries, or past injuries?"></textarea>
+                        <textarea name="diet" id="diet"
+                            placeholder="What is your pet’s diet, and any food issues or restrictions?"></textarea>
+                        <textarea name="behavior" id="behavior"
+                            placeholder="Does your pet have any behavior problems, like anxiety or aggression?"></textarea>
+
+                    </div>
 
                     <label for="Description">Description:</label>
                     <textarea id="Description" name="Description" rows="4" required></textarea>
@@ -109,7 +151,7 @@
                         return namePart.length > 20 ? namePart.slice(0, 20) + "..." + extension : filename;
                     }
                     document.querySelector(".pet_img #fileName").textContent = shortenFileName(fileName);
-                    
+
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         document.querySelector(".pet_img #pet_img").src = e.target.result

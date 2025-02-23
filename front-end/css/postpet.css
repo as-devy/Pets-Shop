@@ -136,3 +136,71 @@ button:hover {
     gap: 1rem;
 
 }
+
+.medical_history {
+    display: flex;
+    gap:1rem;
+    flex-direction:column ;
+   
+
+}
+
+.medical_history textarea{
+    font-size: 14px;
+    font-family: "Poppins", serif;
+    padding: 8px;
+}
+
+.custom-select {
+    width: 100%;
+    position: relative;
+  
+}
+
+.custom-select select {
+    appearance: none;
+    outline: none;
+    width: 100%;
+    color: #eeeeee;
+    /* padding: 0.675em 6em 0.675em 1em; */
+    padding: 13px 15px;
+    background-color: #fff;
+    border: 1px solid #ffaf1e;
+    border-radius: 1rem;
+    color: #000;
+    cursor: pointer;
+}
+
+
+.custom-select::before,
+.custom-select::after {
+    --size: 0.3rem;
+    content: "";
+    position: absolute;
+    right: 1rem;
+    pointer-events: none;
+}
+
+.custom-select::before {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid black;
+    top: 40%;
+}
+
+.custom-select::after {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid black;
+    top: 55%;
+}
+
+
+.name_age{
+    display: flex;
+   justify-content: space-between;
+}
+
+.name_age div{
+    width:48%;
+}
