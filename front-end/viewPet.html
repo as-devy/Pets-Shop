@@ -103,11 +103,11 @@
                 document.querySelector("#age").textContent = `${pet.age} years old `
                 document.querySelector("#desc").textContent = pet.description
                 document.querySelector("#img").src = pet.img
-                document.querySelector("#location").textContent = pet.location
+                document.querySelector("#location").textContent = pet.city
                 document.querySelector("#cat").textContent = pet.category
                 document.querySelector("#mc").textContent = pet.microchip
-                document.querySelector("#ra").textContent = pet.adoption ? "adoption" : "rehoming"
-                document.querySelector("#petButton").textContent =pet.adoption ? "Adopt Pet" : "Rehome Pet" 
+                document.querySelector("#ra").textContent = pet.foster ? "adoption" : "rehoming"
+                document.querySelector("#petButton").textContent =pet.foster ? "Adopt Pet" : "Rehome Pet" 
             })
             .catch(error => {
                 console.error("Error fetching pets:", error);

@@ -234,22 +234,37 @@
             const userPetInfo = {
                 ownerId: userId,
                 img: petImg,
-                rehome: rehome,
+                rehoming: rehome,
                 foster: foster,
                 name: petName,
                 age: petAge,
                 category: petCategory,
-                streetAdress: streetAdress,
+                streetAddress: streetAdress,
                 city: cityAddress,
                 postCode: postCode,
                 vaccines_prevention: vaccines_prevention,
                 health_history: health_history,
                 diet: diet,
                 behavior: behavior,
-                description: description
+                description: description,
+                requests: [],
             }
 
             console.log(userPetInfo)
+
+            fetch('http://localhost:400/addPet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userPetInfo)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data)
+                }
+                )
+                .catch(error => console.error('Error:', error));
         })
     </script>
     <script src="./main.js"></script>

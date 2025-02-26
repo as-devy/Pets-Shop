@@ -69,10 +69,10 @@ app.post("/loginUser", (request, response) => {
     });
 });
 
-app.get("/allPets", (request, response)=>{
+app.get("/allPets", (request, response) => {
     const sql = "SELECT * FROM pets";
 
-    db.query(sql, (err, result)=>{
+    db.query(sql, (err, result) => {
         if (err) {
             console.error("Database error:", err);
             return response.status(500).json({ error: "Database error" });
@@ -82,7 +82,7 @@ app.get("/allPets", (request, response)=>{
     })
 })
 
-app.get("/pet/:id", (request, response)=>{
+app.get("/pet/:id", (request, response) => {
     const petId = request.params.id;
 
     const sql = "SELECT * FROM pets WHERE id = ?";
@@ -96,6 +96,45 @@ app.get("/pet/:id", (request, response)=>{
         const pet = result[0];
         response.json(pet)
     });
+})
+
+app.post("/addPet", (request, response) => {
+    const pet = request.body;
+
+    const sql = ` 
+    INSERT INTO pets 
+    (category, img, name, age, description, streetAddress, city, postCode, vaccines_prevention, health_history, diet, behavior, rehoming, foster, requests) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+`;
+
+    const values = [
+        pet.category,
+        pet.img || null,
+        pet.name || null,
+        pet.age || null,
+        pet.description || null,
+        pet.streetAddress || null,
+        pet.city || null,
+        pet.postCode || null,
+        pet.vaccines_prevention || null,
+        pet.health_history || null,
+        pet.diet || null,
+        pet.behavior || null,
+        pet.rehoming || 0,
+        pet.foster || 0,
+        JSON.stringify(pet.requests || [])
+    ];
+
+    // Execute query
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.error("Error inserting data:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+        response.status(201).json({ message: "Pet added successfully", petId: result.insertId });
+        console.log({ message: "Pet added successfully", petId: result.insertId });
+    });
+
 })
 
 app.listen(400, () => {
