@@ -22,7 +22,7 @@
             </a>
             <ul>
                 <li><a class="active" href="./index.html">Home</a></li>
-                <li><a href="./adoption.html">Adoption</a></li>
+                <li><a href="./foster.html">Foster</a></li>
                 <li><a href="#">ReHoming</a></li>
                 <li><a href="./contactus.html">Contact Us</a></li>
             </ul>
@@ -88,8 +88,11 @@
                     </div>
 
                     <label for="address">Address</label>
+                    <div class="address">
+                    <input type="text" id="country" name="Address" required placeholder="Country" style="margin-bottom:10px;">
                     <input type="text" id="streetAddress" name="Address" required placeholder="Street Address"
                         style="margin-bottom:10px;">
+                    </div>
                     <div class="address">
                         <input type="text" id="cityAddress" name="Address" required placeholder="Town/City">
                         <input type="text" id="postCode" name="Address" required placeholder="Post Code">
@@ -208,6 +211,7 @@
             const petName = document.querySelector("#petName").value;
             const petAge = document.querySelector("#petAge").value;
 
+            const country = document.querySelector("#country").value
             const streetAdress = document.querySelector("#streetAddress").value
             const cityAddress = document.querySelector("#cityAddress").value
             const postCode = document.querySelector("#postCode").value
@@ -239,6 +243,7 @@
                 name: petName,
                 age: petAge,
                 category: petCategory,
+                country: country,
                 streetAddress: streetAdress,
                 city: cityAddress,
                 postCode: postCode,

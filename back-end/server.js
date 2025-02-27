@@ -103,7 +103,7 @@ app.post("/addPet", (request, response) => {
 
     const sql = ` 
     INSERT INTO pets 
-    (category, img, name, age, description, streetAddress, city, postCode, vaccines_prevention, health_history, diet, behavior, rehoming, foster, requests) 
+    (category, img, name, age, description,country, streetAddress, city, postCode, vaccines_prevention, health_history, diet, behavior, rehoming, foster, requests) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 `;
 
@@ -113,6 +113,7 @@ app.post("/addPet", (request, response) => {
         pet.name || null,
         pet.age || null,
         pet.description || null,
+        pet.country || null,
         pet.streetAddress || null,
         pet.city || null,
         pet.postCode || null,
