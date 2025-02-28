@@ -70,9 +70,8 @@ app.post("/loginUser", (request, response) => {
 });
 
 app.get("/allPets", (request, response) => {
-    const sql = "SELECT * FROM pets";
-
-    db.query(sql, (err, result) => {
+    const sql = "SELECT * FROM pets ORDER BY id DESC";
+      db.query(sql, (err, result) => {
         if (err) {
             console.error("Database error:", err);
             return response.status(500).json({ error: "Database error" });
@@ -104,7 +103,7 @@ app.post("/addPet", (request, response) => {
     const sql = ` 
     INSERT INTO pets 
     (category, img, name, age, description,country, streetAddress, city, postCode, vaccines_prevention, health_history, diet, behavior, rehoming, foster, requests) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 `;
 
     const values = [
