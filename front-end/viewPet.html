@@ -75,7 +75,7 @@
                                 <p>Medical Conditions: </p> <span id="health_history"></span>
                             </div>
                             <div>
-                                 <p>Diet:</p> <span id="diet"></span>
+                                <p>Diet:</p> <span id="diet"></span>
                             </div>
                             <div>
                                 <p>Behavior Issues:</p> <span id="behavior"></span>
@@ -297,29 +297,38 @@
 
         console.log(petId);
 
-        fetch(`http://localhost:400/pet/${petId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data)
-                const pet = data;
-                document.title = `View - ${pet.name}`
-                document.querySelector("#name").textContent = pet.name
-                document.querySelector("#age").textContent = `${pet.age} years old `
-                document.querySelector("#desc").textContent = pet.description
-                document.querySelector("#img").src = pet.img
-                document.querySelector("#location").textContent = `${pet.city} , ${pet.country}`;
-                document.querySelector("#cat").textContent = pet.category
-                document.querySelector("#ra").textContent = pet.foster ? "foster" : "rehoming"
-                document.querySelectorAll("#requestsCount").forEach(ele => {
-                    ele.textContent = JSON.parse(pet.requests).length;
+        if (petId) {
+            fetch(`http://localhost:400/pet/${petId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
                 })
-                document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
+                .then(data => {
+                    console.log(data)
+                    const pet = data;
+                    document.title = `View - ${pet.name}`
+                    document.querySelector("#name").textContent = pet.name
+                    document.querySelector("#age").textContent = `${pet.age} years old `
+                    document.querySelector("#desc").textContent = pet.description
+                    document.querySelector("#img").src = pet.img
+                    document.querySelector("#location").textContent = `${pet.city} , ${pet.country}`;
+                    document.querySelector("#cat").textContent = pet.category
+                    document.querySelector("#ra").textContent = pet.foster ? "foster" : "rehoming"
+                    document.querySelectorAll("#requestsCount").forEach(ele => {
+                        ele.textContent = JSON.parse(pet.requests).length;
+                    })
+                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
+                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
 
+                    // Toggle the foster duration question based on pet type
+                    const fosterQuestion = document.querySelector("#foster-duration");
+                    if (pet.foster) {
+                        fosterQuestion.style.display = "block"; // Show for foster
+                    } else {
+                        fosterQuestion.style.display = "none"; // Hide for rehome
+                    }
                     function getCookie(name) {
                         const cookies = document.cookie.split('; ');
                         for (let cookie of cookies) {
@@ -390,40 +399,55 @@
                 form_popup.classList.remove("active")
             })
 
-        document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
-            e.preventDefault()
-            const petRequest = {
-                petsAllowed: document.getElementById("pets_allowed").value,
-                household: document.getElementById("household").value,
-                otherPets: document.getElementById("other_pets").value,
-                petExperience: document.getElementById("pet_experience").value,
-                timeCommitment: document.getElementById("time_commitment").value,
-                financialPrepared: document.getElementById("financial_prepared").value,
-            }
+            document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
+                e.preventDefault()
+                const petRequest = {
+                    petsAllowed: document.getElementById("pets_allowed").value,
+                    household: document.getElementById("household").value,
+                    otherPets: document.getElementById("other_pets").value,
+                    petExperience: document.getElementById("pet_experience").value,
+                    timeCommitment: document.getElementById("time_commitment").value,
+                    financialPrepared: document.getElementById("financial_prepared").value,
+                    fosterDuration: document.getElementById("foster_duration")?.value || null
+                }
 
                 if (document.querySelector("#terms").checked) {
                     console.log(petRequest)
 
-                fetch(`http://localhost:400/addPetRequest/${petId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(petRequest)
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data)
-                        if (data.updatedRequests) {
-                            window.location.href = `./viewPet.html?petId=${petId}`;
+                    fetch(`http://localhost:400/addPetRequest/${petId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(petRequest)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data)
+                            if (data.updatedRequests) {
+                                window.location.href = `./viewPet.html?petId=${petId}`;
+                            }
                         }
-                    }
-                    )
-                    .catch(error => console.error('Error:', error));
-            } else {
-                document.querySelector("#form_popup #error").classList.remove("d_none")
-            }
-        })
+                        )
+                        .catch(error => console.error('Error:', error));
+                } else {
+                    document.querySelector("#form_popup #error").classList.remove("d_none")
+                }
+            })
+        } else {
+            const notFoundError = document.createElement("div")
+            notFoundError.innerHTML = `
+                        <div id="notFoundError">
+                            <h1>petId Can Not Be Found</h1>
+                            <a href="./">Back To Home</a>
+                        </div>
+                    `
+            document.body.style = "overflow-y: hidden;"
+            document.body.appendChild(notFoundError)
+            console.log(document.querySelector("#notFoundError"))
+        }
+
+
     </script>
     <script src="./main.js"></script>
 </body>
