@@ -8,17 +8,19 @@
     <link rel="stylesheet" href="./css/icons.css">
     <link rel="stylesheet" href="./css/adoption.css">
 
-    <title>Paws Safe</title>
+    <title>Paws Safe - Fostering</title>
 </head>
 
 <body>
 
     <header>
         <div class="container">
-            <a href="./" class="logo">
-                <img src="./imgs/logo.png" alt="pawsafe">
-                <h3>Paws Safe</h3>
-            </a>
+            <div class="lg" style="width: 268px;">
+                <a href="./" class="logo">
+                    <img src="./imgs/logo.png" alt="pawsafe">
+                    <h3>Paws Safe</h3>
+                </a>
+            </div>
             <ul>
                 <li><a href="./index.html">Home</a></li>
                 <li><a class="active" href="./foster.html">Foster</a></li>
@@ -30,21 +32,30 @@
                     <a href="./login.html" class="login">Login</a>
                     <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
                 </div>
+
                 <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
+                <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
             </div>
         </div>
     </header>
     <main class="adoption">
         <div class="banner">
             <div>
-                <h1>Adopt A Pet</h1>
+                <h1>Foster A Pet</h1>
                 <span>Home > Foster</span>
             </div>
         </div>
         <section>
             <div class="container">
                 <div class="categories">
-                    <ul>
+                    <ul class="sticky-div">
+                        <li id="category_item" data-category="all">
+                            <div class="icon" style="background-color: var(--primary_color);"> <i style="color: #fff;"
+                                    class="fa-solid fa-paw"></i></div>
+                            <h4>All</h4>
+                            <span class="category-length"> (<span id="all_length">0</span>)</span>
+                        </li>
                         <li id="category_item" data-category="dog">
                             <div class="icon" style="background-color: #ff3d41;"> <img src="./imgs/category-dog.svg"
                                     alt="Dog"></div>
@@ -86,7 +97,7 @@
                 </div>
                 <div class="petlist">
                     <div class="list">
-                        
+
                     </div>
                 </div>
             </div>
@@ -110,6 +121,8 @@
 
                 pets.forEach(pet => {
                     if (pet.foster) {
+                        let all_length = document.querySelector("#all_length")
+                        all_length.innerHTML = Number(all_length.innerHTML) + 1;
                         adoptionPets.push(pet)
                     }
                 })
@@ -187,11 +200,33 @@
                                     document.querySelector(".petlist .list").append(petElement)
                                 }
                             })
-                        }else{
+                        } else if (categoryFilter == "all") {
                             adoptionPets.map(pet => {
-                            if (pet.category == categoryFilter) {
                                 const petElement = document.createElement("div")
                                 petElement.innerHTML = `
+                                    <div class="pet">
+                                        <div class="img">
+                                            <img src="${pet.img}" alt="">
+                                            <span class="category">${pet.foster ? "Foster" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
+                                        </div>
+                                        <div class="text">
+                                            <h2 class="name">${pet.name}</h2>
+                                            <span class="age">${pet.age} Years Old</span>
+                                            <p class="location"><i class="fa-solid fa-location-dot"></i>
+                                                <span>${pet.city}</span>
+                                            </p>
+                                            <p class="desc">${pet.description}</p>
+                                        </div>
+                                        <a href="./viewPet.html?petId=${pet.id}">more info </a>
+                                    </div>
+                                `
+                                document.querySelector(".petlist .list").append(petElement)
+                            })
+                        } else {
+                            adoptionPets.map(pet => {
+                                if (pet.category == categoryFilter) {
+                                    const petElement = document.createElement("div")
+                                    petElement.innerHTML = `
                                 <div class="pet">
                                     <div class="img">
                                         <img src="${pet.img}" alt="">
@@ -208,16 +243,29 @@
                                     <a href="./viewPet.html?petId=${pet.id}">more info </a>
                                 </div>
                     `
-                                document.querySelector(".petlist .list").append(petElement)
-                            }
-                        })
+                                    document.querySelector(".petlist .list").append(petElement)
+                                }
+                            })
                         }
                     })
                 })
             })
             .catch(error => {
                 console.error("Error fetching pets:", error);
+                document.querySelector(".petlist .list").innerHTML = "<p class='msg_defined'>Internal Server Error!</p>"
             });
+
+        const targetDiv = document.querySelector(".sticky-div");
+        const offsetTop = targetDiv.offsetTop;
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY >= offsetTop) {
+                targetDiv.classList.add("fixed");
+            } else {
+                targetDiv.classList.remove("fixed");
+            }
+        });
+
     </script>
     <script src="./main.js"></script>
 </body>

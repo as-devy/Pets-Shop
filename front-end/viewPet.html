@@ -14,10 +14,12 @@
 
     <header>
         <div class="container">
-            <a href="./" class="logo">
-                <img src="./imgs/logo.png" alt="pawsafe">
-                <h3>Paws Safe</h3>
-            </a>
+            <div class="lg" style="width: 268px;">
+                <a href="./" class="logo">
+                    <img src="./imgs/logo.png" alt="pawsafe">
+                    <h3>Paws Safe</h3>
+                </a>
+            </div>
             <ul>
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="./foster.html" id="fosterLink">Foster</a></li>
@@ -29,7 +31,10 @@
                     <a href="./login.html" class="login">Login</a>
                     <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
                 </div>
+
                 <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
+                <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
             </div>
         </div>
     </header>
@@ -104,7 +109,8 @@
                 <div class="user" style="flex-direction: column;align-items: flex-start;">
                     <h3 id="requester">Jhon Dell</h3>
                     <div class="contact" style="margin-top: -10px;">
-                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">jhon@gmail.com</span></p>
+                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">jhon@gmail.com</span>
+                        </p>
                         <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">+2012859687</span></p>
                     </div>
                 </div>
@@ -135,7 +141,8 @@
                 <div class="user" style="flex-direction: column;align-items: flex-start;">
                     <h3 id="requester">Jhon Dell</h3>
                     <div class="contact" style="margin-top: -10px;">
-                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">jhon@gmail.com</span></p>
+                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">jhon@gmail.com</span>
+                        </p>
                         <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">+2012859687</span></p>
                     </div>
                 </div>
@@ -250,6 +257,7 @@
     </div>
 
 
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
 
@@ -257,125 +265,147 @@
 
         console.log(petId);
 
-        fetch(`http://localhost:400/pet/${petId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data)
-                const pet = data;
-                document.title = `View - ${pet.name}`
-                document.querySelector("#name").textContent = pet.name
-                document.querySelector("#age").textContent = `${pet.age} years old `
-                document.querySelector("#desc").textContent = pet.description
-                document.querySelector("#img").src = pet.img
-                document.querySelector("#location").textContent = `${pet.city} , ${pet.country}`;
-                document.querySelector("#cat").textContent = pet.category
-                document.querySelector("#ra").textContent = pet.foster ? "foster" : "rehoming"
-                document.querySelectorAll("#requestsCount").forEach(ele => {
-                    ele.textContent = JSON.parse(pet.requests).length;
-                })
-                document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
-
-                function getCookie(name) {
-                    const cookies = document.cookie.split('; ');
-                    for (let cookie of cookies) {
-                        const [key, value] = cookie.split('=');
-                        if (key === name) {
-                            return value;
-                        }
+        if (petId) {
+            fetch(`http://localhost:400/pet/${petId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
                     }
-                    return null;
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data)
+                    const pet = data;
+                    document.title = `View - ${pet.name}`
+                    document.querySelector("#name").textContent = pet.name
+                    document.querySelector("#age").textContent = `${pet.age} years old `
+                    document.querySelector("#desc").textContent = pet.description
+                    document.querySelector("#img").src = pet.img
+                    document.querySelector("#location").textContent = `${pet.city} , ${pet.country}`;
+                    document.querySelector("#cat").textContent = pet.category
+                    document.querySelector("#ra").textContent = pet.foster ? "foster" : "rehoming"
+                    document.querySelectorAll("#requestsCount").forEach(ele => {
+                        ele.textContent = JSON.parse(pet.requests).length;
+                    })
+                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
+
+                    function getCookie(name) {
+                        const cookies = document.cookie.split('; ');
+                        for (let cookie of cookies) {
+                            const [key, value] = cookie.split('=');
+                            if (key === name) {
+                                return value;
+                            }
+                        }
+                        return null;
+                    }
+
+                    const userId = getCookie('UserId');
+
+                    if (pet.ownerId == userId) {
+                        document.querySelector("#userIdentify").classList.remove("d_none")
+                    } else {
+                        document.querySelector("#userRequest").classList.remove("d_none")
+                    }
+
+                    if (pet.foster) {
+                        document.querySelector("#fosterLink").classList.add("active")
+
+                    } else if (pet.rehoming) {
+                        document.querySelector("#rehomeLink").classList.add("active")
+                    }
+
+                    fetch(`http://localhost:400/users/${pet.ownerId}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(data)
+                            const petOwner = data;
+
+                            document.querySelector("#owenrName").textContent = petOwner.username;
+                            document.querySelector("#ownerEmail").textContent = petOwner.email;
+                            document.querySelector("#ownerPhone").textContent = petOwner.phone;
+                        })
+
+                        .catch(error => {
+                            console.error("Error fetching users:", error);
+                        });
+                }).catch(error => {
+                    console.error("Error fetching pets:", error);
+                    const notFoundError = document.createElement("div")
+                    notFoundError.innerHTML = `
+                        <div id="notFoundError">
+                            <h1>petId Can Not Be Found</h1>
+                            <a href="./">Back To Home</a>
+                        </div>
+                    `
+                    document.body.style = "overflow-y: hidden;"
+                    document.body.appendChild(notFoundError)
+                    console.log(document.querySelector("#notFoundError"))
+                });
+
+
+
+            let form_popup = document.querySelector("#form_popup")
+            document.querySelector("#petButton").addEventListener("click", () => {
+                form_popup.classList.add("active")
+            })
+
+            document.querySelector("#form_popup #close").addEventListener("click", () => {
+                form_popup.classList.remove("active")
+            })
+
+            document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
+                e.preventDefault()
+                const petRequest = {
+                    petsAllowed: document.getElementById("pets_allowed").value,
+                    household: document.getElementById("household").value,
+                    otherPets: document.getElementById("other_pets").value,
+                    petExperience: document.getElementById("pet_experience").value,
+                    timeCommitment: document.getElementById("time_commitment").value,
+                    financialPrepared: document.getElementById("financial_prepared").value,
                 }
 
-                const userId = getCookie('UserId');
+                if (document.querySelector("#terms").checked) {
+                    console.log(petRequest)
 
-                if (pet.ownerId == userId) {
-                    document.querySelector("#userIdentify").classList.remove("d_none")
+                    fetch(`http://localhost:400/addPetRequest/${petId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(petRequest)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data)
+                            if (data.updatedRequests) {
+                                window.location.href = `./viewPet.html?petId=${petId}`;
+                            }
+                        }
+                        )
+                        .catch(error => console.error('Error:', error));
                 } else {
-                    document.querySelector("#userRequest").classList.remove("d_none")
+                    document.querySelector("#form_popup #error").classList.remove("d_none")
                 }
-
-                if (pet.foster) {
-                    document.querySelector("#fosterLink").classList.add("active")
-
-                } else if (pet.rehoming) {
-                    document.querySelector("#rehomeLink").classList.add("active")
-                }
-
-                fetch(`http://localhost:400/users/${pet.ownerId}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log(data)
-                        const petOwner = data;
-
-                        document.querySelector("#owenrName").textContent = petOwner.username;
-                        document.querySelector("#ownerEmail").textContent = petOwner.email;
-                        document.querySelector("#ownerPhone").textContent = petOwner.phone;
-                    })
-
-                    .catch(error => {
-                        console.error("Error fetching users:", error);
-                    });
             })
+        } else {
+            
+            const notFoundError = document.createElement("div")
+            notFoundError.innerHTML = `
+                    <div id="notFoundError">
+                        <h1>petId Can Not Be Found</h1>
+                        <a href="./">Back To Home</a>
+                    </div>
+                `
+            document.body.style = "overflow-y: hidden;"
+            document.body.appendChild(notFoundError)
+        }
 
-            .catch(error => {
-                console.error("Error fetching pets:", error);
-            });
-
-
-
-        let form_popup = document.querySelector("#form_popup")
-        document.querySelector("#petButton").addEventListener("click", () => {
-            form_popup.classList.add("active")
-        })
-
-        document.querySelector("#form_popup #close").addEventListener("click", () => {
-            form_popup.classList.remove("active")
-        })
-
-        document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
-            e.preventDefault()
-            const petRequest = {
-                petsAllowed: document.getElementById("pets_allowed").value,
-                household: document.getElementById("household").value,
-                otherPets: document.getElementById("other_pets").value,
-                petExperience: document.getElementById("pet_experience").value,
-                timeCommitment: document.getElementById("time_commitment").value,
-                financialPrepared: document.getElementById("financial_prepared").value,
-            }
-
-            if (document.querySelector("#terms").checked) {
-                console.log(petRequest)
-
-                fetch(`http://localhost:400/addPetRequest/${petId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(petRequest)
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data)
-                        if (data.updatedRequests) {
-                            window.location.href = `./viewPet.html?petId=${petId}`;
-                        }
-                    }
-                    )
-                    .catch(error => console.error('Error:', error));
-            } else {
-                document.querySelector("#form_popup #error").classList.remove("d_none")
-            }
-        })
     </script>
     <script src="./main.js"></script>
 </body>

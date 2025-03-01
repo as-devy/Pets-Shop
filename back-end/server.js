@@ -35,8 +35,8 @@ app.get("/", (request, response) => {
 app.post("/addUser", (request, response) => {
     const user = request.body;
 
-    const sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-    db.query(sql, [user.name, user.email, user.password], (err, result) => {
+    const sql = "INSERT INTO users (username, email, phone, country, city password) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(sql, [user.name, user.email, user.phone, user.country, user.city, user.password], (err, result) => {
         if (err) {
             console.error("Error inserting data:", err);
             return response.status(500).json({ error: "Database error" });

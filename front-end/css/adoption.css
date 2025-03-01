@@ -66,8 +66,7 @@
     display: flex;
     gap: 1rem;
     flex-direction: column;
-
-
+    width: 250px;
 }
 
 .categories ul li {
@@ -106,6 +105,11 @@
     font-size: 14px;
     color: #838282;
 }
+
+.fixed {
+    position: fixed;
+    top: 100px;
+  }
 
 .petlist {
     width: 80%;

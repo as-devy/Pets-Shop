@@ -19,10 +19,12 @@
 
     <header>
         <div class="container">
-            <a href="./" class="logo">
-                <img src="./imgs/logo.png" alt="pawsafe">
-                <h3>Paws Safe</h3>
-            </a>
+            <div class="lg" style="width: 268px;">
+                <a href="./" class="logo">
+                    <img src="./imgs/logo.png" alt="pawsafe">
+                    <h3>Paws Safe</h3>
+                </a>
+            </div>
             <ul>
                 <li><a class="active" href="./index.html">Home</a></li>
                 <li><a href="./foster.html">Foster</a></li>
@@ -34,7 +36,10 @@
                     <a href="./login.html" class="login">Login</a>
                     <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
                 </div>
+
                 <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
+                <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
             </div>
         </div>
     </header>
@@ -333,9 +338,9 @@
                 document.querySelector(".petlist .list").innerHTML = "<p class='msg_defined'>Internal Server Error!</p>"
             });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/odometer.min.js"
         integrity="sha512-v3fZyWIk7kh9yGNQZf1SnSjIxjAKsYbg6UQ+B+QxAZqJQLrN3jMjrdNwcxV6tis6S0s1xyVDZrDz9UoRLfRpWw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script src="./main.js"></script>
 
 </body>

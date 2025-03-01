@@ -1,13 +1,13 @@
-body{
+body {
     height: 100vh;
 }
 
 .signup,
-.login{
+.login {
     height: 100%;
 }
 
-.signup .auth_container{
+.signup .auth_container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -15,48 +15,48 @@ body{
     /* margin: 0 auto; */
     /* margin-top: 150px; */
     margin-left: 170px;
+    margin-top: 40px;
     height: 100%;
 }
 
-.signup .auth_container form{
-    width: 35%;
+.signup .auth_container form {
+    width: 40%;
     background-color: #fff;
     padding: 20px;
-    padding-top: 10px;
+    padding-top: 15px;
     border-radius: 0.7rem;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.signup .auth_container form h1{
+.signup .auth_container form h1 {
     text-align: center;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     justify-content: center;
-} 
+}
 
-body > main > div > form > h1
-.signup .auth_container form .logo img{
+body>main>div>form>h1 .signup .auth_container form .logo img {
     width: 70px;
     height: 70px;
 }
 
-.signup .auth_container form .logo{
+.signup .auth_container form .logo {
     width: fit-content;
     margin: 0 auto;
     margin-bottom: 20px;
     font-size: 15px;
 }
 
-.signup .auth_container form label{
+.signup .auth_container form label {
     display: flex;
     align-items: center;
     gap: 0.3rem;
     font-size: 15px;
 }
 
-.signup .auth_container form .icon{
+.signup .auth_container form .icon {
     width: 25px;
     height: 25px;
     border-radius: 50%;
@@ -68,32 +68,32 @@ body > main > div > form > h1
     color: #fff;
 }
 
-.signup .auth_container form .inputs{
+.signup .auth_container form .inputs {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.signup .auth_container form .inputs .input{
+.signup .auth_container form .inputs .input {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
 .signup .auth_container form .inputs .input .error,
-.signup .auth_container form .inputs .input b{
+.signup .auth_container form .inputs .input b {
     color: red;
     font-size: 0.8rem;
 }
 
-.signup .auth_container form .inputs .input input{
+.signup .auth_container form .inputs .input input {
     outline: none;
-    padding: 8px 10px;
-    border-radius: 0.7rem;
+    padding: 10px;
+    border-radius: 5px;
     border: 1px solid #939393;
 }
 
-.signup .auth_container form button{
+.signup .auth_container form button {
     width: 100%;
     margin-top: 30px;
     padding: 10px;
@@ -108,11 +108,11 @@ body > main > div > form > h1
     transition: 0.3s;
 }
 
-.signup .auth_container form button:hover{
+.signup .auth_container form button:hover {
     background-color: #00a59e;
 }
 
-.signup .auth_container .illustrate{
+.signup .auth_container .illustrate {
     width: 40%;
     background-color: var(--primary_color);
     height: 100%;
@@ -137,13 +137,61 @@ body > main > div > form > h1
     font-size: 15px;
 }
 
-.signup .auth_container .illustrate .logo img{
+.signup .auth_container .illustrate .logo img {
     width: 50px;
     height: 50px;
 }
 
-.signup .auth_container .illustrate .loign_img{
+.signup .auth_container .illustrate .loign_img {
     width: 100%;
     position: relative;
     left: -50px;
+}
+
+.phone-input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #939393;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #fff;
+    padding: 3px;
+}
+
+.flag-container {
+    width: 30px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.flag-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.country-code {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.phone-input {
+    flex: 1;
+    /* padding: 10px; */
+    border: none !important;
+    outline: none !important;
+}
+
+.inp_fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inp_fields .input{
+    width: 49%;
 }

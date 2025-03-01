@@ -97,7 +97,8 @@ header .container .auth .login:hover {
 }
 
 header .container .auth .signup,
-header .container .auth .post_pet {
+header .container .auth .post_pet,
+header .container .auth .logout {
     border: 2px solid var(--primary_color);
     padding: 4px 8px;
     border-radius: 0.3rem;
@@ -107,8 +108,14 @@ header .container .auth .post_pet {
     gap: 0.3rem;
 }
 
+
+header .container .auth .logout{
+    border: 2px solid #ff3a3a;
+}
+
 header .container .auth .signup i,
-header .container .auth .post_pet i {
+header .container .auth .post_pet i,
+header .container .auth .logout i{
     width: 23px;
     height: 23px;
     border-radius: 50%;
@@ -121,9 +128,19 @@ header .container .auth .post_pet i {
     border: 1px solid #fff;
 }
 
+header .container .auth .logout i{
+    background-color: #ff3a3a;
+    font-size: 11px;
+}
+
 header .container .auth .signup:hover,
 header .container .auth .post_pet:hover {
     background-color: var(--primary_color);
+    color: #fff;
+}
+
+header .container .auth .logout:hover{
+    background-color: #ff3a3a;
     color: #fff;
 }
 

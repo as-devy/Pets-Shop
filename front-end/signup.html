@@ -14,10 +14,12 @@
     <main class="signup">
         <header>
             <div class="container">
-                <a href="./" class="logo">
-                    <img src="./imgs/logo.png" alt="pawsafe">
-                    <h3>Paws Safe</h3>
-                </a>
+                <div class="lg" style="width: 268px;">
+                    <a href="./" class="logo">
+                        <img src="./imgs/logo.png" alt="pawsafe">
+                        <h3>Paws Safe</h3>
+                    </a>
+                </div>
                 <ul>
                     <li><a class="active" href="./index.html">Home</a></li>
                     <li><a href="./foster.html">Foster</a></li>
@@ -27,9 +29,12 @@
                 <div class="auth">
                     <div class="register">
                         <a href="./login.html" class="login">Login</a>
-                        <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Submit </a>
+                        <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
                     </div>
-                    <a href="#" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
+
+                    <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
+                    <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
                 </div>
             </div>
         </header>
@@ -46,21 +51,55 @@
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-user"></i></div> Username <b>*</b>
                         </label>
-                        <input type="text" placeholder="Username" id="name">
+                        <input type="text" placeholder="Enter Username" id="name">
                         <span class="error"></span>
                     </div>
                     <div class="input">
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-envelope"></i></div> Email <b>*</b>
                         </label>
-                        <input type="email" placeholder="Email" id="email">
+                        <input type="email" placeholder="Enter Email" id="email">
                         <span class="error"></span>
+                    </div>
+                    <div class="input">
+                        <label for="">
+                            <div class="icon"><i class="fa-solid fa-phone"></i></div> Phone <b>*</b>
+                        </label>
+                        <div class="phone-input-container">
+                            <select class="country-code" id="countryCode">
+                                <option value="+20" selected>+20 🇪🇬</option>
+                                <option value="+1">+1 🇺🇸</option>
+                                <option value="+44">+44 🇬🇧</option>
+                                <option value="+33">+33 🇫🇷</option>
+                                <option value="+49">+49 🇩🇪</option>
+                                <option value="+91">+91 🇮🇳</option>
+                            </select>
+                            <input type="tel" class="phone-input" id="phoneNumber" placeholder="Enter phone number">
+                        </div>
+                        <span class="error"></span>
+                    </div>
+                    <div class="input">
+                        <label for="">
+                            <div class="icon"><i class="fa-solid fa-location-dot"></i></div> Location <b>*</b>
+                        </label>
+                        <div class="inp_fields">
+                            <div class="input">
+                                <input type="text" placeholder="Country" id="country">
+                                <span class="error"></span>
+                            </div>
+                            <div class="input">
+                                <input type="text" placeholder="City" id="city">
+                                <span class="error"></span>
+                            </div>
+                            
+                        </div>
+                        
                     </div>
                     <div class="input">
                         <label for="">
                             <div class="icon"><i class="fa-solid fa-lock"></i></div> Password <b>*</b>
                         </label>
-                        <input type="password" placeholder="Password" id="password">
+                        <input type="password" placeholder="Enter Password" id="password">
                         <span class="error"></span>
                     </div>
                 </div>
@@ -98,15 +137,24 @@
 
             let name = document.getElementById("name");
             let email = document.getElementById("email");
+            let phone = document.getElementById("phoneNumber");
+            let country = document.getElementById("country");
+            let city = document.getElementById("city");
             let password = document.getElementById("password");
             let nameError = name.nextElementSibling;
             let emailError = email.nextElementSibling;
+            let phoneError = phone.parentElement.nextElementSibling;
+            let countryError = country.nextElementSibling;
+            let cityError = city.nextElementSibling;
             let passwordError = password.nextElementSibling;
 
             let isValid = true;
 
             nameError.textContent = "";
             emailError.textContent = "";
+            phoneError.textContent = "";
+            countryError.textContent = "";
+            cityError.textContent = "";
             passwordError.textContent = "";
 
             if (name.value.trim() === "") {
@@ -124,6 +172,28 @@
                     isValid = false;
                 }
             }
+
+            if (phone.value.trim() === "") {
+                phoneError.textContent = "Please Fill Out This Field.";
+                isValid = false;
+            }else{
+                let phonePattern = /^\+?[1-9]\d{1,14}$/;
+                if (!phonePattern.test(phone.value.trim())) {
+                    phoneError.textContent = "Please Enter Valid Phone.";
+                    isValid = false;
+                }
+            }
+
+            if (country.value.trim() === "") {
+                countryError.textContent = "Please Fill Out This Field.";
+                isValid = false;
+            }
+
+            if (city.value.trim() === "") {
+                cityError.textContent = "Please Fill Out This Field.";
+                isValid = false;
+            }
+
             if (password.value.trim() === "") {
                 passwordError.textContent = "Please Fill Out This Field.";
                 isValid = false;
@@ -133,24 +203,29 @@
                 const user = {
                     name: name.value,
                     email: email.value,
+                    phone: `${document.querySelector("#countryCode").value}${phone.value}`,
+                    country: country.value,
+                    city: city.value,
                     password: password.value,
                 }
 
-                fetch('http://localhost:400/addUser', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data)
-                        document.cookie = `UserId=${data.userId}; path=/; max-age=604800`; // 7 days (604800 seconds)
-                        window.location.href = "http://127.0.0.1:5500/front-end/index.html";
-                    }
-                    )
-                    .catch(error => console.error('Error:', error));
+                console.log(user)
+
+                // fetch('http://localhost:400/addUser', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify(user)
+                // })
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         console.log('Success:', data)
+                //         document.cookie = `UserId=${data.userId}; path=/; max-age=604800`; // 7 days (604800 seconds)
+                //         window.location.href = "http://127.0.0.1:5500/front-end/index.html";
+                //     }
+                //     )
+                //     .catch(error => console.error('Error:', error));
             }
 
 
