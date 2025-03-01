@@ -238,6 +238,17 @@
                     </select>
                 </div>
 
+                <div class="input" id="foster-duration" style="display: none; text-align: left; ">
+                    <label for="foster_duration">How long are you available to foster?</label>
+                    <select id="foster_duration" name="foster_duration" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="short_term">Short-term (a few weeks)</option>
+                        <option value="long_term">Long-term (several months or more)</option>
+                        <option value="emergency">Emergency fostering (temporary care in urgent situations)</option>
+                        <option value="not_sure">Not sure yet</option>
+                    </select>
+                </div>
+
                 <div class="input">
                     <label for="time_commitment">How much time can you dedicate to the pet daily?</label>
                     <input type="text" id="time_commitment" name="time_commitment"
@@ -306,6 +317,14 @@
                     ele.textContent = JSON.parse(pet.requests).length;
                 })
                 document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
+
+                 // Toggle the foster duration question based on pet type
+            const fosterQuestion = document.querySelector("#foster-duration");
+            if (pet.foster) {
+                fosterQuestion.style.display = "block"; // Show for foster
+            } else {
+                fosterQuestion.style.display = "none"; // Hide for rehome
+            }
 
                 function getCookie(name) {
                     const cookies = document.cookie.split('; ');
@@ -378,6 +397,7 @@
                 petExperience: document.getElementById("pet_experience").value,
                 timeCommitment: document.getElementById("time_commitment").value,
                 financialPrepared: document.getElementById("financial_prepared").value,
+                fosterDuration: document.getElementById("foster_duration")?.value || null
             }
 
             if (document.querySelector("#terms").checked) {
@@ -403,6 +423,9 @@
                 document.querySelector("#form_popup #error").classList.remove("d_none")
             }
         })
+
+
+        
     </script>
     <script src="./main.js"></script>
 </body>
