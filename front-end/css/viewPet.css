@@ -250,4 +250,21 @@ body {
     color: #fff;
     border-radius: 0.5rem;
     cursor: pointer;
+
+}
+.medical_history {
+    display: flex;
+    flex-direction:column ;
+  
+}
+
+
+
+.medical_history .qa div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+ 
+    padding: 8px;
+
 }

@@ -64,6 +64,27 @@
                         <span id="cat" style="text-transform: capitalize;"></span>
                     </div>
                 </li>
+                <li>
+                    <div class="medical_history">
+                        <span style="color: grey; font-weight: bold;"> Medical history</span>
+                        <div class="qa">
+                            <div>
+                                <p>Vaccinations: </p> <span id="vaccines_prevention"></span>
+                            </div>
+                            <div>
+                                <p>Medical Conditions: </p> <span id="health_history"></span>
+                            </div>
+                            <div>
+                                 <p>Diet:</p> <span id="diet"></span>
+                            </div>
+                            <div>
+                                <p>Behavior Issues:</p> <span id="behavior"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </li>
 
                 <li>
                     <p id="desc"></p>
@@ -222,6 +243,17 @@
                     </select>
                 </div>
 
+                <div class="input" id="foster-duration" style="display: none; text-align: left; ">
+                    <label for="foster_duration">How long are you available to foster?</label>
+                    <select id="foster_duration" name="foster_duration" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="short_term">Short-term (a few weeks)</option>
+                        <option value="long_term">Long-term (several months or more)</option>
+                        <option value="emergency">Emergency fostering (temporary care in urgent situations)</option>
+                        <option value="not_sure">Not sure yet</option>
+                    </select>
+                </div>
+
                 <div class="input">
                     <label for="time_commitment">How much time can you dedicate to the pet daily?</label>
                     <input type="text" id="time_commitment" name="time_commitment"
@@ -265,29 +297,28 @@
 
         console.log(petId);
 
-        if (petId) {
-            fetch(`http://localhost:400/pet/${petId}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
+        fetch(`http://localhost:400/pet/${petId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data)
+                const pet = data;
+                document.title = `View - ${pet.name}`
+                document.querySelector("#name").textContent = pet.name
+                document.querySelector("#age").textContent = `${pet.age} years old `
+                document.querySelector("#desc").textContent = pet.description
+                document.querySelector("#img").src = pet.img
+                document.querySelector("#location").textContent = `${pet.city} , ${pet.country}`;
+                document.querySelector("#cat").textContent = pet.category
+                document.querySelector("#ra").textContent = pet.foster ? "foster" : "rehoming"
+                document.querySelectorAll("#requestsCount").forEach(ele => {
+                    ele.textContent = JSON.parse(pet.requests).length;
                 })
-                .then(data => {
-                    console.log(data)
-                    const pet = data;
-                    document.title = `View - ${pet.name}`
-                    document.querySelector("#name").textContent = pet.name
-                    document.querySelector("#age").textContent = `${pet.age} years old `
-                    document.querySelector("#desc").textContent = pet.description
-                    document.querySelector("#img").src = pet.img
-                    document.querySelector("#location").textContent = `${pet.city} , ${pet.country}`;
-                    document.querySelector("#cat").textContent = pet.category
-                    document.querySelector("#ra").textContent = pet.foster ? "foster" : "rehoming"
-                    document.querySelectorAll("#requestsCount").forEach(ele => {
-                        ele.textContent = JSON.parse(pet.requests).length;
-                    })
-                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
+                document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
 
                     function getCookie(name) {
                         const cookies = document.cookie.split('; ');
@@ -359,53 +390,40 @@
                 form_popup.classList.remove("active")
             })
 
-            document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
-                e.preventDefault()
-                const petRequest = {
-                    petsAllowed: document.getElementById("pets_allowed").value,
-                    household: document.getElementById("household").value,
-                    otherPets: document.getElementById("other_pets").value,
-                    petExperience: document.getElementById("pet_experience").value,
-                    timeCommitment: document.getElementById("time_commitment").value,
-                    financialPrepared: document.getElementById("financial_prepared").value,
-                }
+        document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
+            e.preventDefault()
+            const petRequest = {
+                petsAllowed: document.getElementById("pets_allowed").value,
+                household: document.getElementById("household").value,
+                otherPets: document.getElementById("other_pets").value,
+                petExperience: document.getElementById("pet_experience").value,
+                timeCommitment: document.getElementById("time_commitment").value,
+                financialPrepared: document.getElementById("financial_prepared").value,
+            }
 
                 if (document.querySelector("#terms").checked) {
                     console.log(petRequest)
 
-                    fetch(`http://localhost:400/addPetRequest/${petId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(petRequest)
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Success:', data)
-                            if (data.updatedRequests) {
-                                window.location.href = `./viewPet.html?petId=${petId}`;
-                            }
+                fetch(`http://localhost:400/addPetRequest/${petId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(petRequest)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data)
+                        if (data.updatedRequests) {
+                            window.location.href = `./viewPet.html?petId=${petId}`;
                         }
-                        )
-                        .catch(error => console.error('Error:', error));
-                } else {
-                    document.querySelector("#form_popup #error").classList.remove("d_none")
-                }
-            })
-        } else {
-            
-            const notFoundError = document.createElement("div")
-            notFoundError.innerHTML = `
-                    <div id="notFoundError">
-                        <h1>petId Can Not Be Found</h1>
-                        <a href="./">Back To Home</a>
-                    </div>
-                `
-            document.body.style = "overflow-y: hidden;"
-            document.body.appendChild(notFoundError)
-        }
-
+                    }
+                    )
+                    .catch(error => console.error('Error:', error));
+            } else {
+                document.querySelector("#form_popup #error").classList.remove("d_none")
+            }
+        })
     </script>
     <script src="./main.js"></script>
 </body>
