@@ -14,24 +14,26 @@
 
     <header>
         <div class="container">
-
             <a href="./" class="logo">
                 <img src="./imgs/logo.png" alt="pawsafe">
                 <h3>Paws Safe</h3>
             </a>
             <ul>
                 <li><a href="./index.html">Home</a></li>
-                <li><a id="fosterLink" href="./foster.html">Foster</a></li>
-                <li><a id="rehomeLink" href="./rehoming.html">ReHoming</a></li>
+                <li><a href="./foster.html" id="fosterLink">Foster</a></li>
+                <li><a href="./rehoming.html" id="rehomeLink">ReHoming</a></li>
                 <li><a href="./contactus.html">Contact Us</a></li>
             </ul>
             <div class="auth">
-                <a href="./login.html" class="login">Login</a>
-                <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
+                <div class="register">
+                    <a href="./login.html" class="login">Login</a>
+                    <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
+                </div>
+                <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
             </div>
         </div>
-
     </header>
+
     <main>
         <div class="petInfo">
             <div class="img" style="position: relative; overflow: hidden;">
@@ -63,7 +65,31 @@
                 </li>
 
                 <li>
+                    <!-- <h4>Owner: </h4> -->
+                    <div class="user">
+                        <p>This pet owenes to <span id="owenrName" style="color: #000;font-weight: bold;">Jhon
+                                Dell</span></p>
+                        <div class="contact" style="display: flex; align-items: center;gap: 1rem;margin-top: 5px;">
+                            <div><span style="color: #454545;">Email: </span> <span
+                                    id="ownerEmail">jhon@gmail.com</span>
+                            </div>
+                            <div><span style="color: #454545;">Phone: </span> <span id="ownerPhone">+2012859678</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- FOR ANY USER EXCEPT THE OWNER -->
+
+                <li style="display: flex;align-items: center;gap: 1rem;" id="userRequest" class="d_none">
                     <button id="petButton">Adopt Pet</button>
+                    <p>This pet have <span style="font-weight: bold;" id="requestsCount">0</span> requests</p>
+                </li>
+
+                <!-- FOR THE OWNER -->
+
+                <li style="display: flex;align-items: center;gap: 1rem;" id="userIdentify" class="d_none">
+                    <p>You have <span style="font-weight: bold;" id="requestsCount">0</span> requests on this pet</p>
                 </li>
 
             </ul>
@@ -72,22 +98,87 @@
 
         </div>
 
+        <h1 style="width: 85%; margin: 0 auto;margin-top: 40px;">Requests</h1>
+        <div class="requests">
+            <div class="request">
+                <div class="user" style="flex-direction: column;align-items: flex-start;">
+                    <h3 id="requester">Jhon Dell</h3>
+                    <div class="contact" style="margin-top: -10px;">
+                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">jhon@gmail.com</span></p>
+                        <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">+2012859687</span></p>
+                    </div>
+                </div>
 
+                <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
+                    <div>
+                        <p>Are pets allowed in your residence: </p> <span id="household_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>Who else lives in your home: </p> <span id="household_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>Do you currently have other pets: </p> <span id="other_pets_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>Have you owned or cared for pets before: </p> <span id="pet_experience_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>How much time can you dedicate to the pet daily: </p> <span id="time_commitment_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>Are you financially prepared for pet care costs: </p> <span
+                            id="financial_prepared_A">Yes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="request">
+                <div class="user" style="flex-direction: column;align-items: flex-start;">
+                    <h3 id="requester">Jhon Dell</h3>
+                    <div class="contact" style="margin-top: -10px;">
+                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">jhon@gmail.com</span></p>
+                        <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">+2012859687</span></p>
+                    </div>
+                </div>
+
+                <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
+                    <div>
+                        <p>Are pets allowed in your residence: </p> <span id="household_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>Who else lives in your home: </p> <span id="household_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>Do you currently have other pets: </p> <span id="other_pets_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>Have you owned or cared for pets before: </p> <span id="pet_experience_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>How much time can you dedicate to the pet daily: </p> <span id="time_commitment_A">Yes</span>
+                    </div>
+                    <div>
+                        <p>Are you financially prepared for pet care costs: </p> <span
+                            id="financial_prepared_A">Yes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
-`    <div id="form_popup">
+
+    <div id="form_popup">
         <div class="content">
             <div id="close">
                 <i class="fa-solid fa-xmark"></i>
             </div>
             <h1>Request a Pet</h1>
             <form action="">
-    
+
                 <!-- <div class="input">
                     <label for="location">Where do you live? (City/Region)</label>
                     <input type="text" id="location" name="location" placeholder="Enter your city/region" required>
                 </div> -->
-    
+
                 <div class="input">
                     <label for="pets_allowed">Are pets allowed in your residence?</label>
                     <select id="pets_allowed" name="pets_allowed" required>
@@ -97,12 +188,13 @@
                         <option value="not_sure">Not sure</option>
                     </select>
                 </div>
-    
+
                 <div class="input">
                     <label for="household">Who else lives in your home?</label>
-                    <input type="text" id="household" name="household" placeholder="E.g., adults, children, roommates" required>
+                    <input type="text" id="household" name="household" placeholder="E.g., adults, children, roommates"
+                        required>
                 </div>
-    
+
                 <div class="input">
                     <label for="other_pets">Do you currently have other pets?</label>
                     <select id="other_pets" name="other_pets" required>
@@ -113,7 +205,7 @@
                         <option value="yes_other">Yes, other pets</option>
                     </select>
                 </div>
-    
+
                 <div class="input">
                     <label for="pet_experience">Have you owned or cared for pets before?</label>
                     <select id="pet_experience" name="pet_experience" required>
@@ -122,12 +214,13 @@
                         <option value="no">No</option>
                     </select>
                 </div>
-    
+
                 <div class="input">
                     <label for="time_commitment">How much time can you dedicate to the pet daily?</label>
-                    <input type="text" id="time_commitment" name="time_commitment" placeholder="E.g., 2-3 hours, full-time, etc." required> 
+                    <input type="text" id="time_commitment" name="time_commitment"
+                        placeholder="E.g., 2-3 hours, full-time, etc." required>
                 </div>
-    
+
                 <div class="input">
                     <label for="financial_prepared">Are you financially prepared for pet care costs?</label>
                     <select id="financial_prepared" name="financial_prepared" required>
@@ -137,20 +230,25 @@
                         <option value="unsure">Unsure</option>
                     </select>
                 </div>
-    
+
                 <!-- Terms and Conditions Section -->
                 <div class="input_terms">
                     <input type="checkbox" id="terms" name="terms" required>
                     <label for="terms">
-                        I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a>
+                        I agree to the <a href="terms.html" target="_blank"
+                            style="color: #009fff; text-decoration: underline;">Terms and Conditions</a>
                     </label>
                 </div>
-    
-                <button type="submit">Request</button>
+
+                <div style="display: flex;flex-direction: column;">
+                    <p id="error" class="error d_none" style="font-size: 13px;color: red;">Accept terms and conditions
+                    </p>
+                    <button id="formRequestBtn">Request</button>
+                </div>
             </form>
         </div>
     </div>
-    
+
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -176,9 +274,31 @@
                 document.querySelector("#img").src = pet.img
                 document.querySelector("#location").textContent = `${pet.city} , ${pet.country}`;
                 document.querySelector("#cat").textContent = pet.category
-
                 document.querySelector("#ra").textContent = pet.foster ? "foster" : "rehoming"
-                document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet"
+                document.querySelectorAll("#requestsCount").forEach(ele => {
+                    ele.textContent = JSON.parse(pet.requests).length;
+                })
+                document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
+
+                function getCookie(name) {
+                    const cookies = document.cookie.split('; ');
+                    for (let cookie of cookies) {
+                        const [key, value] = cookie.split('=');
+                        if (key === name) {
+                            return value;
+                        }
+                    }
+                    return null;
+                }
+
+                const userId = getCookie('UserId');
+
+                if (pet.ownerId == userId) {
+                    document.querySelector("#userIdentify").classList.remove("d_none")
+                } else {
+                    document.querySelector("#userRequest").classList.remove("d_none")
+                }
+
                 if (pet.foster) {
                     document.querySelector("#fosterLink").classList.add("active")
 
@@ -186,20 +306,78 @@
                     document.querySelector("#rehomeLink").classList.add("active")
                 }
 
+                fetch(`http://localhost:400/users/${pet.ownerId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data)
+                        const petOwner = data;
+
+                        document.querySelector("#owenrName").textContent = petOwner.username;
+                        document.querySelector("#ownerEmail").textContent = petOwner.email;
+                        document.querySelector("#ownerPhone").textContent = petOwner.phone;
+                    })
+
+                    .catch(error => {
+                        console.error("Error fetching users:", error);
+                    });
             })
 
             .catch(error => {
                 console.error("Error fetching pets:", error);
             });
-            let form_popup =  document.querySelector("#form_popup")
-            document.querySelector("#petButton").addEventListener("click",()=>{
-                form_popup.classList.add("active")
-            })
-            
-            document.querySelector("#form_popup #close").addEventListener("click",()=>{
-                form_popup.classList.remove("active")
-            })
+
+
+
+        let form_popup = document.querySelector("#form_popup")
+        document.querySelector("#petButton").addEventListener("click", () => {
+            form_popup.classList.add("active")
+        })
+
+        document.querySelector("#form_popup #close").addEventListener("click", () => {
+            form_popup.classList.remove("active")
+        })
+
+        document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
+            e.preventDefault()
+            const petRequest = {
+                petsAllowed: document.getElementById("pets_allowed").value,
+                household: document.getElementById("household").value,
+                otherPets: document.getElementById("other_pets").value,
+                petExperience: document.getElementById("pet_experience").value,
+                timeCommitment: document.getElementById("time_commitment").value,
+                financialPrepared: document.getElementById("financial_prepared").value,
+            }
+
+            if (document.querySelector("#terms").checked) {
+                console.log(petRequest)
+
+                fetch(`http://localhost:400/addPetRequest/${petId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(petRequest)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data)
+                        if (data.updatedRequests) {
+                            window.location.href = `./viewPet.html?petId=${petId}`;
+                        }
+                    }
+                    )
+                    .catch(error => console.error('Error:', error));
+            } else {
+                document.querySelector("#form_popup #error").classList.remove("d_none")
+            }
+        })
     </script>
+    <script src="./main.js"></script>
 </body>
 
 </html>

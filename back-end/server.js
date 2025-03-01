@@ -69,9 +69,25 @@ app.post("/loginUser", (request, response) => {
     });
 });
 
+app.get("/users/:id", (request, response) => {
+    const userId = request.params.id;
+
+    const sql = "SELECT * FROM users WHERE id = ?";
+
+    db.query(sql, [userId], (err, result) => {
+        if (err) {
+            console.error("Database error:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+
+        const user = result[0];
+        response.json(user)
+    });
+})
+
 app.get("/allPets", (request, response) => {
     const sql = "SELECT * FROM pets ORDER BY id DESC";
-      db.query(sql, (err, result) => {
+    db.query(sql, (err, result) => {
         if (err) {
             console.error("Database error:", err);
             return response.status(500).json({ error: "Database error" });
@@ -102,11 +118,12 @@ app.post("/addPet", (request, response) => {
 
     const sql = ` 
     INSERT INTO pets 
-    (category, img, name, age, description,country, streetAddress, city, postCode, vaccines_prevention, health_history, diet, behavior, rehoming, foster, requests) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    (ownerId, category, img, name, age, description,country, streetAddress, city, postCode, vaccines_prevention, health_history, diet, behavior, rehoming, foster, requests) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 `;
 
     const values = [
+        pet.ownerId,
         pet.category,
         pet.img || null,
         pet.name || null,
@@ -134,7 +151,40 @@ app.post("/addPet", (request, response) => {
         response.status(201).json({ message: "Pet added successfully", petId: result.insertId });
         console.log({ message: "Pet added successfully", petId: result.insertId });
     });
+})
 
+app.post("/addPetRequest/:id", (request, response) => {
+    const petId = request.params.id;
+    const petRequest = request.body;
+
+    const sql = `SELECT requests FROM pets WHERE id = ?`;
+
+    db.query(sql, [petId], (err, result) => {
+        if (err) {
+            console.error("Error fetching requests:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+
+        if (result.length === 0) {
+            return response.status(404).json({ error: "Pet not found" });
+        }
+
+        let requests = JSON.parse(result[0].requests || "[]");
+        // let reqeusts = [{q: a, q: a, q: a}, {q: a, q: a, q: a}]
+
+        requests.push(petRequest);
+        // reqeusts.push({q: a, q: a, q: a})
+        // reqeusts = [{q: a, q: a, q: a}, {q: a, q: a, q: a}, {q: a, q: a, q: a}] 
+
+        const updateSql = `UPDATE pets SET requests = ? WHERE id = ?`;
+        db.query(updateSql, [JSON.stringify(requests), petId], (err, updateResult) => {
+            if (err) {
+                console.error("Error updating requests:", err);
+                return response.status(500).json({ error: "Database error" });
+            }
+            response.status(200).json({ message: "Request added successfully", updatedRequests: requests });
+        });
+    });
 })
 
 app.listen(400, () => {

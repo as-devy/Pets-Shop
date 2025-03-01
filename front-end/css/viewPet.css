@@ -95,7 +95,7 @@ body{
     color: #fff;
     font-weight: bold;
     cursor: pointer;
-
+    width: 100%;
 }
 
 .petInfo {
@@ -146,7 +146,7 @@ body{
     color: #003049;
 }
 
-.petInfo .info h4 {
+.petInfo .info #age {
     font-size: 1.020rem;
     color: #d62828;
     text-transform: capitalize;
@@ -189,4 +189,33 @@ body{
     border-bottom-right-radius: 0.5rem;
     font-weight: bold;
 
+}
+
+.requests{
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-top: 1px solid gray;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.requests .request{
+    background: #eee;
+    padding: 10px;
+    border-radius: 0.7rem;
+    margin-bottom: 10px;
+}
+
+.requests .request .requestCont p{
+    color: #4b4b4b;
+}
+
+.requests .request div{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 5px;
 }
