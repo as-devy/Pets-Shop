@@ -309,6 +309,8 @@
                         ele.textContent = JSON.parse(pet.requests).length;
                     })
 
+                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
+
                     fetch(`http://localhost:400/users/${userId}`)
                         .then(response => {
                             if (!response.ok) {
@@ -323,8 +325,6 @@
                                 if (requestedPetId == petId) {
                                     document.querySelector("#petButton").setAttribute("disabled", true)
                                     document.querySelector("#petButton").classList.add("disabled")
-                                } else {
-                                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
                                 }
                             })
                         })
@@ -374,6 +374,7 @@
                         .catch(error => {
                             console.error("Error fetching users:", error);
                         });
+                    
                     // fetching requests 
                     let petRequests = JSON.parse(pet.requests)
                     console.log(petRequests)
