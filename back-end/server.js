@@ -188,6 +188,40 @@ app.post("/addPetRequest/:id", (request, response) => {
     });
 })
 
+app.post("/users/addrequestedPet/:id", (request, response) => {
+    const userId = request.params.id;
+    const requestedPetId = request.body.id;
+
+    const sql = `SELECT requestedPets FROM users WHERE id = ?`;
+
+    db.query(sql, [userId], (err, result) => {
+        if (err) {
+            console.error("Error fetching requests:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+
+        if (result.length === 0) {
+            return response.status(404).json({ error: "User not found" });
+        }
+
+        let requestedPets = JSON.parse(result[0].requestedPets || "[]");
+        // let reqeusts = [{q: a, q: a, q: a}, {q: a, q: a, q: a}]
+
+        requestedPets.push(requestedPetId);
+        // reqeusts.push({q: a, q: a, q: a})
+        // reqeusts = [{q: a, q: a, q: a}, {q: a, q: a, q: a}, {q: a, q: a, q: a}] 
+
+        const updateSql = `UPDATE users SET requestedPets = ? WHERE id = ?`;
+        db.query(updateSql, [JSON.stringify(requestedPets), userId], (err, updateResult) => {
+            if (err) {
+                console.error("Error updating requests:", err);
+                return response.status(500).json({ error: "Database error" });
+            }
+            response.status(200).json({ message: "Request added successfully", updatedRequestedPets: requestedPets });
+        });
+    });
+})
+
 app.listen(400, () => {
     console.log("server is listening")
 })
