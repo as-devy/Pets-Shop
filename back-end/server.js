@@ -118,8 +118,8 @@ app.post("/addPet", (request, response) => {
 
     const sql = ` 
     INSERT INTO pets 
-    (ownerId, category, img, name, age, description,country, streetAddress, city, postCode, vaccines_prevention, health_history, diet, behavior, rehoming, foster, requests) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    (ownerId, category, img, name, age, description,country, streetAddress, city, postCode, vaccines_prevention, health_history, diet, behavior,foster_duration, rehoming, foster, requests) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?);
 `;
 
     const values = [
@@ -137,6 +137,7 @@ app.post("/addPet", (request, response) => {
         pet.health_history || null,
         pet.diet || null,
         pet.behavior || null,
+        pet.foster_duration || null,
         pet.rehoming || 0,
         pet.foster || 0,
         JSON.stringify(pet.requests || [])

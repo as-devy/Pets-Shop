@@ -211,21 +211,21 @@
 
                 console.log(user)
 
-                // fetch('http://localhost:400/addUser', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json'
-                //     },
-                //     body: JSON.stringify(user)
-                // })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         console.log('Success:', data)
-                //         document.cookie = `UserId=${data.userId}; path=/; max-age=604800`; // 7 days (604800 seconds)
-                //         window.location.href = "http://127.0.0.1:5500/front-end/index.html";
-                //     }
-                //     )
-                //     .catch(error => console.error('Error:', error));
+                fetch('http://localhost:400/addUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data)
+                        document.cookie = `UserId=${data.userId}; path=/; max-age=604800`; // 7 days (604800 seconds)
+                        window.location.href = "./index.html";
+                    }
+                    )
+                    .catch(error => console.error('Error:', error));
             }
 
 
