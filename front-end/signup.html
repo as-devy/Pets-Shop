@@ -91,9 +91,9 @@
                                 <input type="text" placeholder="City" id="city">
                                 <span class="error"></span>
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
                     <div class="input">
                         <label for="">
@@ -176,7 +176,7 @@
             if (phone.value.trim() === "") {
                 phoneError.textContent = "Please Fill Out This Field.";
                 isValid = false;
-            }else{
+            } else {
                 let phonePattern = /^\+?[1-9]\d{1,14}$/;
                 if (!phonePattern.test(phone.value.trim())) {
                     phoneError.textContent = "Please Enter Valid Phone.";
@@ -221,8 +221,10 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data)
-                        document.cookie = `UserId=${data.userId}; path=/; max-age=604800`; // 7 days (604800 seconds)
-                        window.location.href = "./index.html";
+                        if (data.userId) {
+                            document.cookie = `UserId=${data.userId}; path=/; max-age=604800`; // 7 days (604800 seconds)
+                            window.location.href = "./index.html";
+                        }
                     }
                     )
                     .catch(error => console.error('Error:', error));

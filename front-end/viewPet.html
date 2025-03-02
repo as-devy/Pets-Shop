@@ -126,7 +126,7 @@
 
         <h1 style="width: 85%; margin: 0 auto;margin-top: 40px;">Requests</h1>
         <div class="requests">
-            <div class="request">
+            <!-- <div class="request">
                 <div class="user" style="flex-direction: column;align-items: flex-start;">
                     <h3 id="requester">Jhon Dell</h3>
                     <div class="contact" style="margin-top: -10px;">
@@ -149,38 +149,7 @@
                     <div>
                         <p>Have you owned or cared for pets before: </p> <span id="pet_experience_A">Yes</span>
                     </div>
-                    <div>
-                        <p>How much time can you dedicate to the pet daily: </p> <span id="time_commitment_A">Yes</span>
-                    </div>
-                    <div>
-                        <p>Are you financially prepared for pet care costs: </p> <span
-                            id="financial_prepared_A">Yes</span>
-                    </div>
-                </div>
-            </div>
-            <div class="request">
-                <div class="user" style="flex-direction: column;align-items: flex-start;">
-                    <h3 id="requester">Jhon Dell</h3>
-                    <div class="contact" style="margin-top: -10px;">
-                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">jhon@gmail.com</span>
-                        </p>
-                        <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">+2012859687</span></p>
-                    </div>
-                </div>
 
-                <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
-                    <div>
-                        <p>Are pets allowed in your residence: </p> <span id="household_A">Yes</span>
-                    </div>
-                    <div>
-                        <p>Who else lives in your home: </p> <span id="household_A">Yes</span>
-                    </div>
-                    <div>
-                        <p>Do you currently have other pets: </p> <span id="other_pets_A">Yes</span>
-                    </div>
-                    <div>
-                        <p>Have you owned or cared for pets before: </p> <span id="pet_experience_A">Yes</span>
-                    </div>
                     <div>
                         <p>How much time can you dedicate to the pet daily: </p> <span id="time_commitment_A">Yes</span>
                     </div>
@@ -189,7 +158,8 @@
                             id="financial_prepared_A">Yes</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
         </div>
 
     </main>
@@ -339,7 +309,7 @@
                         ele.textContent = JSON.parse(pet.requests).length;
                     })
                     document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
-                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
+
 
 
 
@@ -385,6 +355,65 @@
                         .catch(error => {
                             console.error("Error fetching users:", error);
                         });
+                    // fetching requests 
+                    let petRequests = JSON.parse(pet.requests)
+                    console.log(petRequests)
+                    petRequests.map(request => {
+                        console.log(request)
+                        fetch(`http://localhost:400/users/${request.authorID}`)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! Status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log(data)
+                                const author=data
+                                const requestEle = document.createElement("div")
+                                requestEle.innerHTML = `
+                          <div class="request">
+                <div class="user" style="flex-direction: column;align-items: flex-start;">
+                    <h3 id="requester">${author.username}</h3>
+                    <div class="contact" style="margin-top: -10px;">
+                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">${author.email}</span>
+                        </p>
+                        <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">${author.phone}</span></p>
+                    </div>
+                </div>
+
+                <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
+                    <div>
+                        <p>Are pets allowed in your residence: </p> <span >${request.petsAllowed}</span>
+                    </div>
+                    <div>
+                        <p>Who else lives in your home: </p> <span  >${request.household}</span>
+                    </div>
+                    <div>
+                        <p>Do you currently have other pets: </p> <span >${request.otherPets}</span>
+                    </div>
+                     <div>
+                        <p> How long are you available to foster: </p> <span >${request.fosterDuration}</span>
+                    </div>
+                   
+                    <div>
+                        <p>Have you owned or cared for pets before: </p> <span >${request.petExperience}</span>
+                    </div>
+                    <div>
+                        <p>How much time can you dedicate to the pet daily: </p> <span>${request.timeCommitment}</span>
+                    </div>
+                    <div>
+                        <p>Are you financially prepared for pet care costs: </p> <span>${request.financialPrepared}</span>
+                    </div>
+                </div>
+            </div>  
+                        `
+                                document.querySelector(".requests").append(requestEle)
+                            })
+
+
+                    })
+
                 }).catch(error => {
                     console.error("Error fetching pets:", error);
                     const notFoundError = document.createElement("div")
@@ -407,7 +436,7 @@
                 if (userId) {
                     form_popup.classList.add("active")
                 } else {
-                    window.location.href="./signup.html"
+                    window.location.href = "./signup.html"
                 }
             })
 
@@ -421,6 +450,7 @@
                 e.preventDefault()
 
                 const petRequest = {
+                    authorID: userId,
                     petsAllowed: document.getElementById("pets_allowed").value,
                     household: document.getElementById("household").value,
                     otherPets: document.getElementById("other_pets").value,
@@ -428,6 +458,7 @@
                     timeCommitment: document.getElementById("time_commitment").value,
                     financialPrepared: document.getElementById("financial_prepared").value,
                     fosterDuration: document.getElementById("foster_duration")?.value || null
+
                 }
 
 
