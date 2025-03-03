@@ -36,44 +36,49 @@ fetch(`http://localhost:400/users/${sessionUserId}`)
         console.log(data)
         const user = data;
         const notifies = JSON.parse(user.notifications)
-        console.log(notifies)
-        document.querySelector(".notif_length").textContent=notifies.length
-        notifies.forEach(notify => {
-            let petname;
-            let requesterName;
-            fetch(`http://localhost:400/users/${notify.requestedUserId}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const requesterUser = data
-                    requesterName = requesterUser.username
-                    fetch(`http://localhost:400/pet/${notify.requestedPetId}`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(`HTTP error! Status: ${response.status}`);
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            const requestedPet = data
-                            petname =requestedPet.name
-                            console.log(petname)
-                            console.log(requesterName)
-                            document.querySelector("#notif_list ul").innerHTML+=`<li><a href="./viewPet.html?petId=${notify.requestedPetId}"><b>${requesterName}</b> requested your pet <b>${petname}</b></a></li>`
-                        }).catch(error => {
-                            console.error("Error fetching pets:", error);
+        const notifiesLength = notifies.length
+        document.querySelector(".notif_length").textContent = notifiesLength;
+        if (notifiesLength == 0) {
+            document.querySelector("#notif_list .info").classList.remove("d_none")
+        } else {
+            document.querySelector("#notif_list .info").classList.add("d_none")
+            notifies.forEach(notify => {
+                let petname;
+                let requesterName;
+                fetch(`http://localhost:400/users/${notify.requestedUserId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const requesterUser = data
+                        requesterName = requesterUser.username
+                        fetch(`http://localhost:400/pet/${notify.requestedPetId}`)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! Status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                const requestedPet = data
+                                petname = requestedPet.name
+                                console.log(petname)
+                                console.log(requesterName)
+                                document.querySelector("#notif_list ul").innerHTML += `<li><a href="./viewPet.html?petId=${notify.requestedPetId}"><b>${requesterName}</b> requested your pet <b>${petname}</b></a></li>`
+                            }).catch(error => {
+                                console.error("Error fetching pets:", error);
 
-                        });
-                }).catch(error => {
-                    console.error("Error fetching users:", error);
-                });
+                            });
+                    }).catch(error => {
+                        console.error("Error fetching users:", error);
+                    });
 
 
-        });
+            });
+        }
     }).catch(error => {
         console.error("Error fetching users:", error);
     });
@@ -101,7 +106,15 @@ document.querySelector("#notif_btn").addEventListener("click", () => {
     document.querySelector("header .notif_list").classList.toggle("active")
 })
 
+document.addEventListener("click", function (event) {
+    let notifBtn = document.querySelector("#notif_btn");
+    let targetElement = event.target;
 
+    // Check if the clicked element is NOT the notif_btn
+    if (notifBtn && !notifBtn.contains(targetElement)) {
+        document.querySelector("header .notif_list").classList.remove("active");
+    }
+});
 
 // const createOdometer =(el, value)=>{
 //     const odometer = new Odometer({
