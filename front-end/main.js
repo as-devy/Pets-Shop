@@ -19,15 +19,33 @@ if (user) {
     document.querySelector("header .logout").classList.remove("d_none")
 }
 
-document.querySelector("header .logout").addEventListener("click", ()=>{
+document.querySelector("header .logout").addEventListener("click", () => {
     document.cookie = "UserId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.href = "./login.html"
 })
 
 
-document.querySelector("#notif_btn").addEventListener("click", ()=>{
+// const parent = document.querySelector("header .notif_list");
+
+// let totalHeight = 0;
+// const children = Array.from(parent.children);
+
+// children.forEach(child => {
+//     const childStyles = window.getComputedStyle(child);
+//     const height = child.offsetHeight+12;
+//     const marginTop = parseFloat(childStyles.marginTop);
+//     const marginBottom = parseFloat(childStyles.marginBottom);
+
+//     totalHeight += height + marginTop + marginBottom;
+// });
+
+// parent.style.height = `${totalHeight}px`;
+
+document.querySelector("#notif_btn").addEventListener("click", () => {
     document.querySelector("header .notif_list").classList.toggle("active")
 })
+
+
 
 // const createOdometer =(el, value)=>{
 //     const odometer = new Odometer({

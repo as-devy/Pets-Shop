@@ -139,17 +139,19 @@ header .notif_list {
     position: absolute;
     left: -110px;
     top: 45px;
-    bottom: 7px;
+    /* bottom: 7px; */
     background-color: #f5f4f4;
-    min-height: 65px;
-    padding: 10px 15px;
-    list-style: none;
+    /* min-height: 100px; */
+    padding: 15px;
     font-size: 15px;
-    text-align: center;
     border-radius: 0.7rem;
     opacity: 0;
     visibility: hidden;
     transition: 0.3s;
+}
+
+header .notif_list ul{
+    list-style: none;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
