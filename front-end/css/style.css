@@ -41,6 +41,8 @@ header .container {
     justify-content: space-between;
 }
 
+
+
 .logo img {
     width: 80px;
     height: 80px;
@@ -57,26 +59,26 @@ header .container {
     margin-left: -5px;
 }
 
-header .container ul {
+header .container .nav {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     list-style: none;
 }
 
-header .container ul a {
+header .container .nav a {
     color: #000;
     transition: 0.3s;
     padding: 6px 12px;
 }
 
-header .container ul a.active {
+header .container .nav a.active {
     background-color: var(--primary_color);
     color: #fff;
     border-radius: 0.5rem;
 }
 
-header .container ul a:hover {
+header .container .nav a:hover {
     background-color: var(--primary_color);
     color: #fff;
     border-radius: 0.5rem;
@@ -86,6 +88,7 @@ header .container .auth {
     display: flex;
     align-items: center;
     gap: 1rem;
+    position: relative;
 }
 
 header .container .auth a {
@@ -108,14 +111,75 @@ header .container .auth .logout {
     gap: 0.3rem;
 }
 
+header .notif {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background-color: #00aea5;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    position: relative;
+    font-size: 18px;
+}
 
-header .container .auth .logout{
+header .notif .notif_length {
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ff3a3a;
+    font-size: 12px;
+
+}
+
+header .notif_list {
+    position: absolute;
+    left: -110px;
+    top: 45px;
+    bottom: 7px;
+    background-color: #f5f4f4;
+    min-height: 65px;
+    padding: 10px 15px;
+    list-style: none;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 0.7rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+header .notif_list.active {
+    opacity: 1;
+    visibility: visible;
+
+}
+
+header .notif_list li {
+    padding: 8px;
+    background: #eedfcf;
+    border-radius: 0.3rem;
+    border-left: 4px solid var(--primary_color);
+
+}
+
+header .notif:hover {
+    background-color: #018a83;
+}
+
+header .container .auth .logout {
     border: 2px solid #ff3a3a;
 }
 
 header .container .auth .signup i,
 header .container .auth .post_pet i,
-header .container .auth .logout i{
+header .container .auth .logout i {
     width: 23px;
     height: 23px;
     border-radius: 50%;
@@ -128,7 +192,7 @@ header .container .auth .logout i{
     border: 1px solid #fff;
 }
 
-header .container .auth .logout i{
+header .container .auth .logout i {
     background-color: #ff3a3a;
     font-size: 11px;
 }
@@ -139,7 +203,7 @@ header .container .auth .post_pet:hover {
     color: #fff;
 }
 
-header .container .auth .logout:hover{
+header .container .auth .logout:hover {
     background-color: #ff3a3a;
     color: #fff;
 }
@@ -154,7 +218,7 @@ header .container .auth .register {
     display: none !important;
 }
 
-.msg_defined{
+.msg_defined {
     color: #494949;
     font-size: 1.1rem;
     background: #ff82828a;

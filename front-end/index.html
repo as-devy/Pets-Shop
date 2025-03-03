@@ -25,7 +25,7 @@
                     <h3>Paws Safe</h3>
                 </a>
             </div>
-            <ul>
+            <ul class="nav">
                 <li><a class="active" href="./index.html">Home</a></li>
                 <li><a href="./foster.html">Foster</a></li>
                 <li><a href="./rehoming.html">ReHoming</a></li>
@@ -36,10 +36,19 @@
                     <a href="./login.html" class="login">Login</a>
                     <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
                 </div>
+                <div style="display: flex; align-items: center; gap:1rem">
+                    <button class="notif" id="notif_btn"><i class="fa-solid fa-bell"></i>
+                        <span class="notif_length">3</span>
+                    </button>
 
-                <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
-                <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
-                </a>
+                    <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
+                    <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                </div>
+                <ul class="notif_list">
+                    <li><a href="#"><b>john</b> requested your pet <b>doggy</b></a></li>
+                    <li><a href="#"><b>john</b> requested your pet <b>doggy</b></a></li>
+                </ul>
             </div>
         </div>
     </header>
