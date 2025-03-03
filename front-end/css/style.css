@@ -121,6 +121,11 @@ header .notif {
     margin-top: 0;
     position: relative;
     font-size: 18px;
+    color:#fff;
+    align-items: center;
+    outline: none;
+    border:none;
+    cursor: pointer;
 }
 
 header .notif .notif_length {
@@ -168,6 +173,7 @@ header .notif_list li {
     background: #eedfcf;
     border-radius: 0.3rem;
     border-left: 4px solid var(--primary_color);
+    
 
 }
 

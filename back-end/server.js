@@ -222,6 +222,44 @@ app.post("/users/addrequestedPet/:id", (request, response) => {
     });
 })
 
+
+app.post("/users/addNotification/:id", (request, response) => {
+    const userId = request.params.id;
+    const notify = request.body;
+
+    const sql = `SELECT notifications FROM users WHERE id = ?`;
+
+    db.query(sql, [userId], (err, result) => {
+        if (err) {
+            console.error("Error fetching notify:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+
+        if (result.length === 0) {
+            return response.status(404).json({ error: "User not found" });
+        }
+
+        let notifies= JSON.parse(result[0].notifications || "[]");
+        // let reqeusts = [{q: a, q: a, q: a}, {q: a, q: a, q: a}]
+
+        notifies.push(notify);
+        // reqeusts.push({q: a, q: a, q: a})
+        // reqeusts = [{q: a, q: a, q: a}, {q: a, q: a, q: a}, {q: a, q: a, q: a}] 
+
+        const updateSql = `UPDATE users SET notifications = ? WHERE id = ?`;
+        db.query(updateSql, [JSON.stringify(notifies), userId], (err, updateResult) => {
+            if (err) {
+                console.error("Error updating notifies:", err);
+                return response.status(500).json({ error: "Database error" });
+            }
+            response.status(200).json({ message: " notify added successfully", updatedNotifications: notifies });
+        });
+    });
+})
+
+
 app.listen(400, () => {
     console.log("server is listening")
 })
+
+

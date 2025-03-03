@@ -31,10 +31,22 @@
                     <a href="./login.html" class="login">Login</a>
                     <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
                 </div>
+                <div style="display: flex; align-items: center; gap:1rem">
+                    <button class="notif d_none" id="notif_btn"><i class="fa-solid fa-bell"></i>
+                        <span class="notif_length"></span>
+                    </button>
 
-                <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
-                <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
-                </a>
+                    <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
+                    <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                </div>
+                <div class="notif_list" id="notif_list" >
+                    <h3 style="margin-bottom: 10px;">Notifications</h3>
+                    <ul>
+                     
+                    </ul>
+                </div>
+
             </div>
         </div>
     </header>
@@ -93,13 +105,12 @@
                 <li>
                     <!-- <h4>Owner: </h4> -->
                     <div class="user">
-                        <p>This pet owenes to <span id="owenrName" style="color: #000;font-weight: bold;">Jhon
-                                Dell</span></p>
+                        <p>This pet owenes to <span id="owenrName" style="color: #000;font-weight: bold;">
+                            </span></p>
                         <div class="contact" style="display: flex; align-items: center;gap: 1rem;margin-top: 5px;">
-                            <div><span style="color: #454545;">Email: </span> <span
-                                    id="ownerEmail">jhon@gmail.com</span>
+                            <div><span style="color: #454545;">Email: </span> <span id="ownerEmail"></span>
                             </div>
-                            <div><span style="color: #454545;">Phone: </span> <span id="ownerPhone">+2012859678</span>
+                            <div><span style="color: #454545;">Phone: </span> <span id="ownerPhone"></span>
                             </div>
                         </div>
                     </div>
@@ -163,6 +174,7 @@
         </div>
 
     </main>
+
 
     <div id="form_popup">
         <div class="content">
@@ -259,7 +271,7 @@
     </div>
 
 
-
+    <script src="./main.js"></script>
     <script>
 
         function getCookie(name) {
@@ -505,7 +517,78 @@
                             }
                         })
                     }
+                    document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
+                        e.preventDefault()
 
+                        const petRequest = {
+                            authorID: userId,
+                            petsAllowed: document.getElementById("pets_allowed").value,
+                            household: document.getElementById("household").value,
+                            otherPets: document.getElementById("other_pets").value,
+                            petExperience: document.getElementById("pet_experience").value,
+                            timeCommitment: document.getElementById("time_commitment").value,
+                            financialPrepared: document.getElementById("financial_prepared").value,
+                            fosterDuration: document.getElementById("foster_duration")?.value || null
+
+                        }
+
+
+
+                        if (document.querySelector("#terms").checked) {
+                            console.log(petRequest)
+
+                            fetch(`http://localhost:400/addPetRequest/${petId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(petRequest)
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log('Success:', data)
+                                    if (data.updatedRequests) {
+                                        fetch(`http://localhost:400/users/addrequestedPet/${userId}`, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({ id: petId })
+                                        })
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                console.log('Success:', data)
+                                                if (data.updatedRequestedPets) {
+                                                    fetch(`http://localhost:400/users/addNotification/${pet.ownerId}`, {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                        body: JSON.stringify({ requestedUserId: userId, requestedPetId: petId })
+                                                    })
+                                                        .then(response => response.json())
+                                                        .then(data => {
+                                                            console.log('Success:', data)
+                                                            if (data.updatedNotifications) {
+                                                                window.location.href = `./viewPet.html?petId=${petId}`;
+                                                            }
+                                                        }
+                                                        )
+                                                        .catch(error => console.error('Error:', error));
+
+                                                }
+                                            }
+                                            )
+                                            .catch(error => console.error('Error:', error));
+
+                                    }
+                                }
+                                )
+                                .catch(error => console.error('Error:', error));
+                        } else {
+                            document.querySelector("#form_popup #error").classList.remove("d_none")
+                        }
+                    })
                 }).catch(error => {
                     console.error("Error fetching pets:", error);
                     const notFoundError = document.createElement("div")
@@ -538,62 +621,7 @@
                 form_popup.classList.remove("active")
             })
 
-            document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
-                e.preventDefault()
 
-                const petRequest = {
-                    authorID: userId,
-                    petsAllowed: document.getElementById("pets_allowed").value,
-                    household: document.getElementById("household").value,
-                    otherPets: document.getElementById("other_pets").value,
-                    petExperience: document.getElementById("pet_experience").value,
-                    timeCommitment: document.getElementById("time_commitment").value,
-                    financialPrepared: document.getElementById("financial_prepared").value,
-                    fosterDuration: document.getElementById("foster_duration")?.value || null
-
-                }
-
-
-
-                if (document.querySelector("#terms").checked) {
-                    console.log(petRequest)
-
-                    fetch(`http://localhost:400/addPetRequest/${petId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(petRequest)
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Success:', data)
-                            if (data.updatedRequests) {
-                                fetch(`http://localhost:400/users/addrequestedPet/${userId}`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({ id: petId })
-                                })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        console.log('Success:', data)
-                                        if (data.updatedRequestedPets) {
-                                            window.location.href = `./viewPet.html?petId=${petId}`;
-                                        }
-                                    }
-                                    )
-                                    .catch(error => console.error('Error:', error));
-                                // window.location.href = `./viewPet.html?petId=${petId}`;
-                            }
-                        }
-                        )
-                        .catch(error => console.error('Error:', error));
-                } else {
-                    document.querySelector("#form_popup #error").classList.remove("d_none")
-                }
-            })
         } else {
             const notFoundError = document.createElement("div")
             notFoundError.innerHTML = `
@@ -609,7 +637,7 @@
 
 
     </script>
-    <script src="./main.js"></script>
+   
 </body>
 
 </html>
