@@ -24,23 +24,6 @@ document.querySelector("header .logout").addEventListener("click", () => {
     window.location.href = "./login.html"
 })
 
-
-// const parent = document.querySelector("header .notif_list");
-
-// let totalHeight = 0;
-// const children = Array.from(parent.children);
-
-// children.forEach(child => {
-//     const childStyles = window.getComputedStyle(child);
-//     const height = child.offsetHeight+12;
-//     const marginTop = parseFloat(childStyles.marginTop);
-//     const marginBottom = parseFloat(childStyles.marginBottom);
-
-//     totalHeight += height + marginTop + marginBottom;
-// });
-
-// parent.style.height = `${totalHeight}px`;
-
 document.querySelector("#notif_btn").addEventListener("click", () => {
     document.querySelector("header .notif_list").classList.toggle("active")
 })
