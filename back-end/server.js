@@ -188,6 +188,21 @@ app.post("/addPetRequest/:id", (request, response) => {
     });
 })
 
+app.put("/updateRequest/:id" , (request, response) =>{
+    const petId = request.params.id;
+    const updatedPetRequest = request.body;
+
+    const updateSql = `UPDATE pet SET requests = ? WHERE id = ?`;
+    db.query(updateSql, [JSON.stringify(updatedPetRequest), petId], (err, updateResult) => {
+        if (err) {
+            console.error("Error updating requests:", err);
+            return response.status(500).json({ error: "Database error" });
+        }
+        response.status(200).json({ message: "Request added successfully", updatedRequests: updatedPetRequest });
+    });
+})
+
+
 app.post("/users/addrequestedPet/:id", (request, response) => {
     const userId = request.params.id;
     const requestedPetId = request.body.id;
@@ -221,6 +236,7 @@ app.post("/users/addrequestedPet/:id", (request, response) => {
         });
     });
 })
+
 
 
 app.post("/users/addNotification/:id", (request, response) => {

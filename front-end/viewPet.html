@@ -414,8 +414,8 @@
                                                 </div>    
                                                 ${pet.ownerId == userId ? `
                                                     <div class="control_request">
-                                                        <button>Approve</button>
-                                                        <button>Denied</button>
+                                                        <button id="approveBtn">Approve</button>
+                                                        <button id="deniedBtn">Denied</button>
                                                     </div>
                                                 `: ""}
                                             </div>
@@ -478,8 +478,8 @@
                                                     </div>    
                                                     ${pet.ownerId == userId ? `
                                                         <div class="control_request">
-                                                            <button>Approve</button>
-                                                            <button>Denied</button>
+                                                            <button id="approveBtn">Approve</button>
+                                                            <button id="deniedBtn">Denied</button>
                                                         </div>
                                                     `: ""}
                                                 </div>
@@ -528,7 +528,9 @@
                             petExperience: document.getElementById("pet_experience").value,
                             timeCommitment: document.getElementById("time_commitment").value,
                             financialPrepared: document.getElementById("financial_prepared").value,
-                            fosterDuration: document.getElementById("foster_duration")?.value || null
+                            fosterDuration: document.getElementById("foster_duration")?.value || null,
+                            approved:0,
+                            
 
                         }
 
@@ -588,7 +590,9 @@
                         } else {
                             document.querySelector("#form_popup #error").classList.remove("d_none")
                         }
-                    })
+                    }) 
+
+                    console.log(document.querySelector(".request ."))
                 }).catch(error => {
                     console.error("Error fetching pets:", error);
                     const notFoundError = document.createElement("div")
