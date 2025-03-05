@@ -188,17 +188,34 @@ app.post("/addPetRequest/:id", (request, response) => {
     });
 })
 
-app.put("/updateRequest/:id" , (request, response) =>{
+app.put("/update-pet-to-requested/:id", (req, res) => {
+    const petId = req.params.id;
+
+    const query = `UPDATE pets SET requested = 1 WHERE id = ?`;
+
+    db.query(query, [petId], (err, result) => {
+        if (err) {
+            console.error("Error updating pet:", err);
+            return res.status(500).json({ error: "Database error" });
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "No rows updated (maybe already 1 or invalid column)" });
+        }
+        res.json({ message: "Update successful", updatedRows: result.affectedRows });
+    });
+});
+
+app.put("/updateRequest/:id", (request, response) =>{
     const petId = request.params.id;
     const updatedPetRequest = request.body;
 
-    const updateSql = `UPDATE pet SET requests = ? WHERE id = ?`;
+    const updateSql = `UPDATE pets SET requests = ? WHERE id = ?`;
     db.query(updateSql, [JSON.stringify(updatedPetRequest), petId], (err, updateResult) => {
         if (err) {
             console.error("Error updating requests:", err);
             return response.status(500).json({ error: "Database error" });
         }
-        response.status(200).json({ message: "Request added successfully", updatedRequests: updatedPetRequest });
+        response.status(200).json({ message: "Request updated successfully", updatedRequests: updatedPetRequest });
     });
 })
 

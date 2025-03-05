@@ -244,7 +244,7 @@ body {
     justify-content: center;
 }
 
-#notFoundError a{
+#notFoundError a {
     background-color: var(--primary_color);
     padding: 8px 10px;
     color: #fff;
@@ -252,10 +252,11 @@ body {
     cursor: pointer;
 
 }
+
 .medical_history {
     display: flex;
-    flex-direction:column ;
-  
+    flex-direction: column;
+
 }
 
 
@@ -267,23 +268,50 @@ body {
     padding: 8px;
 }
 
-.disabled{
+.disabled {
     opacity: 0.5;
     cursor: no-drop !important;
 }
 
-.control_request button{
+.control_request button {
     border: none;
     cursor: pointer;
     padding: 8px 10px;
     border-radius: 0.3rem;
     color: #fff;
+    transition: .3s;
 }
 
-.control_request button:first-child{
+.control_request button:hover {
+    opacity: .7;
+}
+
+.control_request button:first-child {
     background-color: #00cb00;
 }
 
-.control_request button:last-child{
+.control_request button:last-child {
     background-color: #ff3737;
+}
+
+.request .approved h5 {
+    padding: 8px 10px;
+    background-color: #00c900;
+    color: #fff;
+    border-radius: .3rem;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.request .approved h5 i {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -145,7 +145,7 @@ header .notif_list {
     left: -110px;
     top: 45px;
     /* bottom: 7px; */
-    background-color: #f5f4f4;
+    background-color: #ffdcdc;
     /* min-height: 100px; */
     padding: 15px;
     font-size: 15px;
@@ -170,11 +170,11 @@ header .notif_list.active {
 
 header .notif_list li {
     padding: 8px;
-    background: #eedfcf;
+    background: #fff8f1;
     border-radius: 0.3rem;
     border-left: 4px solid var(--primary_color);
-    
-
+    border-top: 2px solid var(--primary_color);
+    border-bottom: 2px solid var(--primary_color);
 }
 
 header .notif:hover {

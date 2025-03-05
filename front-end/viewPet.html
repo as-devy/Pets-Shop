@@ -40,10 +40,11 @@
                     <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
                     </a>
                 </div>
-                <div class="notif_list" id="notif_list" >
+                <div class="notif_list" id="notif_list">
                     <h3 style="margin-bottom: 10px;">Notifications</h3>
+                    <p class="info d_none" style="color: #505050;padding: 8px;">You Don't Have Notifications.</p>
                     <ul>
-                     
+
                     </ul>
                 </div>
 
@@ -323,6 +324,9 @@
 
                     document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
 
+                    
+
+                    
                     fetch(`http://localhost:400/users/${userId}`)
                         .then(response => {
                             if (!response.ok) {
@@ -385,11 +389,68 @@
                             console.error("Error fetching users:", error);
                         });
 
+
+                    const approvePetFunc = () => {
+                        const approvedBtns = document.querySelectorAll(".request #approveBtn");
+                        approvedBtns.forEach(btn => {
+                            btn.addEventListener("click", () => {
+                                const requestAutherId = btn.getAttribute("data-id")
+
+                                const updatedPetRequests = petRequests.reverse().map(item =>
+                                    item.authorID === requestAutherId ? { ...item, approved: 1 } : item
+                                );
+
+                                fetch(`http://localhost:400/updateRequest/${petId}`, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(updatedPetRequests)
+                                }).then(response => response.json())
+                                    .then(data => {
+                                        console.log('Success:', data)
+                                        if (data.updatedRequests) {
+                                            fetch(`http://localhost:400/update-pet-to-requested/${petId}`, {
+                                                method: "PUT",
+                                                headers: {
+                                                    "Content-Type": "application/json"
+                                                }
+                                            })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    if (data.error) {
+                                                        console.error("Error:", data.error);
+                                                    } else {
+                                                        console.log("Success:", data);
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error("Fetch error:", error);
+                                                });
+
+                                            console.log("Approved")
+
+                                            document.querySelectorAll(".request .control_request").forEach(ele => {
+                                                ele.remove()
+                                            })
+
+                                            const approvedDiv = document.createElement("div")
+                                            approvedDiv.classList.add("approved")
+                                            approvedDiv.innerHTML = `<h5><i class="fa-solid fa-check"></i> Approved</h5>`
+                                            if (!document.querySelector(`.request[data-id="${requestAutherId}"] .request_head .approved`)) {
+                                                document.querySelector(`.request[data-id="${requestAutherId}"] .request_head`).appendChild(approvedDiv)
+                                            }
+                                        }
+                                    }).catch(error => console.error('Error:', error));
+                            })
+                        })
+                    }
+
                     // fetching requests 
                     let petRequests = JSON.parse(pet.requests)
                     console.log(petRequests)
                     if (userId == pet.ownerId) {
-                        petRequests.reverse().map(request => {
+                        petRequests.map(request => {
                             fetch(`http://localhost:400/users/${request.authorID}`)
                                 .then(response => {
                                     if (!response.ok) {
@@ -402,8 +463,8 @@
                                     const author = data
                                     const requestEle = document.createElement("div")
                                     requestEle.innerHTML = `
-                                        <div class="request">
-                                            <div style="display: flex ; align-items: center; justify-content: space-between;">
+                                        <div class="request" data-id="${request.authorID}">
+                                            <div class="request_head" style="display: flex ; align-items: center; justify-content: space-between;">
                                                 <div class="user" style="flex-direction: column;align-items: flex-start;">
                                                     <h3 id="requester">${author.username}</h3>
                                                     <div class="contact" style="margin-top: -10px;">
@@ -412,12 +473,14 @@
                                                         <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">${author.phone}</span></p>
                                                     </div>
                                                 </div>    
-                                                ${pet.ownerId == userId ? `
+                                                ${pet.ownerId == userId && !pet.requested ? `
                                                     <div class="control_request">
-                                                        <button id="approveBtn">Approve</button>
-                                                        <button id="deniedBtn">Denied</button>
+                                                        <button id="approveBtn" data-id="${request.authorID}">Approve</button>
+                                                        <button id="deniedBtn" data-id="${request.authorID}">Denied</button>
                                                     </div>
                                                 `: ""}
+
+                                                ${request.approved ? `<div class="approved"><h5><i class="fa-solid fa-check"></i> Approved</h5></div>` : ""}
                                             </div>
 
                                             <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
@@ -447,9 +510,13 @@
                                         </div>  
                                     `
                                     document.querySelector(".requests").append(requestEle)
+
+                                    approvePetFunc()
                                 }).catch(error => {
                                     console.error("Error fetching requests:", error);
                                 });
+
+
                         })
                     } else {
                         petRequests.map(request => {
@@ -466,8 +533,8 @@
                                         const author = data
                                         const requestEle = document.createElement("div")
                                         requestEle.innerHTML = `
-                                            <div class="request">
-                                                <div style="display: flex ; align-items: center; justify-content: space-between;">
+                                            <div class="request" data-id="${request.authorID}">
+                                                <div class="request_head" style="display: flex ; align-items: center; justify-content: space-between;">
                                                     <div class="user" style="flex-direction: column;align-items: flex-start;">
                                                         <h3 id="requester">${author.username}</h3>
                                                         <div class="contact" style="margin-top: -10px;">
@@ -476,12 +543,14 @@
                                                             <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">${author.phone}</span></p>
                                                         </div>
                                                     </div>    
-                                                    ${pet.ownerId == userId ? `
-                                                        <div class="control_request">
-                                                            <button id="approveBtn">Approve</button>
-                                                            <button id="deniedBtn">Denied</button>
-                                                        </div>
-                                                    `: ""}
+                                                    ${pet.ownerId == userId && !pet.requested ? `
+                                                    <div class="control_request">
+                                                        <button id="approveBtn" data-id="${request.authorID}">Approve</button>
+                                                        <button id="deniedBtn" data-id="${request.authorID}">Denied</button>
+                                                    </div>
+                                                `: ""}
+
+                                                ${request.approved ? `<div class="approved"><h5><i class="fa-solid fa-check"></i> Approved</h5></div>` : ""}
                                                 </div>
 
                                                 <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
@@ -511,11 +580,15 @@
                                             </div>  
                                         `
                                         document.querySelector(".requests").append(requestEle)
+
+                                        approvePetFunc()
                                     }).catch(error => {
                                         console.error("Error fetching requests:", error);
                                     });
                             }
                         })
+
+
                     }
                     document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
                         e.preventDefault()
@@ -529,9 +602,7 @@
                             timeCommitment: document.getElementById("time_commitment").value,
                             financialPrepared: document.getElementById("financial_prepared").value,
                             fosterDuration: document.getElementById("foster_duration")?.value || null,
-                            approved:0,
-                            
-
+                            approved: 0,
                         }
 
 
@@ -545,8 +616,7 @@
                                     'Content-Type': 'application/json'
                                 },
                                 body: JSON.stringify(petRequest)
-                            })
-                                .then(response => response.json())
+                            }).then(response => response.json())
                                 .then(data => {
                                     console.log('Success:', data)
                                     if (data.updatedRequests) {
@@ -585,14 +655,13 @@
 
                                     }
                                 }
-                                )
-                                .catch(error => console.error('Error:', error));
+                                ).catch(error => console.error('Error:', error));
                         } else {
                             document.querySelector("#form_popup #error").classList.remove("d_none")
                         }
-                    }) 
+                    })
 
-                    console.log(document.querySelector(".request ."))
+
                 }).catch(error => {
                     console.error("Error fetching pets:", error);
                     const notFoundError = document.createElement("div")
@@ -641,7 +710,7 @@
 
 
     </script>
-   
+
 </body>
 
 </html>
