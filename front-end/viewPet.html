@@ -60,8 +60,13 @@
             </div>
             <ul class="info">
                 <li>
-                    <h1 id="name"></h1>
+                    <div class="approve_pet" >
+                        <h1 id="name"></h1>
+                        <button id="approvalButton" style="display: none; font-weight: bold;">Pet Approved</button>
+                        
+                    </div>
                 </li>
+                
                 <li>
                     <h4 id="age"></h4>
                 </li>
@@ -324,7 +329,7 @@
 
                     document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
 
-                    
+                  
 
                     
                     fetch(`http://localhost:400/users/${userId}`)

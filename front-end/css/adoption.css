@@ -161,6 +161,20 @@
 
 }
 
+ .pet .img  .requests {
+    position: absolute;
+    text-transform: uppercase;
+    color: #2b2a2a;
+    background-color: #eff5f5;
+    top: 0;
+    right: 0;
+    padding: 5px 8px;
+    border-bottom-right-radius: 0.5rem;
+    font-weight: bolder;
+} 
+
+
+
 .petlist .list .pet .text {
     padding: 20px 15px;
     gap: 0.5rem;

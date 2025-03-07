@@ -315,3 +315,14 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+
+/* .petinfo .info li .approve_pet{
+  
+} */
+.petInfo .info .approve_pet {
+    display: flex;
+   align-items: center; 
+   gap: 18rem;
+
+}

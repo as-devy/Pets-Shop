@@ -169,6 +169,8 @@
                             <div class="img">
                                 <img src="${pet.img}" alt="">
                                 <span class="category">${pet.foster ? "Foster" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
+                            <p class="requests">${pet.requested ? "Requested" : `${JSON.parse(pet.requests).length} Requests`}</p>
+                                 
                             </div>
                             <div class="text">
                                 <h2 class="name">${pet.name}</h2>
@@ -176,7 +178,7 @@
                                 <p class="location"><i class="fa-solid fa-location-dot"></i>
                                     <span> ${pet.country} , ${pet.city}</span>
                                 </p>
-                                ${pet.requested ? "" : ""}
+                         
                                 <p class="desc">${pet.description}</p>
                             </div>
                             <a href="./viewPet.html?petId=${pet.id}">more info </a>
@@ -199,6 +201,8 @@
                                     <div class="img">
                                         <img src="${pet.img}" alt="">
                                         <span class="category">${pet.foster ? "Foster" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
+                                            <p class="requests">${pet.requested ? "Requested" : `${JSON.parse(pet.requests).length} Requests`}</p>
+
                                     </div>
                                     <div class="text">
                                         <h2 class="name">${pet.name}</h2>
@@ -206,6 +210,8 @@
                                         <p class="location"><i class="fa-solid fa-location-dot"></i>
                                             <span>${pet.city}</span>
                                         </p>
+                                      
+                                    
                                         <p class="desc">${pet.description}</p>
                                     </div>
                                     <a href="./viewPet.html?petId=${pet.id}">more info</a>
@@ -222,6 +228,7 @@
                                         <div class="img">
                                             <img src="${pet.img}" alt="">
                                             <span class="category">${pet.foster ? "Foster" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
+                                            <p class="requests">${pet.requested ? "Requested" : `${JSON.parse(pet.requests).length} Requests`}</p>
                                         </div>
                                         <div class="text">
                                             <h2 class="name">${pet.name}</h2>
@@ -229,6 +236,8 @@
                                             <p class="location"><i class="fa-solid fa-location-dot"></i>
                                                 <span>${pet.city}</span>
                                             </p>
+                                    
+                                            
                                             <p class="desc">${pet.description}</p>
                                         </div>
                                         <a href="./viewPet.html?petId=${pet.id}">more info </a>
@@ -245,6 +254,9 @@
                                     <div class="img">
                                         <img src="${pet.img}" alt="">
                                         <span class="category">${pet.foster ? "Foster" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
+                                            <p class="requests">
+                            ${pet.requested ? "Requested" : `${JSON.parse(pet.requests).length} Requests`}
+                            </p>
                                     </div>
                                     <div class="text">
                                         <h2 class="name">${pet.name}</h2>
@@ -252,6 +264,8 @@
                                         <p class="location"><i class="fa-solid fa-location-dot"></i>
                                             <span>${pet.city}</span>
                                         </p>
+                                
+                                        
                                         <p class="desc">${pet.description}</p>
                                     </div>
                                     <a href="./viewPet.html?petId=${pet.id}">more info </a>
