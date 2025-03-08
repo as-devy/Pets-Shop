@@ -62,7 +62,7 @@
                 <li>
                     <div class="approve_pet" >
                         <h1 id="name"></h1>
-                        <button id="approvalButton" style="display: none; font-weight: bold;">Pet Approved</button>
+                        <span id="approvalPet" class="d_none">Pet Requested</span>
                         
                     </div>
                 </li>
@@ -328,10 +328,15 @@
                     })
 
                     document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
-
+                    
+                    if(pet.requested){
+                        document.querySelector("#approvalPet").classList.remove("d_none")
+                        document.querySelector("#petButton").setAttribute("disabled", true)
+                        document.querySelector("#petButton").classList.add("disabled")
+                    }
                   
 
-                    
+                
                     fetch(`http://localhost:400/users/${userId}`)
                         .then(response => {
                             if (!response.ok) {

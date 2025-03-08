@@ -168,6 +168,16 @@ body {
     align-items: center;
 }
 
+.petInfo .info .approve_pet span {
+    background-color: var(--primary_color);
+    border: none;
+    padding: 10px 25px;
+    color: #fff;
+    border-radius: 0.7rem;
+    font-weight: bold;
+   
+   
+}
 .petInfo .info button {
     background-color: var(--primary_color);
     border: none;
@@ -323,6 +333,7 @@ body {
 .petInfo .info .approve_pet {
     display: flex;
    align-items: center; 
-   gap: 18rem;
+   justify-content: space-between;
+   
 
 }

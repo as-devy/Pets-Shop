@@ -169,10 +169,11 @@
                             <div class="img">
                                 <img src="${pet.img}" alt="">
                                 <span class="category">${pet.foster ? "Foster" : ""} ${pet.rehoming ? "ReHoming" : ""}</span>
-                            <p class="requests">${pet.requested ? "Requested" : `${JSON.parse(pet.requests).length} Requests`}</p>
+                            
                                  
                             </div>
                             <div class="text">
+                                <p class="requests">${pet.requested ? "Requested" : `${JSON.parse(pet.requests).length} Requests`}</p>
                                 <h2 class="name">${pet.name}</h2>
                                 <span class="age">${pet.age} Years Old</span>
                                 <p class="location"><i class="fa-solid fa-location-dot"></i>
