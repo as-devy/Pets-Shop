@@ -43,38 +43,73 @@ fetch(`http://localhost:400/users/${sessionUserId}`)
         } else {
             document.querySelector("#notif_list .info").classList.add("d_none")
             notifies.forEach(notify => {
-                let petname;
-                let requesterName;
-                fetch(`http://localhost:400/users/${notify.requestedUserId}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        const requesterUser = data
-                        requesterName = requesterUser.username
-                        fetch(`http://localhost:400/pet/${notify.requestedPetId}`)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(`HTTP error! Status: ${response.status}`);
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                const requestedPet = data
-                                petname = requestedPet.name
-                                console.log(petname)
-                                console.log(requesterName)
-                                document.querySelector("#notif_list ul").innerHTML += `<li><a href="./viewPet.html?petId=${notify.requestedPetId}"><b>${requesterName}</b> requested your pet <b>${petname}</b></a></li>`
-                            }).catch(error => {
-                                console.error("Error fetching pets:", error);
 
-                            });
-                    }).catch(error => {
-                        console.error("Error fetching users:", error);
-                    });
+                if (notify.type == "approval") {
+                    let petname;
+                    let approvedUserName;
+                    fetch(`http://localhost:400/users/${notify.approvedUserId}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            const requesterUser = data
+                            approvedUserName = requesterUser.username
+                            fetch(`http://localhost:400/pet/${notify.approvedPetId}`)
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! Status: ${response.status}`);
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    const requestedPet = data
+                                    petname = requestedPet.name
+                                    document.querySelector("#notif_list ul").innerHTML += `<li><a href="./viewPet.html?petId=${notify.approvedPetId}"><b>${approvedUserName}</b> Approved your request on <b>${petname}</b></a></li>`
+                                }).catch(error => {
+                                    console.error("Error fetching pets:", error);
+
+                                });
+                        }).catch(error => {
+                            console.error("Error fetching users:", error);
+                        });
+                } else {
+                    let petname;
+                    let requesterName;
+                    fetch(`http://localhost:400/users/${notify.requestedUserId}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            const requesterUser = data
+                            requesterName = requesterUser.username
+                            fetch(`http://localhost:400/pet/${notify.requestedPetId}`)
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! Status: ${response.status}`);
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    const requestedPet = data
+                                    petname = requestedPet.name
+                                    console.log(petname)
+                                    console.log(requesterName)
+                                    document.querySelector("#notif_list ul").innerHTML += `<li><a href="./viewPet.html?petId=${notify.requestedPetId}"><b>${requesterName}</b> requested your pet <b>${petname}</b></a></li>`
+                                }).catch(error => {
+                                    console.error("Error fetching pets:", error);
+
+                                });
+                        }).catch(error => {
+                            console.error("Error fetching users:", error);
+                        });
+                }
+
 
 
             });

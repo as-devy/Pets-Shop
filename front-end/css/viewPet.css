@@ -168,16 +168,15 @@ body {
     align-items: center;
 }
 
-.petInfo .info .approve_pet span {
-    background-color: var(--primary_color);
+.petInfo #approvalPet {
+    background-color: #00c900;
     border: none;
     padding: 10px 25px;
     color: #fff;
     border-radius: 0.7rem;
     font-weight: bold;
-   
-   
 }
+
 .petInfo .info button {
     background-color: var(--primary_color);
     border: none;

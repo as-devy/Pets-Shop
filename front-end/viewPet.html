@@ -60,13 +60,12 @@
             </div>
             <ul class="info">
                 <li>
-                    <div class="approve_pet" >
+                    <div class="approve_pet">
                         <h1 id="name"></h1>
-                        <span id="approvalPet" class="d_none">Pet Requested</span>
-                        
+
                     </div>
                 </li>
-                
+
                 <li>
                     <h4 id="age"></h4>
                 </li>
@@ -132,7 +131,9 @@
                 <!-- FOR THE OWNER -->
 
                 <li style="display: flex;align-items: center;gap: 1rem;" id="userIdentify" class="d_none">
-                    <p>You have <span style="font-weight: bold;" id="requestsCount">0</span> requests on this pet</p>
+                    <p id="requests_count">You have <span style="font-weight: bold;" id="requestsCount">0</span>
+                        requests on this pet</p>
+                    <span id="approvalPet" class="d_none">Pet Requested</span>
                 </li>
 
             </ul>
@@ -328,15 +329,12 @@
                     })
 
                     document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
-                    
-                    if(pet.requested){
-                        document.querySelector("#approvalPet").classList.remove("d_none")
-                        document.querySelector("#petButton").setAttribute("disabled", true)
-                        document.querySelector("#petButton").classList.add("disabled")
-                    }
-                  
 
-                
+                    if (pet.requested) {
+                        document.querySelector("#approvalPet").classList.remove("d_none")
+                        document.querySelector("#requests_count").classList.add("d_none")
+                    }
+
                     fetch(`http://localhost:400/users/${userId}`)
                         .then(response => {
                             if (!response.ok) {
@@ -400,7 +398,7 @@
                         });
 
 
-                    const approvePetFunc = () => {
+                    const approvePetFunc = (requesterAutherId) => {
                         const approvedBtns = document.querySelectorAll(".request #approveBtn");
                         approvedBtns.forEach(btn => {
                             btn.addEventListener("click", () => {
@@ -440,9 +438,30 @@
 
                                             console.log("Approved")
 
+                                            fetch(`http://localhost:400/users/addNotification/${requesterAutherId}`, {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({ type: "approval", approvedUserId: pet.ownerId, approvedPetId: petId })
+                                            })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    console.log('Success:', data)
+                                                    if (data.updatedNotifications) {
+                                                        // window.location.href = `./viewPet.html?petId=${petId}`;
+                                                        console.log("Send Notifi")
+                                                    }
+                                                }
+                                                )
+                                                .catch(error => console.error('Error:', error));
+
                                             document.querySelectorAll(".request .control_request").forEach(ele => {
                                                 ele.remove()
                                             })
+
+                                            document.querySelector("#approvalPet").classList.remove("d_none")
+                                            document.querySelector("#requests_count").classList.add("d_none")
 
                                             const approvedDiv = document.createElement("div")
                                             approvedDiv.classList.add("approved")
@@ -521,7 +540,7 @@
                                     `
                                     document.querySelector(".requests").append(requestEle)
 
-                                    approvePetFunc()
+                                    approvePetFunc(request.authorID)
                                 }).catch(error => {
                                     console.error("Error fetching requests:", error);
                                 });
@@ -591,7 +610,7 @@
                                         `
                                         document.querySelector(".requests").append(requestEle)
 
-                                        approvePetFunc()
+                                        approvePetFunc(request.authorID)
                                     }).catch(error => {
                                         console.error("Error fetching requests:", error);
                                     });
