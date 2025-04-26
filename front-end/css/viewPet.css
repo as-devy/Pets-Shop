@@ -2,7 +2,9 @@ body {
     position: relative;
 }
 
-#form_popup {
+#form_popup,
+#contact_popup,
+.sureToDeletePopUp{
     position: fixed;
     top: 0;
     left: 0;
@@ -16,31 +18,42 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: 0.3s;
-
 }
 
-#form_popup.active {
+#form_popup.active,
+#contact_popup.active,
+.sureToDeletePopUp.active {
     opacity: 1;
     visibility: visible;
 }
 
-#form_popup .content {
+#form_popup .content,
+#contact_popup .content,
+.sureToDeletePopUp .content {
     background: #fff;
-    padding: 20px;
+    padding: 10px 20px;
     border-radius: 0.7rem;
     text-align: center;
-    width: 500px;
+    width: 520px;
     position: relative;
-
 }
 
-#form_popup .content #close {
+#getVerified_popup .content {
+    width: 630px;
+}
+
+.sureToDeletePopUp .content{
+    padding: 10px;
+}
+
+#form_popup .content #close,
+#contact_popup .content #close{
     position: absolute;
     right: 10px;
     top: 10px;
     background: #e86565;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -50,7 +63,8 @@ body {
     font-size: 20px;
 }
 
-#form_popup .content form {
+#form_popup .content form,
+#contact_popup .content form {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -58,7 +72,8 @@ body {
     /* align-items: center; */
 }
 
-#form_popup .content form .input {
+#form_popup .content form .input,
+#contact_popup .content form .input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -68,7 +83,8 @@ body {
 
 
 #form_popup .content form .input select,
-#form_popup .content form .input input {
+#form_popup .content form .input input,
+#contact_popup .content form .input input {
     width: 100%;
     padding: 10px;
     border-radius: 6px;
@@ -78,35 +94,50 @@ body {
     transition: border-color 0.2s;
 }
 
+#contact_popup .content form .input textarea {
+    width: 100%;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #8f8f8f;
+    outline: none;
+    font-family: "Poppins", serif;
+}
+
+#contact_popup .content form .input input {
+    padding: 5px 8px;
+}
+
+#contact_popup .content form .input input.disabled {
+    background: #cdcdcd;
+    cursor: no-drop;
+    color: #000;
+}
+
 #form_popup .content form .input_terms {
     display: flex;
-
     align-items: center;
     width: 100%;
     gap: 0.3rem;
 }
 
-
-
-
-#form_popup .content form button {
+#form_popup .content form button,
+#contact_popup .content form button {
     margin-top: 10px;
     padding: 8px;
     border: none;
     background: #02b6ae;
     border-radius: 1rem;
     color: #fff;
-    font-weight: bold;
+    /* font-weight: bold; */
     cursor: pointer;
     width: 100%;
+    font-family: "Poppins", serif;
 }
 
 .petInfo {
     display: flex;
     width: 85%;
-
     gap: 2rem;
-
     margin: 0 auto;
     padding-top: 150px;
 
@@ -140,8 +171,6 @@ body {
 .petInfo .info li:not(:last-child) {
     border-bottom: 2px solid #21d3c482;
     padding-bottom: 9px;
-
-
 }
 
 .petInfo .info h1 {
@@ -175,6 +204,7 @@ body {
     color: #fff;
     border-radius: 0.7rem;
     font-weight: bold;
+    width: fit-content;
 }
 
 .petInfo .info button {
@@ -187,7 +217,39 @@ body {
     cursor: pointer;
 }
 
+.petInfo .info #owenrName{
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+}
 
+.petInfo .info #owenrName #verify_icon{
+    position: relative;
+}
+
+.petInfo .info #owenrName #verify_icon::before{
+    content: 'Trusted User';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    width: 75px;
+    background: #000000b5;
+    color: #fff;
+    padding: 1px 6px;
+    padding-left: 8px;
+    border-radius: .7rem;
+    transition: .5s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.petInfo .info #owenrName #verify_icon:hover::before{
+    opacity: 1;
+    visibility: visible;
+}
 
 .petlist .list .pet .img .category,
 .petInfo .img .category {
@@ -219,6 +281,11 @@ body {
     padding: 10px;
     border-radius: 0.7rem;
     margin-bottom: 10px;
+    transition: 0.5s;
+}
+
+.requests .request.light {
+    background: #dddddd;
 }
 
 .requests .request .requestCont p {
@@ -303,7 +370,8 @@ body {
     background-color: #ff3737;
 }
 
-.request .approved h5 {
+.request .approved h5,
+.request .denied h5 {
     padding: 8px 10px;
     background-color: #00c900;
     color: #fff;
@@ -312,9 +380,15 @@ body {
     display: flex;
     align-items: center;
     gap: 0.3rem;
+    color: #fff;
 }
 
-.request .approved h5 i {
+.request .denied h5 {
+    background-color: #ff3c3c;
+}
+
+.request .approved h5 i,
+.request .denied h5 i {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -325,14 +399,66 @@ body {
     justify-content: center;
 }
 
+.request .denied h5 i {
+    color: #ff4f4f;
+    font-size: 12px;
+}
 
-/* .petinfo .info li .approve_pet{
-  
-} */
 .petInfo .info .approve_pet {
     display: flex;
-   align-items: center; 
-   justify-content: space-between;
-   
+    align-items: center;
+    justify-content: space-between;
+}
 
+.delete_btn{
+    background-color: #ff4343;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    transition: .3s;
+}
+
+.delete_btn:hover{
+    background-color: #ff1c1c;
+}
+
+.delete_btn i{
+    font-size: 13px;
+}
+
+#send_msg_to_owner {
+    transition: 0.3s;
+}
+
+
+
+.sureToDeletePopUp .action_btns{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.sureToDeletePopUp .action_btns a{
+    color: #fff;
+    padding: 3px 25px;
+    border-radius: .7rem;
+    transition: .3s;
+}
+
+.sureToDeletePopUp .action_btns a:hover{
+    opacity: .8;
+}
+
+.sureToDeletePopUp .action_btns .main_delete{
+    background-color: #ff3b3b;
+}
+
+.sureToDeletePopUp .action_btns #cancel{
+    background-color: gray;
 }

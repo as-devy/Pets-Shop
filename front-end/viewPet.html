@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./imgs/favicon.ico">
     <link rel="stylesheet" href="./css/viewPet.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/icons.css">
@@ -11,7 +12,9 @@
 </head>
 
 <body>
-
+    <div class="preloader">
+        <img src="./imgs/preloader.gif" alt="">
+    </div>
     <header>
         <div class="container">
             <div class="lg" style="width: 268px;">
@@ -21,27 +24,46 @@
                 </a>
             </div>
             <ul class="nav">
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./foster.html" id="fosterLink">Foster</a></li>
-                <li><a href="./rehoming.html" id="rehomeLink">ReHoming</a></li>
-                <li><a href="./contactus.html">Contact Us</a></li>
+                <li><a href="./index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="./foster.html" id="fosterLink"><i class="fa-solid fa-paw"></i> Foster</a></li>
+                <li><a href="./rehoming.html" id="rehomeLink"><i class="fa-solid fa-hand-holding-heart"></i>
+                        Adoption</a></li>
+                <li> <a href="./postpet.html" class="post_pet "><i class="fas fa-upload"></i> Post Pet </a></li>
+                <li><a href="./index.html#contact_us"><i class="fas fa-phone"></i> Contact Us</a></li>
             </ul>
             <div class="auth">
+
                 <div class="register">
+
                     <a href="./login.html" class="login">Login</a>
                     <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
                 </div>
+
                 <div style="display: flex; align-items: center; gap:1rem">
                     <button class="notif d_none" id="notif_btn"><i class="fa-solid fa-bell"></i>
                         <span class="notif_length"></span>
                     </button>
 
-                    <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
-                    <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
-                    </a>
+                    <div id="user_personal" class="d_none">Hi, <b id="user_name"></b> <i
+                            class="fa-solid fa-caret-down"></i></div>
+                </div>
+                <div class="personal_info ">
+                    <div class="info"><span>Email:</span> <b id="user-email"></b></div>
+                    <div class="action_btns">
+                        <a href="./admin_dashboard.html" id="dashboard_btn" class="verify_account d_none"><i
+                                class="fa-solid fa-badge-check"></i> Dashboard</a>
+                        <a href="./mypets.html" class="verify_account"><i class="fa-solid fa-paw"></i> My Pets</a>
+                        <a href="./verification.html" id="get_verify_btn" class="verify_account"><i
+                                class="fa-solid fa-badge-check"></i> Get
+                            Verified</a>
+                        <a href="#" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout </a>
+                    </div>
                 </div>
                 <div class="notif_list" id="notif_list">
-                    <h3 style="margin-bottom: 10px;">Notifications</h3>
+                    <div style="display: flex;align-items: center;justify-content: space-between;margin-bottom: 10px;">
+                        <h3>Notifications</h3>
+                        <a href="#" class="d_none" id="clear_notifis">Clear All</a>
+                    </div>
                     <p class="info d_none" style="color: #505050;padding: 8px;">You Don't Have Notifications.</p>
                     <ul>
 
@@ -62,7 +84,8 @@
                 <li>
                     <div class="approve_pet">
                         <h1 id="name"></h1>
-
+                        <a href="#" id="open_delete_pet_popup" class="delete_btn d_none"><i
+                                class="fa-solid fa-trash"></i> Delete</a>
                     </div>
                 </li>
 
@@ -79,6 +102,12 @@
                     <div class="cat">
                         <span style="color: grey;">Category:</span>
                         <span id="cat" style="text-transform: capitalize;"></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="cat">
+                        <span style="color: grey;">Gender:</span>
+                        <span id="gender" style="text-transform: capitalize;"></span>
                     </div>
                 </li>
                 <li>
@@ -108,16 +137,12 @@
                 </li>
 
                 <li>
-                    <!-- <h4>Owner: </h4> -->
-                    <div class="user">
+
+                    <div class="user" style="display: flex; justify-content: space-between;align-items: center;">
                         <p>This pet owenes to <span id="owenrName" style="color: #000;font-weight: bold;">
                             </span></p>
-                        <div class="contact" style="display: flex; align-items: center;gap: 1rem;margin-top: 5px;">
-                            <div><span style="color: #454545;">Email: </span> <span id="ownerEmail"></span>
-                            </div>
-                            <div><span style="color: #454545;">Phone: </span> <span id="ownerPhone"></span>
-                            </div>
-                        </div>
+                        <button id="contact_owner" style="font-size: 16px;padding: 10px 20px;"><i
+                                class="fa-solid fa-envelope"></i> Contact</button>
                     </div>
                 </li>
 
@@ -133,7 +158,10 @@
                 <li style="display: flex;align-items: center;gap: 1rem;" id="userIdentify" class="d_none">
                     <p id="requests_count">You have <span style="font-weight: bold;" id="requestsCount">0</span>
                         requests on this pet</p>
-                    <span id="approvalPet" class="d_none">Pet Requested</span>
+                </li>
+
+                <li id="approvalPet" class="d_none">
+                    <span>Pet Requested</span>
                 </li>
 
             </ul>
@@ -142,41 +170,10 @@
 
         </div>
 
+
         <h1 style="width: 85%; margin: 0 auto;margin-top: 40px;">Requests</h1>
         <div class="requests">
-            <!-- <div class="request">
-                <div class="user" style="flex-direction: column;align-items: flex-start;">
-                    <h3 id="requester">Jhon Dell</h3>
-                    <div class="contact" style="margin-top: -10px;">
-                        <p style="color: #4b4b4b;">Email: <span id="email" style="color: #000;">jhon@gmail.com</span>
-                        </p>
-                        <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">+2012859687</span></p>
-                    </div>
-                </div>
 
-                <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
-                    <div>
-                        <p>Are pets allowed in your residence: </p> <span id="household_A">Yes</span>
-                    </div>
-                    <div>
-                        <p>Who else lives in your home: </p> <span id="household_A">Yes</span>
-                    </div>
-                    <div>
-                        <p>Do you currently have other pets: </p> <span id="other_pets_A">Yes</span>
-                    </div>
-                    <div>
-                        <p>Have you owned or cared for pets before: </p> <span id="pet_experience_A">Yes</span>
-                    </div>
-
-                    <div>
-                        <p>How much time can you dedicate to the pet daily: </p> <span id="time_commitment_A">Yes</span>
-                    </div>
-                    <div>
-                        <p>Are you financially prepared for pet care costs: </p> <span
-                            id="financial_prepared_A">Yes</span>
-                    </div>
-                </div>
-            </div> -->
 
         </div>
 
@@ -190,11 +187,6 @@
             </div>
             <h1>Request a Pet</h1>
             <form action="">
-
-                <!-- <div class="input">
-                    <label for="location">Where do you live? (City/Region)</label>
-                    <input type="text" id="location" name="location" placeholder="Enter your city/region" required>
-                </div> -->
 
                 <div class="input">
                     <label for="pets_allowed">Are pets allowed in your residence?</label>
@@ -277,8 +269,81 @@
         </div>
     </div>
 
+    <div id="getVerified_popup">
+        <div class="content">
+            <div id="close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <h2>You Should be Verified To Request This Pet</h2>
+            <a href="./verification.html" id="get_verify_btn" class="verify_account" style="margin-top: 15px;"><i
+                    class="fa-solid fa-badge-check"></i> Get
+                Verified</a>
+        </div>
+    </div>
 
-    <script src="./main.js"></script>
+    <div id="contact_popup" class="">
+        <div class="content">
+            <div id="close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <h2 style="display: flex ; justify-content: center; gap: .5rem;">Contact <span id="owenrName"
+                    style="display: flex ; gap: .3rem;color: #000;font-weight: bold;"></span></h2>
+            <form action="">
+                <div class="input d_none" id="phone_input">
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" id="owenrPhone" name="phone" class="disabled" readonly required>
+                </div>
+
+                <div class="input">
+                    <label for="name">To:</label>
+                    <input type="text" id="owenrEmail" name="name" class="disabled" readonly required>
+                </div>
+
+                <div class="input">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="userEmail" class="disabled" readonly name="email" required>
+                </div>
+
+                <div class="input">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="emailSubject" name="subject" required>
+                </div>
+
+                <div class="input">
+                    <label for="message">Message:</label>
+                    <textarea id="emailMessage" name="message" rows="5" required></textarea>
+                </div>
+
+                <button id="send_msg_to_owner">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="email_notice">
+        <i class="fa-solid fa-check"></i>
+        <h4>Email Sended Successfully</h4>
+    </div>
+
+    <div class="sureToDeletePopUp" id="delete_pet_popup">
+        <div class="content">
+            <h1>Sure To Delete This Pet ?</h1>
+            <div class="action_btns">
+                <a href="#" class="main_delete" id="delete_pet">Delete</a>
+                <a href="#" id="cancel">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="sureToDeletePopUp" id="delete_request_popup">
+        <div class="content">
+            <h1>Sure To Delete Your Request ?</h1>
+            <div class="action_btns">
+                <a href="#" class="main_delete" id="delete_request">Delete</a>
+                <a href="#" id="cancel">Cancel</a>
+            </div>
+        </div>
+    </div>
+
     <script>
 
         function getCookie(name) {
@@ -292,12 +357,12 @@
             return null;
         }
 
-
-
         const userId = getCookie('UserId');
+        let verified = false;
         const urlParams = new URLSearchParams(window.location.search);
 
         const petId = urlParams.get("petId");
+        const requesterId = urlParams.get("requesterId");
 
         console.log(petId);
 
@@ -323,17 +388,27 @@
                     document.querySelector("#behavior").textContent = pet.behavior
                     document.querySelector("#location").textContent = `${pet.city} , ${pet.country}`;
                     document.querySelector("#cat").textContent = pet.category
-                    document.querySelector("#ra").textContent = pet.foster ? "foster" : "rehoming"
+                    document.querySelector("#gender").textContent = pet.gender
+                    document.querySelector("#ra").textContent = pet.foster ? "foster" : "Adopt"
+                    const petRequests = JSON.parse(pet.requests)
                     document.querySelectorAll("#requestsCount").forEach(ele => {
-                        ele.textContent = JSON.parse(pet.requests).length;
+                        ele.textContent = petRequests.length;
                     })
 
-                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Rehome Pet";
-
+                    //get approved request on adopter id
                     if (pet.requested) {
-                        document.querySelector("#approvalPet").classList.remove("d_none")
-                        document.querySelector("#requests_count").classList.add("d_none")
+                        petRequests.forEach(request => {
+                            if (request.approved) {
+                                if (request.authorID == userId){
+                                    document.querySelector("#phone_input").classList.remove("d_none")
+                                }
+                            }
+                        })
                     }
+
+
+
+                    document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Adopt Pet";
 
                     fetch(`http://localhost:400/users/${userId}`)
                         .then(response => {
@@ -344,16 +419,20 @@
                         })
                         .then(data => {
                             const user = data;
-                            const userRequestedPets = JSON.parse(user.requestedPets)
+                            document.querySelector("#userEmail").value = user.email;
+                            const userRequestedPets = JSON.parse(user.requestedPets);
                             userRequestedPets.forEach(requestedPetId => {
-                                if (requestedPetId == petId) {
-                                    document.querySelector("#petButton").setAttribute("disabled", true)
-                                    document.querySelector("#petButton").classList.add("disabled")
-                                }
+                                // if (requestedPetId == petId) {
+                                //     document.querySelector("#petButton").setAttribute("disabled", true)
+                                //     document.querySelector("#petButton").classList.add("disabled")
+                                // }
                             })
-                        })
 
-                        .catch(error => {
+                            // CHECK IF USER VERIFIED
+                            if (user.verification_status == "approved" || user.role == 'admin') {
+                                verified = true;
+                            }
+                        }).catch(error => {
                             console.error("Error fetching users:", error);
                         });
 
@@ -362,16 +441,26 @@
                     if (pet.foster) {
                         fosterQuestion.style.display = "block"; // Show for foster
                     } else {
-                        fosterQuestion.style.display = "none"; // Hide for rehome
+                        fosterQuestion.style.display = "none"; // Hide for adopt
                     }
 
+                    // CHECK IF PET IS REQUESTED SHOW PET REQUESTED
 
-                    if (pet.ownerId == userId) {
-                        document.querySelector("#userIdentify").classList.remove("d_none")
+                    if (pet.requested) {
+                        document.querySelector("#approvalPet").classList.remove("d_none")
                     } else {
-                        document.querySelector("#userRequest").classList.remove("d_none")
+                        // IF NOT SHOW THE ABILITY TO REQUEST THE PET IF USER
+                        if (pet.ownerId == userId) {
+                            document.querySelector("#userIdentify").classList.remove("d_none")
+                            document.querySelector("#contact_owner").classList.add("d_none")
+                            document.querySelector("#open_delete_pet_popup").classList.remove("d_none")
+                        } else {
+                            // IF THE OWNER SHOW ONLY THE REQUESTES COUNT
+                            document.querySelector("#userRequest").classList.remove("d_none")
+                        }
                     }
 
+                    // class actiuve added on header to highlight it deneoend on type of adoption or fostering 
                     if (pet.foster) {
                         document.querySelector("#fosterLink").classList.add("active")
 
@@ -389,61 +478,118 @@
                         .then(data => {
                             console.log(data)
                             const petOwner = data;
+                            // SET THE OWNER NAME TO ALL ONWER NAME FILDES
+                            document.querySelectorAll("#owenrName").forEach(ele => {
+                                ele.textContent = petOwner.username;
+                                if (petOwner.verification_status == "approved" || petOwner.role == "admin") {
+                                    ele.innerHTML += `<div id='verify_icon'><i class="fa-solid fa-badge-check" style='color: var(--primary_color);'></i></div>`
+                                }
+                            })
 
-                            document.querySelector("#owenrName").textContent = petOwner.username;
-                            document.querySelector("#ownerEmail").textContent = petOwner.email;
-                            document.querySelector("#ownerPhone").textContent = petOwner.phone;
+                            document.querySelector("#owenrPhone").value = petOwner.phone;
+                            document.querySelector("#owenrEmail").value = petOwner.email;
                         }).catch(error => {
                             console.error("Error fetching users:", error);
                         });
 
 
-                    const approvePetFunc = (requesterAutherId) => {
+                    // REQUESTS FUNCTIONALLITIES
+                    const approvePetFunc = () => {
                         const approvedBtns = document.querySelectorAll(".request #approveBtn");
+                        // PUT CLICK EVENT ON ALL APPROVE BUTTONS IN PAGE
                         approvedBtns.forEach(btn => {
                             btn.addEventListener("click", () => {
+                                // GET REQUESTER ID
                                 const requestAutherId = btn.getAttribute("data-id")
 
+                                // GET THE ACCEPTED REQUEST AND CHNAGE THE ACCEPTED VALUE TO 1
                                 const updatedPetRequests = petRequests.reverse().map(item =>
                                     item.authorID === requestAutherId ? { ...item, approved: 1 } : item
                                 );
 
+                                // UPDATE THE REQUESTES OBJECT IN DATABASE
                                 fetch(`http://localhost:400/updateRequest/${petId}`, {
                                     method: 'PUT',
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
-                                    body: JSON.stringify(updatedPetRequests)
+                                    body: JSON.stringify({ type: "approval", updatedRequest: updatedPetRequests })
                                 }).then(response => response.json())
                                     .then(data => {
                                         console.log('Success:', data)
                                         if (data.updatedRequests) {
-                                            fetch(`http://localhost:400/update-pet-to-requested/${petId}`, {
-                                                method: "PUT",
-                                                headers: {
-                                                    "Content-Type": "application/json"
-                                                }
-                                            })
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                    if (data.error) {
-                                                        console.error("Error:", data.error);
-                                                    } else {
-                                                        console.log("Success:", data);
-                                                    }
-                                                })
-                                                .catch(error => {
-                                                    console.error("Fetch error:", error);
-                                                });
-
-                                            console.log("Approved")
-
-                                            fetch(`http://localhost:400/users/addNotification/${requesterAutherId}`, {
+                                            // SEND NOTIFICATION TO USER
+                                            fetch(`http://localhost:400/users/addNotification/${requestAutherId}`, {
                                                 method: 'POST',
                                                 headers: {
                                                     'Content-Type': 'application/json'
                                                 },
-                                                body: JSON.stringify({ type: "approval", approvedUserId: pet.ownerId, approvedPetId: petId })
+                                                body: JSON.stringify({ type: "approval", ownerUserId: pet.ownerId, PetId: petId })
+                                            })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    if (data.updatedNotifications) {
+                                                        // window.location.href = `./viewPet.html?petId=${petId}`;
+                                                        console.log("Send Notifi")
+                                                    }
+                                                }
+                                                )
+                                                .catch(error => console.error('Error:', error));
+
+                                            // REMOVE ALL CONTROLS BUTTONS ON REQUEST (Approve & Denied)
+                                            document.querySelectorAll(".request .control_request").forEach(ele => {
+                                                ele.remove()
+                                            })
+
+                                            // ADD PET REQUESTED ON PET
+                                            document.querySelector("#approvalPet").classList.remove("d_none")
+                                            document.querySelector("#userIdentify").classList.add("d_none")
+
+                                            // ADD Approved TEXT ON REQUEST
+                                            const approvedDiv = document.createElement("div")
+                                            approvedDiv.classList.add("approved")
+                                            approvedDiv.innerHTML = `<h5><i class="fa-solid fa-check"></i> Approved</h5>`
+                                            // document.querySelector(`.request[data-id="${requestAutherId}"] .request_head`).appendChild(approvedDiv)
+                                            if (!document.querySelector(`.request[data-id="${requestAutherId}"] .request_head .approved`)) {
+                                                document.querySelector(`.request[data-id="${requestAutherId}"] .request_head`).appendChild(approvedDiv)
+                                            }
+                                        }
+                                    }).catch(error => console.error('Error:', error));
+                            })
+                        })
+                    }
+
+                    const deniedPetFunc = () => {
+                        const deniedBtn = document.querySelectorAll(".request #deniedBtn");
+                        // PUT CLICK EVENT ON ALL DENIED BUTTONS IN PAGE
+                        deniedBtn.forEach(btn => {
+                            btn.addEventListener("click", () => {
+                                // GET REQUESTER ID
+                                const requestAutherId = btn.getAttribute("data-id")
+
+                                // GET THE DENIED REQUEST AND CHNAGE THE DENIED VALUE TO 1
+                                const updatedPetRequests = petRequests.reverse().map(item =>
+                                    item.authorID === requestAutherId ? { ...item, denied: 1 } : item
+                                );
+
+                                // UPDATE THE REQUESTES OBJECT IN DATABASE
+                                fetch(`http://localhost:400/updateRequest/${petId}`, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ updatedRequest: updatedPetRequests })
+                                }).then(response => response.json())
+                                    .then(data => {
+                                        console.log('Success:', data)
+                                        if (data.updatedRequests) {
+                                            // SEND NOTIFICATION TO USER
+                                            fetch(`http://localhost:400/users/addNotification/${requestAutherId}`, {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({ type: "denied", ownerUserId: pet.ownerId, PetId: petId })
                                             })
                                                 .then(response => response.json())
                                                 .then(data => {
@@ -456,18 +602,13 @@
                                                 )
                                                 .catch(error => console.error('Error:', error));
 
-                                            document.querySelectorAll(".request .control_request").forEach(ele => {
-                                                ele.remove()
-                                            })
-
-                                            document.querySelector("#approvalPet").classList.remove("d_none")
-                                            document.querySelector("#requests_count").classList.add("d_none")
-
-                                            const approvedDiv = document.createElement("div")
-                                            approvedDiv.classList.add("approved")
-                                            approvedDiv.innerHTML = `<h5><i class="fa-solid fa-check"></i> Approved</h5>`
-                                            if (!document.querySelector(`.request[data-id="${requestAutherId}"] .request_head .approved`)) {
-                                                document.querySelector(`.request[data-id="${requestAutherId}"] .request_head`).appendChild(approvedDiv)
+                                            // ADD DENIED TEXT ON REQUEST
+                                            const deniedDiv = document.createElement("div")
+                                            deniedDiv.classList.add("denied")
+                                            deniedDiv.innerHTML = `<h5><i class="fa-solid fa-x"></i> Denied</h5>`
+                                            // document.querySelector(`.request[data-id="${requestAutherId}"] .request_head`).appendChild(deniedDiv)
+                                            if (!document.querySelector(`.request[data-id="${requestAutherId}"] .request_head .denied`)) {
+                                                document.querySelector(`.request[data-id="${requestAutherId}"] .request_head`).appendChild(deniedDiv)
                                             }
                                         }
                                     }).catch(error => console.error('Error:', error));
@@ -476,8 +617,6 @@
                     }
 
                     // fetching requests 
-                    let petRequests = JSON.parse(pet.requests)
-                    console.log(petRequests)
                     if (userId == pet.ownerId) {
                         petRequests.map(request => {
                             fetch(`http://localhost:400/users/${request.authorID}`)
@@ -492,7 +631,7 @@
                                     const author = data
                                     const requestEle = document.createElement("div")
                                     requestEle.innerHTML = `
-                                        <div class="request" data-id="${request.authorID}">
+                                        <div class="request ${request.approved ? "approved_request" : ""}" data-id="${request.authorID}">
                                             <div class="request_head" style="display: flex ; align-items: center; justify-content: space-between;">
                                                 <div class="user" style="flex-direction: column;align-items: flex-start;">
                                                     <h3 id="requester">${author.username}</h3>
@@ -502,7 +641,7 @@
                                                         <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">${author.phone}</span></p>
                                                     </div>
                                                 </div>    
-                                                ${pet.ownerId == userId && !pet.requested ? `
+                                                ${pet.ownerId == userId && !pet.requested && !request.denied ? `
                                                     <div class="control_request">
                                                         <button id="approveBtn" data-id="${request.authorID}">Approve</button>
                                                         <button id="deniedBtn" data-id="${request.authorID}">Denied</button>
@@ -510,6 +649,7 @@
                                                 `: ""}
 
                                                 ${request.approved ? `<div class="approved"><h5><i class="fa-solid fa-check"></i> Approved</h5></div>` : ""}
+                                                ${request.denied ? `<div class="denied"><h5><i class="fa-solid fa-x"></i> Denied</h5></div>` : ""}
                                             </div>
 
                                             <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
@@ -540,12 +680,25 @@
                                     `
                                     document.querySelector(".requests").append(requestEle)
 
-                                    approvePetFunc(request.authorID)
+                                    // MAKE THE APPROVED REQUEST BE THE FIRST REUQEST TO BE VIWED
+                                    if (document.querySelector(".requests .approved_request")) {
+                                        document.querySelector(".requests").prepend(document.querySelector(".approved_request").parentElement)
+                                    }
+
+                                    // SCROLL INTO THE REQUESTERID REQUEST IF EXIST
+                                    if (requesterId) {
+                                        const requestedRequest = document.querySelector(`.request[data-id="${requesterId}"]`);
+                                        if (requestedRequest) {
+                                            requestedRequest.scrollIntoView({ behavior: 'smooth', block: "center" })
+                                            requestedRequest.classList.add("light")
+                                        }
+                                    }
+
+                                    approvePetFunc()
+                                    deniedPetFunc()
                                 }).catch(error => {
                                     console.error("Error fetching requests:", error);
                                 });
-
-
                         })
                     } else {
                         petRequests.map(request => {
@@ -571,15 +724,12 @@
                                                             </p>
                                                             <p style="color: #4b4b4b;">Phone: <span id="phone" style="color: #000;">${author.phone}</span></p>
                                                         </div>
-                                                    </div>    
-                                                    ${pet.ownerId == userId && !pet.requested ? `
-                                                    <div class="control_request">
-                                                        <button id="approveBtn" data-id="${request.authorID}">Approve</button>
-                                                        <button id="deniedBtn" data-id="${request.authorID}">Denied</button>
-                                                    </div>
-                                                `: ""}
+                                                    </div>  
 
-                                                ${request.approved ? `<div class="approved"><h5><i class="fa-solid fa-check"></i> Approved</h5></div>` : ""}
+                                                    ${!request.approved && !request.denied ? `<a href="#" id="open_delete_request_popup" class="delete_btn" data-id="${request.authorID}"><i class="fa-solid fa-trash"></i> Delete</a>` : ""}
+
+                                                    ${request.approved ? `<div class="approved"><h5><i class="fa-solid fa-check"></i> Approved -> Contact Owner</h5></div>` : ""}
+                                                    ${request.denied ? `<div class="denied"><h5><i class="fa-solid fa-x"></i> Denied</h5></div>` : ""}
                                                 </div>
 
                                                 <div class="requestCont" style="flex-direction: column;align-items: flex-start;">
@@ -610,16 +760,53 @@
                                         `
                                         document.querySelector(".requests").append(requestEle)
 
-                                        approvePetFunc(request.authorID)
+                                        const sureToDeleteRequestPopUp = document.querySelector("#delete_request_popup")
+
+                                        // OPEN DELETE REQUEST POP UP
+                                        const open_delete_request_popup = document.querySelector("#open_delete_request_popup")
+                                        if (open_delete_request_popup) {
+                                            open_delete_request_popup.addEventListener("click", (e) => {
+                                                e.preventDefault()
+                                                sureToDeleteRequestPopUp.classList.add("active")
+                                                const requestAutherId = open_delete_request_popup.getAttribute("data-id");
+                                                sureToDeleteRequestPopUp.querySelector("#delete_request").setAttribute("data-requestAutherId", requestAutherId)
+                                            })
+                                        }
+
+                                        // DELETE PET REQUEST
+                                        const deleteRequestBtn = document.querySelector("#delete_request");
+                                        deleteRequestBtn.addEventListener("click", () => {
+                                            const requestId = deleteRequestBtn.getAttribute("data-requestAutherId")
+
+                                            const updatedPetRequests = petRequests.filter(item => item.authorID !== requestId);
+                                            // UPDATE THE REQUESTES OBJECT IN DATABASE
+                                            fetch(`http://localhost:400/removePetRequest/${petId}`, {
+                                                method: 'PUT',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({ petOwnerId: pet.ownerId, requestAuthorId: requestId, updatedRequest: updatedPetRequests })
+                                            }).then(response => response.json())
+                                                .then(data => {
+                                                    if (data.updatedRequestedPets) {
+                                                        window.location.reload()
+                                                    }
+                                                }).catch(error => console.error('Error:', error));
+                                        })
+
+                                        // CANCEL REQUEST DELETION
+                                        document.querySelector("#delete_request_popup #cancel").addEventListener("click", () => {
+                                            sureToDeleteRequestPopUp.classList.remove("active")
+                                        })
                                     }).catch(error => {
                                         console.error("Error fetching requests:", error);
                                     });
                             }
                         })
-
-
                     }
-                    document.querySelector("#formRequestBtn").addEventListener("click", (e) => {
+
+                    const formRequestBtn = document.querySelector("#formRequestBtn")
+                    formRequestBtn.addEventListener("click", (e) => {
                         e.preventDefault()
 
                         const petRequest = {
@@ -632,12 +819,14 @@
                             financialPrepared: document.getElementById("financial_prepared").value,
                             fosterDuration: document.getElementById("foster_duration")?.value || null,
                             approved: 0,
+                            denied: 0,
                         }
-
-
 
                         if (document.querySelector("#terms").checked) {
                             console.log(petRequest)
+                            formRequestBtn.innerHTML = "Requesting..."
+                            formRequestBtn.setAttribute("disabled", true)
+                            formRequestBtn.classList.add("disabled")
 
                             fetch(`http://localhost:400/addPetRequest/${petId}`, {
                                 method: 'POST',
@@ -707,22 +896,104 @@
 
 
 
-            let form_popup = document.querySelector("#form_popup")
+            const sureToDeletePetPopUp = document.querySelector("#delete_pet_popup")
+            // OPEN DELETE PET POP UP
+            document.querySelector("#open_delete_pet_popup").addEventListener("click", () => {
+                sureToDeletePetPopUp.classList.add("active")
+            })
 
+            // DELETE PET
+            document.querySelector("#delete_pet").addEventListener("click", () => {
+                fetch(`http://localhost:400/pet/${petId}`, {
+                    method: 'DELETE',
+                }).then(response => {
+                    if (response.ok) {
+                        window.location.href = './foster.html';
+                    }
+                }).catch(error => {
+                    console.error('Error deleting pet:', error);
+                });
+            })
+
+            // CANCEL PET DELETION
+            document.querySelector("#delete_pet_popup #cancel").addEventListener("click", () => {
+                sureToDeletePetPopUp.classList.remove("active")
+            })
+
+            let getVerified_popup = document.querySelector("#getVerified_popup")
+            let form_popup = document.querySelector("#form_popup")
+            let contact_popup = document.querySelector("#contact_popup")
+
+            // OPENS REQUEST FORM POPUP
             document.querySelector("#petButton").addEventListener("click", () => {
                 if (userId) {
-                    form_popup.classList.add("active")
+                    if (verified) {
+                        form_popup.classList.add("active")
+                    } else {
+                        getVerified_popup.classList.add("active")
+                    }
                 } else {
                     window.location.href = "./signup.html"
                 }
             })
 
-
-
+            // CLOSE REQUEST FORM POPUP
             document.querySelector("#form_popup #close").addEventListener("click", () => {
                 form_popup.classList.remove("active")
             })
 
+            // CLOSE GET VERIFIED POPUP
+            document.querySelector("#getVerified_popup #close").addEventListener("click", () => {
+                getVerified_popup.classList.remove("active")
+            })
+
+            // OPENS CONTACT FORM POPUP
+            document.querySelector("#contact_owner").addEventListener("click", () => {
+                if (userId) {
+                    if (verified) {
+                        contact_popup.classList.add("active")
+                    } else {
+                        getVerified_popup.classList.add("active")
+                    }
+                } else {
+                    window.location.href = "./signup.html"
+                }
+            })
+
+            // CLOSE CONTACT FORM POPUP
+            document.querySelector("#contact_popup #close").addEventListener("click", () => {
+                contact_popup.classList.remove("active")
+            })
+
+            // SEND EMAIL
+            document.querySelector("#send_msg_to_owner").addEventListener("click", (e) => {
+                e.preventDefault()
+                document.querySelector("#send_msg_to_owner").textContent = "Sending Message..."
+                document.querySelector("#send_msg_to_owner").setAttribute("disabled", true)
+                document.querySelector("#send_msg_to_owner").classList.add("disabled")
+                fetch("http://localhost:400/sendEmail", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        to: document.querySelector("#owenrEmail").value,
+                        from: document.querySelector("#userEmail").value,
+                        subject: document.querySelector("#emailSubject").value,
+                        text: document.querySelector("#emailMessage").value,
+                    })
+                }).then(response => response.json())
+                    .then(data => {
+                        if (data.sended) {
+                            contact_popup.classList.remove("active")
+                            document.querySelector("#email_notice").classList.add("active")
+                            document.querySelector("#send_msg_to_owner").textContent = "Send Message"
+                            setTimeout(() => {
+                                document.querySelector("#email_notice").classList.remove("active")
+                            }, 5000)
+                        }
+                    }).catch(error => console.error("Error:", error));
+            })
 
         } else {
             const notFoundError = document.createElement("div")
@@ -739,7 +1010,7 @@
 
 
     </script>
-
+    <script src="./main.js"></script>
 </body>
 
 </html>

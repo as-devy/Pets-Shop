@@ -23,6 +23,25 @@ a {
     color: #000;
 }
 
+.preloader{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999999;
+    background-color: #f9f9e4;
+    transition: .3s;
+}
+
+.preloader.hide{
+    opacity: 0;
+    visibility: hidden;
+}
+
 header {
     width: 100%;
     position: fixed;
@@ -64,6 +83,7 @@ header .container .nav {
     align-items: center;
     gap: 1.5rem;
     list-style: none;
+    font-weight: bold;
 }
 
 header .container .nav a {
@@ -111,6 +131,26 @@ header .container .auth .logout {
     gap: 0.3rem;
 }
 
+header #user_personal {
+    background-color: #e5e5e5;
+    padding: 2px 8px;
+    border-radius: .3rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+header #user_personal:hover {
+    background-color: #d3d3d3;
+}
+
+header #user_personal i {
+    font-size: 13px;
+}
+
+header #user_personal i.fa-badge-check{
+    color: var(--primary_color);
+}
+
 header .notif {
     height: 35px;
     width: 35px;
@@ -121,10 +161,10 @@ header .notif {
     margin-top: 0;
     position: relative;
     font-size: 18px;
-    color:#fff;
+    color: #fff;
     align-items: center;
     outline: none;
-    border:none;
+    border: none;
     cursor: pointer;
 }
 
@@ -142,10 +182,11 @@ header .notif .notif_length {
 
 header .notif_list {
     position: absolute;
-    left: -110px;
+    left: -250px;
     top: 45px;
     /* bottom: 7px; */
     background-color: #ffdcdc;
+    min-width: 320px;
     /* min-height: 100px; */
     padding: 15px;
     font-size: 15px;
@@ -155,7 +196,8 @@ header .notif_list {
     transition: 0.3s;
 }
 
-header .notif_list ul{
+
+header .notif_list ul {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -168,21 +210,104 @@ header .notif_list.active {
 
 }
 
-header .notif_list li {
+header .notif_list li a {
     padding: 8px;
     background: #fff8f1;
     border-radius: 0.3rem;
     border-left: 4px solid var(--primary_color);
     border-top: 2px solid var(--primary_color);
     border-bottom: 2px solid var(--primary_color);
+    display: flex;
+    column-gap: .2rem;
+    flex-wrap: wrap;
+}
+
+header #clear_notifis {
+    font-size: 15px;
+    color: #007bff;
+}
+
+header #clear_notifis:hover {
+    color: #ff3a3a;
 }
 
 header .notif:hover {
     background-color: #018a83;
 }
 
+header .personal_info {
+    position: absolute;
+    right: 0;
+    top: 45px;
+    /* bottom: 7px; */
+    background-color: #e3e3e3;
+    /* min-height: 100px; */
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+header .personal_info.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+header .personal_info .info {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+}
+
+header .personal_info .action_btns {
+    /* width: fit-content; */
+    margin: 0 auto;
+    gap: .5rem;
+    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid #a1a1a1;
+}
+
+.verify_account {
+    border: 2px solid var(--primary_color);
+    padding: 4px 8px;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    width: 100%;
+    justify-content: center;
+    transition: .3s;
+}
+
+.verify_account *{
+    transition: .3s;
+}
+
+.verify_account i{
+    color: var(--primary_color);
+}
+
+.verify_account:hover {
+    background-color: var(--primary_color);
+    color: #fff;
+}
+
+
+.verify_account:hover i{
+    color: #fff;
+}
+
 header .container .auth .logout {
     border: 2px solid #ff3a3a;
+    width: 100%;
+    justify-content: center;
 }
 
 header .container .auth .signup i,
@@ -232,4 +357,97 @@ header .container .auth .register {
     background: #ff82828a;
     padding: 10px 50px;
     border-radius: 0.5rem;
+}
+
+
+#email_notice,
+#data_notice{
+    position: fixed;
+    bottom: 10px;
+    right: 5px;
+    background-color: #dfdfdfeb;
+    z-index: 99999;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.3rem;
+    transform: translateX(50vw);
+    transition: 0.3s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#email_notice.active,
+#data_notice.active {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+#email_notice i, 
+#data_notice i{
+    width: 30px;
+    height: 30px;
+    background-color: #00a700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: no-drop;
+}
+
+#getVerified_popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0000008c;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+#getVerified_popup.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#getVerified_popup .content {
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 0.7rem;
+    text-align: center;
+    width: 520px;
+    position: relative;
+}
+
+#getVerified_popup .content {
+    width: 630px;
+}
+
+#getVerified_popup #close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #e86565;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
 }

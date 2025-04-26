@@ -3,38 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions</title>
+    <link rel="icon" type="image/x-icon" href="./imgs/favicon.ico"> 
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/terms.css">
+    <link rel="stylesheet" href="./css/icons.css">
+
+    <title>Terms and Conditions</title>
     
 </head>
 <body>
+    <div class="preloader">
+        <img src="./imgs/preloader.gif" alt="">
+    </div>
     <header>
         <div class="container">
             <div class="lg" style="width: 268px;">
                 <a href="./" class="logo">
                     <img src="./imgs/logo.png" alt="pawsafe">
-                    <h3>Paws Safe - Terms And Conditions</h3>
+                    <h3>Paws Safe</h3>
                 </a>
             </div>
             <ul class="nav">
-                <li><a class="active" href="./index.html">Home</a></li>
-                <li><a href="./foster.html">Foster</a></li>
-                <li><a href="./rehoming.html">ReHoming</a></li>
-                <li><a href="./contactus.html">Contact Us</a></li>
+                <li><a class="active" href="./index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="./foster.html" id="fosterLink"><i class="fa-solid fa-paw"></i> Foster</a></li>
+                <li><a href="./rehoming.html" id="rehomeLink"><i class="fa-solid fa-hand-holding-heart"></i> Adoption</a></li>
+                <li> <a href="./postpet.html" class="post_pet "><i class="fas fa-upload"></i> Post Pet </a></li>
+                <li><a href="./index.html#contact_us"><i class="fas fa-phone"></i> Contact Us</a></li>
             </ul>
             <div class="auth">
+
                 <div class="register">
+
                     <a href="./login.html" class="login">Login</a>
                     <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
                 </div>
 
-                <a href="./postpet.html" class="post_pet d_none"><i class="fa-solid fa-paw"></i> Post Your Pet </a>
-                <a href="#" class="logout d_none"><i class="fa-solid fa-right-from-bracket"></i> Logout
-                </a>
+                <div style="display: flex; align-items: center; gap:1rem">
+                    <button class="notif d_none" id="notif_btn"><i class="fa-solid fa-bell"></i>
+                        <span class="notif_length"></span>
+                    </button>
+
+<<<<<<< HEAD
+                    <div id="user_personal" class="d_none">Hi, <b id="user_name"></b>  <i class="fa-solid fa-caret-down"></i></div>
+
+=======
+                    <div id="user_personal" class="d_none">Hi, <b id="user_name"></b> <i
+                            class="fa-solid fa-caret-down"></i></div>
+>>>>>>> ba9de8c1e2f551625c1e9aef3f00af407283ac33
+                </div>
+                <div class="personal_info ">
+                    <div class="info"><span>Email:</span> <b id="user-email"></b></div>
+                    <div class="action_btns">
+                        <a href="./admin_dashboard.html" id="dashboard_btn" class="verify_account d_none"><i
+                            class="fa-solid fa-badge-check"></i> Dashboard</a>
+                        <a href="./mypets.html" class="verify_account"><i class="fa-solid fa-paw"></i> My Pets</a>
+                        <a href="./verification.html" id="get_verify_btn" class="verify_account"><i
+                                class="fa-solid fa-badge-check"></i> Get
+                            Verified</a>
+                        <a href="#" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout </a>
+                    </div>
+                </div>
+                <div class="notif_list" id="notif_list">
+                    <div style="display: flex;align-items: center;justify-content: space-between;margin-bottom: 10px;">
+                        <h3>Notifications</h3>
+                        <a href="#" class="d_none" id="clear_notifis">Clear All</a>
+                    </div>
+                    <p class="info d_none" style="color: #505050;padding: 8px;">You Don't Have Notifications.</p>
+                    <ul>
+
+                    </ul>
+                </div>
+
             </div>
         </div>
     </header>
 
+   <main>
     <div class="container">
         <h1>Terms and Conditions</h1>
 
@@ -56,6 +100,7 @@
         <h2>6. Agreement Acceptance</h2>
         <p>By rehoming or fostering a pet, you confirm that you have read and understood these terms and agree to comply with them.</p>
     </div>
-
+   </main>
+   <script src="./main.js"></script>
 </body>
 </html>
