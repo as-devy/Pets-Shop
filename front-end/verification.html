@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./imgs/favicon.ico">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/icons.css">
+    <link rel="stylesheet" href="./css/postpet.css">
+    <style>
+        main {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main .form {
+            width: 50%;
+        }
+
+        main .form .form-container {
+            width: 100%;
+        }
+    </style>
+    <title>Paws Safe | Get Verified</title>
+</head>
+
+<body>
+    <div class="preloader">
+        <img src="./imgs/preloader.gif" alt="">
+    </div>
+    <header>
+        <div class="container">
+            <div class="lg" style="width: 268px;">
+                <a href="./" class="logo">
+                    <img src="./imgs/logo.png" alt="pawsafe">
+                    <h3>Paws Safe</h3>
+                </a>
+            </div>
+            <ul class="nav">
+                <li><a class="active" href="./index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="./foster.html" id="fosterLink"><i class="fa-solid fa-paw"></i> Foster</a></li>
+                <li><a href="./rehoming.html" id="rehomeLink"><i class="fa-solid fa-hand-holding-heart"></i>
+                        Adoption</a></li>
+                <li> <a href="./postpet.html" class="post_pet "><i class="fas fa-upload"></i> Post Pet </a></li>
+                <li><a href="./index.html#contact_us"><i class="fas fa-phone"></i> Contact Us</a></li>
+            </ul>
+            <div class="auth">
+
+                <div class="register">
+
+                    <a href="./login.html" class="login">Login</a>
+                    <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
+                </div>
+
+                <div style="display: flex; align-items: center; gap:1rem">
+                    <button class="notif d_none" id="notif_btn"><i class="fa-solid fa-bell"></i>
+                        <span class="notif_length"></span>
+                    </button>
+
+                    <div id="user_personal" class="d_none">Hi, <b id="user_name"></b>  <i class="fa-solid fa-caret-down"></i></div>
+                </div>
+                <div class="personal_info ">
+                    <div class="info"><span>Email:</span> <b id="user-email"></b></div>
+                    <div class="action_btns">
+                        <a href="./admin_dashboard.html" id="dashboard_btn" class="verify_account d_none"><i
+                            class="fa-solid fa-badge-check"></i> Dashboard</a>
+                        <a href="./mypets.html" class="verify_account"><i class="fa-solid fa-paw"></i> My Pets</a>
+                        <a href="./verification.html" id="get_verify_btn" class="verify_account"><i
+                                class="fa-solid fa-badge-check"></i> Get
+                            Verified</a>
+                        <a href="#" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout </a>
+                    </div>
+                </div>
+                <div class="notif_list" id="notif_list">
+                    <div style="display: flex;align-items: center;justify-content: space-between;margin-bottom: 10px;">
+                        <h3>Notifications</h3>
+                        <a href="#" class="d_none" id="clear_notifis">Clear All</a>
+                    </div>
+                    <p class="info d_none" style="color: #505050;padding: 8px;">You Don't Have Notifications.</p>
+                    <ul>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="form">
+            <div class="form-container">
+
+                <form class="d_none">
+                    <h2><i class="fa-solid fa-badge-check"></i> Get Verified</h2>
+
+                    <div class="pet_img" id="card_img_container">
+                        <input id="pet_img_input" type="file" accept="image/*" hidden>
+                        <div class="input">
+                            <img id="card_img" style="display: none;"
+                                src="https://images.pexels.com/photos/208773/pexels-photo-208773.jpeg" alt="">
+                            <img class="icon" src="./imgs/image-gallery.png" alt="">
+                        </div>
+                        <p id="fileName">Post a photo of your ID card with your face clearly visible beside it.</p>
+                    </div>
+
+                    <div>
+                        <label for="age">Age</label>
+                        <input type="number" id="userAge" name="Age" required>
+                    </div>
+
+                    <div>
+                        <label for="Job">Job</label>
+                        <input type="text" id="userJob" name="Job" required>
+                    </div>
+
+                    <button type="submit" id="submit_btn">Send</button>
+                </form>
+
+                <div id="waiting_for_verify" class="d_none">
+                    <h2 style="flex-direction: column;"><i class="fa-solid fa-badge-check"></i> Verification Sended
+                        Successfully </h2>
+                    <p style="text-align: center;">Your request has been submitted and is awaiting administrative
+                        review.</p>
+                </div>
+
+                <div id="plain_text" class="d_none">
+                    <h2 style="flex-direction: column;"> </h2>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <!-- <div id="data_notice">
+        <i class="fa-solid fa-check"></i>
+        <h4>Your Verification Request Sent Successfully</h4>
+    </div> -->
+    <script src="main.js"></script>
+    <script>
+        const card_img_ele = document.querySelector("#card_img_container .input")
+        const card_img_input = document.querySelector("#card_img_container #pet_img_input")
+
+        let base64Image;
+        card_img_ele.addEventListener("click", () => {
+            card_img_input.click()
+            card_img_input.addEventListener("change", function (event) {
+                const file = event.target.files[0]; // Get the selected file
+                if (file) {
+                    const fileName = file.name;
+                    function shortenFileName(filename) {
+                        const lastDotIndex = filename.lastIndexOf(".");
+
+                        if (lastDotIndex === -1) {
+                            return filename.length > 20 ? filename.slice(0, 20) + "..." : filename;
+                        }
+
+                        const namePart = filename.slice(0, lastDotIndex); // File name without extension
+                        const extension = filename.slice(lastDotIndex); // File extension
+
+                        return namePart.length > 20 ? namePart.slice(0, 20) + "..." + extension : filename;
+                    }
+                    document.querySelector("#card_img_container #fileName").textContent = shortenFileName(fileName);
+
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function (e) {
+                        document.querySelector("#card_img_container #card_img").src = e.target.result
+                        document.querySelector("#card_img_container #card_img").style = `display: block`
+                        document.querySelector("#card_img_container .icon").style = `display: none`
+
+                        base64Image = reader.result.split(',')[1]; // Remove data URL prefix
+                    };
+
+                } else {
+                    document.getElementById("fileName").textContent = "No file selected.";
+                }
+            });
+        })
+
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                const [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null; // Return null if the cookie is not found
+        }
+
+        const userId = getCookie('UserId');
+
+        if (!userId) {
+            window.location.href = "./signup.html"
+        }
+
+        fetch(`http://localhost:400/users/${userId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const user = data;
+
+                if (user.verification_status == "pending"){
+                    document.querySelector("#waiting_for_verify").classList.remove("d_none")
+                }else if (user.verification_status == "approved" || user.role == "admin"){
+                    document.querySelector("#plain_text h2").innerHTML = `<i class="fa-solid fa-badge-check"></i> Your Verification Is Approved`
+                    document.querySelector("#plain_text").classList.remove("d_none")
+                }else if (user.verification_status == "rejected"){
+                    document.querySelector(".form-container").style = "border-top: 5px solid red;border-bottom: 5px solid red;"
+                    document.querySelector("#plain_text h2").innerHTML = `<i class="fa-solid fa-badge-check"></i> Your Verification Rejected`
+                    document.querySelector("#plain_text").classList.remove("d_none")
+                }else{
+                    document.querySelector(".form form").classList.remove("d_none")
+                }
+            }).catch(error => {
+                console.error("Error fetching users:", error);
+            });
+
+        
+        document.querySelector("#submit_btn").addEventListener("click", () => {
+            document.querySelector("#submit_btn").textContent = "Sending Request..."
+            document.querySelector("#submit_btn").setAttribute("disabled", true)
+            document.querySelector("#submit_btn").classList.add("disabled")
+
+            const formData = new FormData();
+            formData.append("key", "2750377068f6e1a5530b8e8e9a5d522b");
+            formData.append("image", base64Image);
+
+            fetch("https://api.imgbb.com/1/upload", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const perosnalCardImg = data.data.url;
+                        const userAge = document.querySelector("#userAge").value;
+                        const userJob = document.querySelector("#userJob").value;
+                        const userVerificationDetails = {
+                            user_id: userId,
+                            user_card_img: perosnalCardImg,
+                            user_age: userAge,
+                            user_job: userJob,
+                        }
+
+                        fetch('http://localhost:400/sendVerification', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(userVerificationDetails)
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Success:', data)
+                                if (data.verificationId) {
+                                    window.location.reload()
+                                }
+                            }
+                            )
+                            .catch(error => console.error('Error:', error));
+                    } else {
+                        console.log("Upload failed!")
+                    }
+                })
+                .catch(error => {
+                    console.error("Upload Error:", error);
+                });
+        })
+    </script>
+</body>
+
+</html>

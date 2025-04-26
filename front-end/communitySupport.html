@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="./imgs/favicon.ico">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/icons.css">
+        <link rel="stylesheet" href="./css/adoption.css">
+      
+        <link rel="stylesheet" href="./css/support.css">
+
+    
+        <title>Paws Safe - Community Support</title>
+    </head>
+<body>
+    <div class="preloader">
+        <img src="./imgs/preloader.gif" alt="">
+    </div>
+    <header>
+        <div class="container">
+            <div class="lg" style="width: 268px;">
+                <a href="./" class="logo">
+                    <img src="./imgs/logo.png" alt="pawsafe">
+                    <h3>Paws Safe</h3>
+                </a>
+            </div>
+            <ul class="nav">
+                <li><a class="active" href="./index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="./foster.html"><i class="fa-solid fa-paw"></i> Foster</a></li>
+                <li><a href="./rehoming.html"><i class="fa-solid fa-hand-holding-heart"></i> Adoption</a></li>
+                <li> <a href="./postpet.html" class="post_pet "><i class="fas fa-upload"></i> Post Pet </a></li>
+                <li><a href="./index.html#contact_us"><i class="fas fa-phone"></i> Contact Us</a></li>
+            </ul>
+            <div class="auth">
+
+                <div class="register">
+
+                    <a href="./login.html" class="login">Login</a>
+                    <a href="./signup.html" class="signup"><i class="fa-solid fa-user"></i> Sign Up</a>
+                </div>
+
+                <div style="display: flex; align-items: center; gap:1rem">
+                    <button class="notif d_none" id="notif_btn"><i class="fa-solid fa-bell"></i>
+                        <span class="notif_length"></span>
+                    </button>
+
+                    <div id="user_personal" class="d_none">Hi, <b id="user_name"></b> <i
+                            class="fa-solid fa-caret-down"></i></div>
+                </div>
+                <div class="personal_info ">
+                    <div class="info"><span>Email:</span> <b id="user-email"></b></div>
+                    <div class="action_btns">
+                        <a href="./admin_dashboard.html" id="dashboard_btn" class="verify_account d_none"><i
+                            class="fa-solid fa-badge-check"></i> Dashboard</a>
+                        <a href="./mypets.html" class="verify_account"><i class="fa-solid fa-paw"></i> My Pets</a>
+                        <a href="./verification.html" id="get_verify_btn" class="verify_account"><i
+                                class="fa-solid fa-badge-check"></i> Get
+                            Verified</a>
+                        <a href="#" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout </a>
+                    </div>
+                </div>
+                <div class="notif_list" id="notif_list">
+                    <div style="display: flex;align-items: center;justify-content: space-between;margin-bottom: 10px;">
+                        <h3>Notifications</h3>
+                        <a href="#" class="d_none" id="clear_notifis">Clear All</a>
+                    </div>
+                    <p class="info d_none" style="color: #505050;padding: 8px;">You Don't Have Notifications.</p>
+                    <ul>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+<main>
+    <div class="container">
+        <div class="supportInfo">
+        <section id="financial-aid">
+            <h2><i class="fas fa-hand-holding-heart"></i> Financial Aid Resources</h2>
+            <ul>
+                <li><a href="https://www.petsofthehomeless.org">Pets of the Homeless</a></li>
+                <li><a href="https://www.redrover.org">RedRover – Emergency Vet Help</a></li>
+               
+                <li><a href="https://www.thepetfund.com">The Pet Fund – Medical Support</a></li>
+            </ul>
+        </section>
+    
+        <section id="pet-care">
+            <h2><i class="fas fa-paw"></i> Pet Care Tips</h2>
+            <p>Learn how to care for your pet on a budget, find affordable food options, and get vet advice.</p>
+            <a href="https://www.webmd.com/pets/features/saving-on-pet-costs">Read More</a>
+        </section>
+    
+        <section id="forums">
+            <h2><i class="fas fa-comments"></i> Community Discussions</h2>
+            <p>Join this forum to ask questions, share advice, or offer help to other pet owners.</p>
+            <a href="https://www.petforums.co.uk">Visit Forum</a>
+        </section>
+    </div>
+    
+        <!-- <footer>
+            <p>© 2025 PawsSafe - Helping pets find safe homes</p>
+        </footer> -->
+    
+    </div>
+
+</main>
+<script src="./main.js"></script>
+</body>
+</html>
