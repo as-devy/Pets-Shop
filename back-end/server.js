@@ -19,8 +19,10 @@ app.use(routes)
 
 
 
-app.listen(400, () => {
-    console.log("server is listening")
-})
+const PORT = process.env.PORT || 400;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 
