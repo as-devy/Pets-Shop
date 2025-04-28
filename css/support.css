@@ -1,0 +1,91 @@
+main {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    background-image:url(./imgs/8kzIh3.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container .supportInfo {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center circles vertically within container */
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 40px 16px;
+}
+
+/* Section Circle Cards */
+.container .supportInfo section {
+    background: #65d2cd;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    box-shadow: 0 6px 12px rgba(26, 42, 108, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* vertical centering */
+    align-items: center;       /* horizontal centering */
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.container .supportInfo section:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(26, 42, 108, 0.2);
+}
+
+/* Titles inside circles */
+.container .supportInfo section h2 {
+    font-size: 1.1rem;
+    color: #1a2a6c;
+    margin-bottom: 8px;
+}
+
+/* Paragraph and list inside circle */
+.container .supportInfo section p,
+.container .supportInfo section ul {
+    font-size: 0.9rem;
+    color: #333;
+    margin: 0;
+    padding: 0 8px;
+    text-align: center;
+}
+
+/* Links styled as buttons */
+.container .supportInfo section a {
+    color: #1a2a6c;
+    background-color: #b3d9ff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-top: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.container .supportInfo section a:hover {
+    background-color: #99caff;
+}
+
+/* Financial aid section list styles */
+#financial-aid ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#financial-aid li {
+    margin: 6px 0;
+}
+
+#financial-aid li a {
+    display: block;
+}
