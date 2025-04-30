@@ -198,7 +198,7 @@
             window.location.href = "./signup.html"
         }
 
-        fetch(`http://82.26.74.49:4000/users/${userId}`)
+        fetch(`https://pawssafe.ddns.net/users/${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -251,7 +251,7 @@
                             user_job: userJob,
                         }
 
-                        fetch('http://82.26.74.49:4000/sendVerification', {
+                        fetch('https://pawssafe.ddns.net/sendVerification', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

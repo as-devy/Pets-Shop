@@ -168,7 +168,7 @@
 
         const userId = getCookie('UserId');
 
-        fetch("http://82.26.74.49:4000/allPets")
+        fetch("https://pawssafe.ddns.net/allPets")
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

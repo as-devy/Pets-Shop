@@ -279,9 +279,11 @@
                             <li><b>Wait for Approval: </b>The pet owner will review your application and decide if
                                 you're the right match.</li>
                             <li><b>Connect with the Owner:</b></li>
-                            <li style="padding-left: 20px; display: inline-block;">If your request is approved, you can either wait for the owner to contact you, or 
+                            <li style="padding-left: 20px; display: inline-block;">If your request is approved, you can
+                                either wait for the owner to contact you, or
                                 you can send an email directly to the owner through our website.</li>
-                            <li style="padding-left: 20px; display: inline-block;">You will receive their email address and phone number to help arrange a safe meet-up and 
+                            <li style="padding-left: 20px; display: inline-block;">You will receive their email address
+                                and phone number to help arrange a safe meet-up and
                                 complete the adoption or fostering process.</li>
                         </ol>
                     </div>
@@ -290,7 +292,7 @@
         </div>
     </section>
 
-    
+
 
 
     <section class="petlist">
@@ -505,6 +507,7 @@
             const countrySelection = document.querySelector("#countrySelection").value
             const categorySelection = document.querySelector("#categorySelection").value
             console.log(typeSelection)
+            // Redirect based on the selected pet type
             if (typeSelection == "adopt") {
                 window.location.href = `./rehoming.html?country=${countrySelection}&category=${categorySelection}`
 
@@ -519,7 +522,7 @@
             document.querySelector("#sendEmailBtn").classList.add("disabled")
             const contact_username = document.querySelector("#contact_username").value
 
-            fetch("https://82.26.74.49:4000/sendEmail", {
+            fetch("https://pawssafe.ddns.net/sendEmail", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -547,7 +550,7 @@
         let pets = [];
         let pets_countries = [];
 
-        fetch("https://82.26.74.49:4000/allPets")
+        fetch("https://pawssafe.ddns.net/allPets")
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -612,8 +615,10 @@
                         }
 
                     })
+
+                    // Error handling when no matching pets are found
                 } else {
-                    document.querySelector(".petlist .list").innerHTML = "<p class='msg_defined'>Oops! We couldn’t find any pets matching your search</p>"
+                    document.querySelector(".petlist .list").innerHTML = "<p class='msg_defined'>Oops! We couldn’t find anypets matching your search</p>"
                 }
             })
             .catch(error => {
@@ -622,7 +627,7 @@
             });
 
         //             document.addEventListener('DOMContentLoaded', () => {
-        //    fetch("http://82.26.74.49:4000/country") // Ensure this matches your server's URL
+        //    fetch("82.26.74.49:4000/country") // Ensure this matches your server's URL
         //        .then(response => response.json())
         //         .then(data => {
         //            const select = document.getElementById('countrySelection');

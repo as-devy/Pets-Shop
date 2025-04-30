@@ -367,7 +367,7 @@
         console.log(petId);
 
         if (petId) {
-            fetch(`http://82.26.74.49:4000/pet/${petId}`)
+            fetch(`https://pawssafe.ddns.net/pet/${petId}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -410,7 +410,7 @@
 
                     document.querySelector("#petButton").textContent = pet.foster ? "Foster Pet" : "Adopt Pet";
 
-                    fetch(`http://82.26.74.49:4000/users/${userId}`)
+                    fetch(`https://pawssafe.ddns.net/users/${userId}`)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -468,7 +468,7 @@
                         document.querySelector("#rehomeLink").classList.add("active")
                     }
 
-                    fetch(`http://82.26.74.49:4000/users/${pet.ownerId}`)
+                    fetch(`https://pawssafe.ddns.net/users/${pet.ownerId}`)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -508,7 +508,7 @@
                                 );
 
                                 // UPDATE THE REQUESTES OBJECT IN DATABASE
-                                fetch(`http://82.26.74.49:4000/updateRequest/${petId}`, {
+                                fetch(`https://pawssafe.ddns.net/updateRequest/${petId}`, {
                                     method: 'PUT',
                                     headers: {
                                         'Content-Type': 'application/json'
@@ -519,7 +519,7 @@
                                         console.log('Success:', data)
                                         if (data.updatedRequests) {
                                             // SEND NOTIFICATION TO USER
-                                            fetch(`http://82.26.74.49:4000/users/addNotification/${requestAutherId}`, {
+                                            fetch(`https://pawssafe.ddns.net/users/addNotification/${requestAutherId}`, {
                                                 method: 'POST',
                                                 headers: {
                                                     'Content-Type': 'application/json'
@@ -573,7 +573,7 @@
                                 );
 
                                 // UPDATE THE REQUESTES OBJECT IN DATABASE
-                                fetch(`http://82.26.74.49:4000/updateRequest/${petId}`, {
+                                fetch(`https://pawssafe.ddns.net/updateRequest/${petId}`, {
                                     method: 'PUT',
                                     headers: {
                                         'Content-Type': 'application/json'
@@ -584,7 +584,7 @@
                                         console.log('Success:', data)
                                         if (data.updatedRequests) {
                                             // SEND NOTIFICATION TO USER
-                                            fetch(`http://82.26.74.49:4000/users/addNotification/${requestAutherId}`, {
+                                            fetch(`https://pawssafe.ddns.net/users/addNotification/${requestAutherId}`, {
                                                 method: 'POST',
                                                 headers: {
                                                     'Content-Type': 'application/json'
@@ -619,7 +619,7 @@
                     // fetching requests 
                     if (userId == pet.ownerId) {
                         petRequests.map(request => {
-                            fetch(`http://82.26.74.49:4000/users/${request.authorID}`)
+                            fetch(`https://pawssafe.ddns.net/users/${request.authorID}`)
                                 .then(response => {
                                     if (!response.ok) {
                                         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -703,7 +703,7 @@
                     } else {
                         petRequests.map(request => {
                             if (request.authorID == userId) {
-                                fetch(`http://82.26.74.49:4000/users/${request.authorID}`)
+                                fetch(`https://pawssafe.ddns.net/users/${request.authorID}`)
                                     .then(response => {
                                         if (!response.ok) {
                                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -780,7 +780,7 @@
 
                                             const updatedPetRequests = petRequests.filter(item => item.authorID !== requestId);
                                             // UPDATE THE REQUESTES OBJECT IN DATABASE
-                                            fetch(`http://82.26.74.49:4000/removePetRequest/${petId}`, {
+                                            fetch(`https://pawssafe.ddns.net/removePetRequest/${petId}`, {
                                                 method: 'PUT',
                                                 headers: {
                                                     'Content-Type': 'application/json'
@@ -828,7 +828,7 @@
                             formRequestBtn.setAttribute("disabled", true)
                             formRequestBtn.classList.add("disabled")
 
-                            fetch(`http://82.26.74.49:4000/addPetRequest/${petId}`, {
+                            fetch(`https://pawssafe.ddns.net/addPetRequest/${petId}`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -838,7 +838,7 @@
                                 .then(data => {
                                     console.log('Success:', data)
                                     if (data.updatedRequests) {
-                                        fetch(`http://82.26.74.49:4000/users/addrequestedPet/${userId}`, {
+                                        fetch(`https://pawssafe.ddns.net/users/addrequestedPet/${userId}`, {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -849,7 +849,7 @@
                                             .then(data => {
                                                 console.log('Success:', data)
                                                 if (data.updatedRequestedPets) {
-                                                    fetch(`http://82.26.74.49:4000/users/addNotification/${pet.ownerId}`, {
+                                                    fetch(`https://pawssafe.ddns.net/users/addNotification/${pet.ownerId}`, {
                                                         method: 'POST',
                                                         headers: {
                                                             'Content-Type': 'application/json'
@@ -904,7 +904,7 @@
 
             // DELETE PET
             document.querySelector("#delete_pet").addEventListener("click", () => {
-                fetch(`http://82.26.74.49:4000/pet/${petId}`, {
+                fetch(`https://pawssafe.ddns.net/pet/${petId}`, {
                     method: 'DELETE',
                 }).then(response => {
                     if (response.ok) {
@@ -971,7 +971,7 @@
                 document.querySelector("#send_msg_to_owner").textContent = "Sending Message..."
                 document.querySelector("#send_msg_to_owner").setAttribute("disabled", true)
                 document.querySelector("#send_msg_to_owner").classList.add("disabled")
-                fetch("http://82.26.74.49:4000/sendEmail", {
+                fetch("https://pawssafe.ddns.net/sendEmail", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

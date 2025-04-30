@@ -31,7 +31,7 @@ document.querySelector("header .logout")?.addEventListener("click", () => {
 })
 
 if (sessionUserId) {
-    fetch(`http://82.26.74.49:4000/users/${sessionUserId}`)
+    fetch(`https://pawssafe.ddns.net/users/${sessionUserId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -62,7 +62,7 @@ if (sessionUserId) {
                     if (notify.type == "approval") {
                         let petname;
                         let approvedUserName;
-                        fetch(`http://82.26.74.49:4000/users/${notify.ownerUserId}`)
+                        fetch(`https://pawssafe.ddns.net/users/${notify.ownerUserId}`)
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -72,7 +72,7 @@ if (sessionUserId) {
                             .then(data => {
                                 const requesterUser = data
                                 approvedUserName = requesterUser.username
-                                fetch(`http://82.26.74.49:4000/pet/${notify.PetId}`)
+                                fetch(`https://pawssafe.ddns.net/pet/${notify.PetId}`)
                                     .then(response => {
                                         if (!response.ok) {
                                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -94,7 +94,7 @@ if (sessionUserId) {
                     if (notify.type == "denied") {
                         let petname;
                         let petOnwerUserName;
-                        fetch(`http://82.26.74.49:4000/users/${notify.ownerUserId}`)
+                        fetch(`https://pawssafe.ddns.net/users/${notify.ownerUserId}`)
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -104,7 +104,7 @@ if (sessionUserId) {
                             .then(data => {
                                 const requesterUser = data
                                 petOnwerUserName = requesterUser.username
-                                fetch(`http://82.26.74.49:4000/pet/${notify.PetId}`)
+                                fetch(`https://pawssafe.ddns.net/pet/${notify.PetId}`)
                                     .then(response => {
                                         if (!response.ok) {
                                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -134,7 +134,7 @@ if (sessionUserId) {
                         let petname;
                         let requesterName;
                         console.log(notify)
-                        fetch(`http://82.26.74.49:4000/users/${notify.requestedUserId}`)
+                        fetch(`https://pawssafe.ddns.net/users/${notify.requestedUserId}`)
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -145,7 +145,7 @@ if (sessionUserId) {
                                 const requesterUser = data
                                 requesterName = requesterUser.username
                                 console.log("requested pet", notify.requestedPetId)
-                                fetch(`http://82.26.74.49:4000/pet/${notify.requestedPetId}`)
+                                fetch(`https://pawssafe.ddns.net/pet/${notify.requestedPetId}`)
                                     .then(response => {
                                         if (!response.ok) {
                                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -174,7 +174,7 @@ if (sessionUserId) {
 
 // ADD CLEAR NOTIFICATIONS FUNCTIONALLITY
 document.querySelector("header #clear_notifis").addEventListener("click", () => {
-    fetch(`http://82.26.74.49:4000/users/deleteNotifications/${sessionUserId}`, {
+    fetch(`https://pawssafe.ddns.net/users/deleteNotifications/${sessionUserId}`, {
         method: 'DELETE',
     }).then(response => {
         if (response.ok) {

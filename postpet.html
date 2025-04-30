@@ -232,7 +232,7 @@
         }
 
         const getVerified_popup = document.querySelector("#getVerified_popup")
-        fetch(`http://82.26.74.49:4000/users/${userId}`)
+        fetch(`https://pawssafe.ddns.net/users/${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -381,7 +381,7 @@
 
                         console.log(userPetInfo)
 
-                        fetch('http://82.26.74.49:4000/addPet', {
+                        fetch('https://pawssafe.ddns.net/addPet', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

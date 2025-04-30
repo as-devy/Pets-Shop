@@ -122,7 +122,7 @@
             window.location.href = "./signup.html"
         }
 
-        fetch(`http://82.26.74.49:4000/users/${userId}`)
+        fetch(`https://pawssafe.ddns.net/${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -140,7 +140,7 @@
             });
 
         const requestsContainer = document.querySelector(".requests")
-        fetch("http://82.26.74.49:4000/getVerifications")
+        fetch("https://pawssafe.ddns.net/getVerifications")
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -152,7 +152,7 @@
 
                 console.log(verificationRequests)
                 verificationRequests.map(verifyRequest => {
-                    fetch(`http://82.26.74.49:4000/users/${verifyRequest.userId}`)
+                    fetch(`https://pawssafe.ddns.net/${verifyRequest.userId}`)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -207,7 +207,7 @@
                                     const requestId = requestEle.getAttribute("data-requestId")
                                     const userId = requestEle.getAttribute("data-userId")
                                     // UPDATE THE REQUESTE AND USER STATUS
-                                    fetch(`http://82.26.74.49:4000/updateVerificationStatus?requestId=${requestId}&userId=${userId}`, {
+                                    fetch(`https://pawssafe.ddns.net/updateVerificationStatus?requestId=${requestId}&userId=${userId}`, {
                                         method: 'PUT',
                                         headers: {
                                             'Content-Type': 'application/json'
@@ -217,7 +217,7 @@
                                         .then(data => {
                                             if (data.updatedRequest) {
                                                 // SEND NOTIFICATION TO USER
-                                                fetch(`http://82.26.74.49:4000/users/addNotification/${userId}`, {
+                                                fetch(`https://pawssafe.ddns.net/users/addNotification/${userId}`, {
                                                     method: 'POST',
                                                     headers: {
                                                         'Content-Type': 'application/json'
@@ -248,7 +248,7 @@
                                     const userId = requestEle.getAttribute("data-userId")
 
                                     // UPDATE THE REQUESTE AND USER STATUS
-                                    fetch(`http://82.26.74.49:4000/updateVerificationStatus?requestId=${requestId}&userId=${userId}`, {
+                                    fetch(`https://pawssafe.ddns.net/updateVerificationStatus?requestId=${requestId}&userId=${userId}`, {
                                         method: 'PUT',
                                         headers: {
                                             'Content-Type': 'application/json'
@@ -258,7 +258,7 @@
                                         .then(data => {
                                             if (data.updatedRequest) {
                                                 // SEND NOTIFICATION TO USER
-                                                fetch(`http://82.26.74.49:4000/users/addNotification/${userId}`, {
+                                                fetch(`https://pawssafe.ddns.net/users/addNotification/${userId}`, {
                                                     method: 'POST',
                                                     headers: {
                                                         'Content-Type': 'application/json'
